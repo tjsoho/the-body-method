@@ -18,13 +18,6 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head>
-                {/* Robots meta tag with all directives combined */}
-                <meta
-                    name="robots"
-                    content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-                />
-            </head>
             <body className={`${inter.variable} antialiased overflow-x-clip`}>
                 <Toaster
                     position="top-right"

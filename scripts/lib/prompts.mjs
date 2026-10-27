@@ -43,7 +43,7 @@ export async function collectInputs(cli = {}) {
     cli.adminEmail ??
     (await input({
       message: "Admin email:",
-      default: "toby@ai-guy.co",
+      default: "admin@example.com",
       validate: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? true : "Enter a valid email"),
     }));
 

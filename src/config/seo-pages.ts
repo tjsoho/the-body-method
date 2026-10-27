@@ -17,9 +17,8 @@ export const seoPages: SeoPageConfig[] = [
     slug: "home",
     path: "/",
     label: "Home",
-    defaultTitle: "Home | Your Site",
-    defaultDescription:
-      "A starter template. Replace this description with a short, compelling summary of your site.",
-    defaultKeywords: "template, starter, website",
+    defaultTitle: "",
+    defaultDescription: "",
+    defaultKeywords: "",
   },
 ];

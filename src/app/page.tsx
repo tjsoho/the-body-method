@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import getPage from "@/server-actions/page";
 import { HomePageContent, homePageFallbackData } from "./_config";
@@ -10,15 +9,10 @@ import Section4 from "@/components/Home/Section4";
 import Section6 from "@/components/Home/Section6";
 import Section7 from "@/components/Home/Section7";
 import Section8 from "@/components/Home/Section8";
-import { buildPageMetadata } from "@/utils/seo";
 
 // Disable caching for this page to ensure fresh content
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-export async function generateMetadata(): Promise<Metadata> {
-    return buildPageMetadata("home");
-}
 
 type SectionKey =
     | "section2"

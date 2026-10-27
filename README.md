@@ -9,7 +9,7 @@ admin user), Vercel deploy, env vars wired, browser opened at the live URL — w
 a single command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tjsoho/summer-website-template/main/bootstrap.sh | bash -s my-site
+curl -fsSL https://raw.githubusercontent.com/your-org/your-template/main/bootstrap.sh | bash -s my-site
 ```
 
 That creates a private repo `my-site` from this template, clones it, installs

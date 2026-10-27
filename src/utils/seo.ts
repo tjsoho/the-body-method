@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { seoPages } from "@/config/seo-pages";
 import { fetchSeoEntry } from "@/data/seo";
 
-const DEFAULT_TITLE = "Your Site";
-const DEFAULT_DESCRIPTION = "A starter website template. Replace this with a short, compelling summary of your site.";
-const DEFAULT_KEYWORDS = "template, starter, website";
+const DEFAULT_TITLE = "";
+const DEFAULT_DESCRIPTION = "";
+const DEFAULT_KEYWORDS = "";
 
 export async function buildPageMetadata(
   slug: string,

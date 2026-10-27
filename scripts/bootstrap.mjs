@@ -20,7 +20,7 @@ import { randomBytes } from "node:crypto";
 
 const SCRIPTS_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = dirname(SCRIPTS_DIR);
-const TEMPLATE = "tjsoho/summer-website-template";
+const TEMPLATE = "your-org/your-template";
 
 // -----------------------------------------------------------------------------
 // 0a. Ensure this CLI's own dependencies are installed before importing them.

@@ -17,7 +17,7 @@ That's it. No clone step. No copying env vars by hand. No SQL editor.
 The script runs interactively and asks for:
 
 1. **New repo name** (e.g. `acme-corporate-site`) — used as the GitHub repo name, the local folder, the Vercel project name, and the Supabase project name.
-2. **Admin password** for `toby@ai-guy.co` (default email; allow override with `--admin-email`).
+2. **Admin password** for `admin@example.com` (default email; allow override with `--admin-email`).
 3. **Supabase region** (default `ap-southeast-2 Sydney`, allow list pick).
 4. **Vercel team / scope** (default personal account, allow list pick).
 
@@ -52,14 +52,14 @@ Two paths to consider — recommend the second:
 No npm publish needed. The user runs:
 
 ```bash
-gh repo create my-site --template tjsoho/summer-website-template --clone --private \
+gh repo create my-site --template your-org/your-template --clone --private \
   && cd my-site && npm install && npm run bootstrap
 ```
 
 …or wrap that in a one-liner alias. We can also ship a tiny **`bootstrap.sh`** at the repo root that does the GitHub-repo-create + clone + cd + `npm install` + `npm run bootstrap` — the user just downloads/curls that one file:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tjsoho/summer-website-template/main/bootstrap.sh | bash -s my-site
+curl -fsSL https://raw.githubusercontent.com/your-org/your-template/main/bootstrap.sh | bash -s my-site
 ```
 
 **Build Option B first.** Add a clear note in the README that v2 will publish to npm for `npx`.
@@ -79,7 +79,7 @@ Implementation lives at `scripts/bootstrap.mjs` (Node 20+, ESM, no TypeScript bu
 ### 1. Collect inputs (interactive prompts)
 Use `@inquirer/prompts` (or `prompts` — smaller). Ask:
 - Repo name (validate: kebab-case, no spaces, ≤ 50 chars)
-- Admin email (default `toby@ai-guy.co`)
+- Admin email (default `admin@example.com`)
 - Admin password (hidden input, validate length ≥ 12)
 - Supabase region pick list
 - Vercel scope pick list
@@ -90,7 +90,7 @@ Cache long-lived credentials at `~/.summer-website-template/config.json` (Supaba
 ### 2. Create GitHub repo from template (only in Option A path)
 If we're already inside a cloned new repo (Option B), skip. Otherwise:
 ```
-gh repo create <name> --template tjsoho/summer-website-template --private --clone
+gh repo create <name> --template your-org/your-template --private --clone
 cd <name>
 npm install
 ```
@@ -251,7 +251,7 @@ The script prompts for the Supabase + Vercel tokens **once** on first run, valid
 - CI/CD beyond Vercel auto-deploy
 - npm publishing of the CLI (do in v2)
 - Multi-environment (staging/prod split) — single production env only
-- Multiple admin users — just `toby@ai-guy.co`
+- Multiple admin users — just `admin@example.com`
 - Image migration from another Supabase project
 
 ---
@@ -263,7 +263,7 @@ The script prompts for the Supabase + Vercel tokens **once** on first run, valid
 3. ☐ Verify Supabase project shows `ACTIVE_HEALTHY` in dashboard
 4. ☐ Verify `pages`, `blogs`, etc. tables exist in Supabase
 5. ☐ Verify `site-images` and `site-files` buckets exist in Storage
-6. ☐ Verify `toby@ai-guy.co` user exists in Authentication → Users
+6. ☐ Verify `admin@example.com` user exists in Authentication → Users
 7. ☐ Visit deployment URL → home page renders
 8. ☐ Visit `/admin/login` → log in with the chosen password → admin dashboard loads
 9. ☐ Edit a page in admin, save → reload public page → change persists

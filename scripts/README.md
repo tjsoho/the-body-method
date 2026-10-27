@@ -12,7 +12,7 @@ This implements **Option B** from `../BOOTSTRAP_SCRIPT_BRIEF.md`: the script run
 
 ```bash
 # from anywhere — creates repo, clones, installs, bootstraps:
-curl -fsSL https://raw.githubusercontent.com/tjsoho/summer-website-template/main/bootstrap.sh | bash -s my-site
+curl -fsSL https://raw.githubusercontent.com/your-org/your-template/main/bootstrap.sh | bash -s my-site
 
 # or, if you've already got a clone:
 npm start app
@@ -26,7 +26,7 @@ just works.
 
 | Flag | Effect |
 |---|---|
-| `--admin-email <email>` | Override the default `toby@ai-guy.co`. |
+| `--admin-email <email>` | Override the default `admin@example.com`. |
 | `--repo-name <name>` | Override the project name (defaults to the repo folder name). |
 | `--region <slug>` | Skip the region prompt (e.g. `ap-southeast-2`). |
 | `--dry-run` | Validate inputs + tokens, then stop. Creates nothing. |
