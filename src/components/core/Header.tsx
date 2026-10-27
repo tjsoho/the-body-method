@@ -29,12 +29,6 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
 
-    // Admin pages render their own chrome, no public header.
-    if (pathname?.startsWith("/admin")) return null;
-
-    const links: NavLink[] =
-        navItems && navItems.length > 0 ? navItems : defaultNavLinks;
-
     // Lock body scroll while the mobile overlay is open.
     useEffect(() => {
         if (!open) return;
@@ -73,6 +67,13 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
     useEffect(() => {
         setOpen(false);
     }, [pathname]);
+
+    // Admin pages render their own chrome, no public header. Kept AFTER
+    // every hook above so rules-of-hooks never fires on route change.
+    if (pathname?.startsWith("/admin")) return null;
+
+    const links: NavLink[] =
+        navItems && navItems.length > 0 ? navItems : defaultNavLinks;
 
     const Wordmark = (
         <Link
