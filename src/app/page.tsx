@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import getPage from "@/server-actions/page";
 import { HomePageContent, homePageFallbackData } from "./_config";
@@ -9,10 +10,19 @@ import Section4 from "@/components/Home/Section4";
 import Section6 from "@/components/Home/Section6";
 import Section7 from "@/components/Home/Section7";
 import Section8 from "@/components/Home/Section8";
+import { buildPageMetadata } from "@/utils/seo";
 
 // Disable caching for this page to ensure fresh content
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+// Emits meta tags only once the admin has set site basics (name + URL) in
+// env vars. Until then this returns {} so Google and LLMs see nothing to
+// index. Once populated, title/description come from the admin SEO panel
+// via the seo_metadata table.
+export async function generateMetadata(): Promise<Metadata> {
+    return buildPageMetadata("home");
+}
 
 type SectionKey =
     | "section2"
