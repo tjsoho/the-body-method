@@ -15,6 +15,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import CareersPopup from "./CareersPopup";
 
 export default function Footer() {
     const pathname = usePathname();
@@ -102,23 +103,7 @@ export default function Footer() {
                     <Link href="/member-login" style={{ color: "#dfdede" }}>Member Login</Link>
                     <Link href="/terms" style={{ color: "#dfdede" }}>Terms</Link>
                     <Link href="/accessibility" style={{ color: "#dfdede" }}>Accessibility</Link>
-                    {/* TODO: wire the Careers popup in a follow-up turn */}
-                    <Link
-                        href="/careers"
-                        aria-haspopup="dialog"
-                        style={{
-                            color: "#f4f2ed",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: 8,
-                        }}
-                    >
-                        Careers / Teach With Us
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
-                            <rect x="1" y="3" width="8" height="8" />
-                            <path d="M5 1h6v6M11 1L6 6" />
-                        </svg>
-                    </Link>
+                    <CareersPopup>Careers / Teach With Us</CareersPopup>
                 </nav>
             </div>
         </footer>

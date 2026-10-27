@@ -1,3 +1,7 @@
+import type { MemberStory } from "@/components/Home/WhyPeopleStay";
+import type { Teacher } from "@/components/Home/GreatTeaching";
+import type { LifeTile } from "@/components/Home/LifeAtTbm";
+
 /**
  * The Body Method — Home page content shape and fallback copy.
  *
@@ -266,3 +270,95 @@ export const homePageFallbackData: HomePageProps = {
         },
     },
 };
+
+/* ──────────────────────────────────────────────────────────────────────
+   Lists that grow over time.
+
+   These three arrays mirror the V3 placeholder content exactly. They
+   live separately from HomePageContent because they are destined for
+   their own Supabase tables (`member_stories`, `team`, `life_at_tbm`)
+   once the admin forms land. For now the home sections render straight
+   from these fallbacks.
+   ────────────────────────────────────────────────────────────────────── */
+
+export const memberStoriesFallback: MemberStory[] = [
+    {
+        id: "placeholder-1",
+        quote: "Short quote",
+        name: "Member name",
+        memberSince: "XXXX",
+        favouriteClassTeacher: "Favourite class / teacher",
+        image: ph("member-1-downdog.jpg"),
+        imageAlt: "Downward facing dog on a sage mat",
+    },
+    {
+        id: "placeholder-2",
+        quote: "Short quote",
+        name: "Member name",
+        memberSince: "XXXX",
+        favouriteClassTeacher: "Favourite class / teacher",
+        image: ph("member-2-reformer-arms.jpg"),
+        imageAlt: "Kneeling arm work with straps on a Reformer",
+    },
+    {
+        id: "placeholder-3",
+        quote: "Short quote",
+        name: "Member name",
+        memberSince: "XXXX",
+        favouriteClassTeacher: "Favourite class / teacher",
+        image: ph("member-3-childs-pose.jpg"),
+        imageAlt: "Child's pose in soft window light",
+    },
+];
+
+export const teachersFallback: Teacher[] = [
+    {
+        id: "placeholder-1",
+        name: "Name",
+        intro: "Short intro",
+        image: ph("teacher-1.jpg"),
+        imageAlt: "A teacher's hands guiding a student's hips",
+    },
+    {
+        id: "placeholder-2",
+        name: "Name",
+        intro: "Short intro",
+        image: ph("teacher-2.jpg"),
+        imageAlt: "Plank on the Reformer carriage",
+    },
+    {
+        id: "placeholder-3",
+        name: "Name",
+        intro: "Short intro",
+        image: ph("teacher-3.jpg"),
+        imageAlt: "Garland squat on a sage mat by the windows",
+    },
+    {
+        id: "placeholder-4",
+        name: "Name",
+        intro: "Short intro",
+        image: ph("teacher-4.jpg"),
+        imageAlt: "Legs in Reformer straps",
+    },
+];
+
+export const lifeAtTbmTilesFallback: LifeTile[] = [
+    {
+        id: "placeholder-1",
+        image: ph("life-group.jpg"),
+        imageAlt: "A row of members in a seated stretch facing the windows",
+        size: "wide-8",
+    },
+    {
+        id: "placeholder-2",
+        image: ph("life-meditation.jpg"),
+        imageAlt: "Seated meditation in linen",
+        size: "narrow-4",
+    },
+    {
+        id: "placeholder-3",
+        image: ph("life-beach.jpg"),
+        imageAlt: "Yoga on the sand at sunrise",
+        size: "wide-all",
+    },
+];

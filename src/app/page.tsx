@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
 import getPage from "@/server-actions/page";
-import { HomePageProps, homePageFallbackData } from "./_config";
+import {
+    HomePageProps,
+    homePageFallbackData,
+    memberStoriesFallback,
+    teachersFallback,
+    lifeAtTbmTilesFallback,
+} from "./_config";
 import Hero from "@/components/Home/Hero";
 import Belong from "@/components/Home/Belong";
+import TwoStudios from "@/components/Home/TwoStudios";
+import TwentyOneDay from "@/components/Home/TwentyOneDay";
+import WhyPeopleStay from "@/components/Home/WhyPeopleStay";
+import GreatTeaching from "@/components/Home/GreatTeaching";
+import PrivatePilates from "@/components/Home/PrivatePilates";
+import LifeAtTbm from "@/components/Home/LifeAtTbm";
+import FinalCta from "@/components/Home/FinalCta";
 import { buildPageMetadata } from "@/utils/seo";
 
 // Force dynamic so admin edits in the CMS show on next request without
@@ -21,14 +34,23 @@ export default async function Home() {
     );
     const content = homePage.content;
 
+    // Lists are still inline until their admin tables land. Shape stays
+    // the same so swapping the source for a Supabase query is one line.
+    const memberStories = memberStoriesFallback;
+    const teachers = teachersFallback;
+    const lifeAtTbmTiles = lifeAtTbmTilesFallback;
+
     return (
         <>
             <Hero content={content.hero} />
             <Belong content={content.belong} />
-            {/* Phase 2 (next turn):
-                <TwoStudios />, <TwentyOneDay />, <WhyPeopleStay />,
-                <GreatTeaching />, <PrivatePilates />, <LifeAtTbm />, <FinalCta />
-            */}
+            <TwoStudios content={content.twoStudios} />
+            <TwentyOneDay content={content.twentyOneDay} />
+            <WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} />
+            <GreatTeaching content={content.greatTeaching} teachers={teachers} />
+            <PrivatePilates content={content.privatePilates} />
+            <LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} />
+            <FinalCta content={content.finalCta} />
         </>
     );
 }
