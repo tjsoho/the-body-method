@@ -31,6 +31,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                 color: "#f4f2ed",
                 display: "flex",
                 flexDirection: "column",
+                overflow: "hidden",
             }}
         >
             {/* Background image (placeholder — swap for <video> loop later).
