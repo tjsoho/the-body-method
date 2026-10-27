@@ -174,3 +174,30 @@ a:hover {
 @media (max-width: 560px) {
     .tbm-c-q { grid-column: 1 / -1; }
 }
+
+/* Header responsive — kept here (not inside the Header client component)
+ * so styled-jsx scoping doesn't swallow the class selectors.           */
+.tbm-nav-desktop { display: flex; }
+.tbm-nav-mobile-btn { display: none; }
+@media (max-width: 900px) {
+    .tbm-nav-desktop { display: none !important; }
+    .tbm-nav-mobile-btn { display: inline-flex !important; }
+}
+
+/* Wordmark — scales down on narrow screens so the whole bar
+ * (wordmark + BOOK + hamburger) fits inside a phone viewport.          */
+.tbm-wordmark {
+    display: inline-block;
+    padding: 8px 14px 10px;
+    font-size: 17px;
+    letter-spacing: 0.3em;
+}
+.tbm-btn-book { padding: 0 24px; }
+@media (max-width: 560px) {
+    .tbm-wordmark {
+        padding: 6px 10px 7px;
+        font-size: 13px;
+        letter-spacing: 0.24em;
+    }
+    .tbm-btn-book { padding: 0 14px; font-size: 11px; }
+}

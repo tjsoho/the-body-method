@@ -49,13 +49,11 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
         <Link
             href="/"
             aria-label="The Body Method home"
+            className="tbm-wordmark"
             style={{
                 color: "#f4f2ed",
                 textDecoration: "none",
                 border: "1px solid rgba(244,242,237,.85)",
-                padding: "8px 14px 10px",
-                fontSize: "17px",
-                letterSpacing: ".3em",
                 whiteSpace: "nowrap",
                 fontFamily: "var(--font-lora)",
             }}
@@ -121,12 +119,11 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                     >
                         <a
                             href={bookingUrl}
-                            className="tbm-btn"
+                            className="tbm-btn tbm-btn-book"
                             style={{
                                 background: "#f4f2ed",
                                 color: "#1b2518",
                                 minHeight: 44,
-                                padding: "0 24px",
                             }}
                             {...(bookingUrl.startsWith("http")
                                 ? { target: "_blank", rel: "noopener noreferrer" }
@@ -205,19 +202,6 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                 </div>
             )}
 
-            <style jsx>{`
-                .tbm-nav-mobile-btn {
-                    display: none;
-                }
-                @media (max-width: 900px) {
-                    .tbm-nav-desktop {
-                        display: none !important;
-                    }
-                    .tbm-nav-mobile-btn {
-                        display: inline-flex !important;
-                    }
-                }
-            `}</style>
         </>
     );
 }
