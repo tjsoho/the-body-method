@@ -17,7 +17,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
-const DURATION = 1.5;
+const DURATION = 1.1;
 
 type Props = {
     children: ReactNode;
@@ -25,9 +25,9 @@ type Props = {
     style?: CSSProperties;
     /** Seconds to wait before firing. */
     delay?: number;
-    /** Rise distance in px. Default 80. */
+    /** Rise distance in px. Default 40. */
     y?: number;
-    /** Horizontal drift in px. Default -12. */
+    /** Horizontal drift in px. Default -4. */
     x?: number;
     /** Fraction of the element that must be in view (0–1). */
     amount?: number;
@@ -40,8 +40,8 @@ export default function Reveal({
     className,
     style,
     delay = 0,
-    y = 80,
-    x = -12,
+    y = 40,
+    x = -4,
     amount = 0.3,
     once = true,
 }: Props) {
@@ -63,7 +63,7 @@ export default function Reveal({
                 opacity: 0,
                 y,
                 x,
-                filter: "blur(16px)",
+                filter: "blur(6px)",
             }}
             whileInView={{
                 opacity: 1,

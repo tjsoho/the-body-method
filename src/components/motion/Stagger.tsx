@@ -34,11 +34,12 @@ import {
 import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-/* Explicit tween, not a spring. Springs settle fast and can be hard
-   to perceive; a 1.6s cubic ease over a 100px travel + 20px blur
-   is what reads as a wave rolling across the row. */
+/* Explicit tween, not a spring. The stagger timing (set by the
+   parent Stagger) carries the wave feeling; the per-item travel
+   just needs to be enough to notice, not dramatic. 50px rise +
+   8px blur over 1.2s reads as a gentle lift, not a block drop. */
 const EASE = [0.22, 0.61, 0.36, 1] as const;
-const DURATION = 1.6;
+const DURATION = 1.2;
 
 const StaggerContext = createContext<{ stagger: number; baseDelay: number }>({
     stagger: 0.35,
@@ -91,9 +92,9 @@ type ItemProps = {
     children: ReactNode;
     className?: string;
     style?: CSSProperties;
-    /** Rise distance in px. Default 100 — a real editorial travel. */
+    /** Rise distance in px. Default 50 — a gentle lift. */
     y?: number;
-    /** Horizontal drift in px. Default -14 — slight left-to-right drift. */
+    /** Horizontal drift in px. Default -6 — barely a sway. */
     x?: number;
     /** Injected by Stagger — do not pass directly. */
     _index?: number;
@@ -103,8 +104,8 @@ export function StaggerItem({
     children,
     className,
     style,
-    y = 100,
-    x = -14,
+    y = 50,
+    x = -6,
     _index = 0,
 }: ItemProps) {
     const prefersReduced = useReducedMotion();
@@ -128,8 +129,8 @@ export function StaggerItem({
                 opacity: 0,
                 y,
                 x,
-                filter: "blur(20px)",
-                scale: 0.94,
+                filter: "blur(8px)",
+                scale: 0.985,
             }}
             whileInView={{
                 opacity: 1,
