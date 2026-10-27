@@ -62,16 +62,14 @@ export function Stagger({
     stagger = 0.35,
     delay = 0.1,
 }: StaggerProps) {
-    // Walk the children and inject a per-item index so each
-    // StaggerItem can derive its own delay. This keeps the API
-    // simple at the call site (no `index` prop needed).
+    // Walk every valid-element child and inject _index so each
+    // StaggerItem can derive its own delay. The server/client
+    // function-reference marker approach doesn't survive the RSC
+    // boundary, so we clone every element and inject the index.
     const items = Children.toArray(children);
     let staggerIndex = 0;
     const wrapped = items.map((c) => {
-        if (
-            isValidElement(c) &&
-            (c.type as { __stagger?: boolean })?.__stagger === true
-        ) {
+        if (isValidElement(c)) {
             const i = staggerIndex++;
             return cloneElement(c as ReactElement<{ _index?: number }>, {
                 _index: i,
