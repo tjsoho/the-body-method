@@ -2,80 +2,175 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes aurora-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+/* ──────────────────────────────────────────────────────────────────────
+   The Body Method — brand tokens.
+
+   Mirrored exactly from the approved V3 design brief. Every text and
+   background pair has been checked against WCAG AA by the design team
+   so DO NOT recolour text without re-running the WebAIM Contrast Checker.
+   The notes against each value call out which pairs are decoration-only.
+   ────────────────────────────────────────────────────────────────────── */
+
+:root {
+    /* Core palette */
+    --tbm-ink: #191b1f;              /* headings, primary text, dark buttons */
+    --tbm-forest: #1b2518;           /* dark sections (21-day, footer), link colour on light */
+    --tbm-cream: #f4f2ed;            /* page bg, light buttons */
+    --tbm-sand: #e9e6de;             /* teaching section bg */
+    --tbm-charcoal: #191b1f;         /* Life at TBM bg */
+
+    /* Text on light */
+    --tbm-text-body: #2c2f33;
+    --tbm-text-muted: #45484c;
+    --tbm-text-subtle: #5a5d61;
+    --tbm-green-accent: #4f6a57;     /* italic subheads on light, LARGE TEXT ONLY */
+    --tbm-bronze-label: #7a6142;     /* small labels on light */
+    --tbm-rule: #c9c7bd;             /* dividers on light */
+
+    /* Text on dark */
+    --tbm-on-dark-body: #c9cbc0;
+    --tbm-on-dark-strong: #dfdede;
+    --tbm-on-dark-label: #afb1a1;    /* DECORATION ONLY — fails on cream */
+    --tbm-on-dark-sage: #75907d;     /* small labels on forest only */
+    --tbm-on-dark-bronze: #a88d66;   /* small labels on forest only */
+    --tbm-on-dark-sage-soft: #a9bfae;
+
+    /* Fonts (loaded via next/font in layout.tsx) */
+    --font-lora: "Lora", Georgia, serif;
+    --font-hanken: "Hanken Grotesk", system-ui, sans-serif;
+
+    /* Keep ONLY the hsl tokens that shadcn primitives still read.
+       Everything else above is TBM-brand only. */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
 }
 
-@layer base {
-    :root {
-        --font-inter: "Inter";
+html,
+body {
+    background: var(--tbm-cream);
+    color: var(--tbm-ink);
+    font-family: var(--font-lora);
+}
 
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 100%;
-        --secondary: 0, 0%, 0%, 0.1;
-        --secondary-foreground: 0 0% 100%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
-    }
+body {
+    margin: 0;
+    overflow-x: clip;
+}
 
-    .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-    }
+img { display: block; }
 
-    body {
-        @apply bg-background text-foreground font-inter;
-    }
+a {
+    color: var(--tbm-forest);
+}
+a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
 
-    h1 {
-        @apply font-poppins text-[32px] lg:text-[52px] font-medium;
-    }
-    h2 {
-        @apply font-poppins text-[24px] lg:text-[40px] font-medium;
-    }
-    p {
-        @apply font-poppins font-light leading-relaxed;
-    }
+/* Reusable primitives mirrored from design/home.html */
+.tbm-wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: clamp(20px, 5vw, 72px);
+    padding-right: clamp(20px, 5vw, 72px);
+}
+
+.tbm-g12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+}
+
+.tbm-lbl {
+    font-family: var(--font-hanken);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.tbm-btn {
+    font-family: var(--font-hanken);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    transition: background 0.3s, color 0.3s;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tbm-lnk {
+    font-family: var(--font-hanken);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    border-bottom: 1px solid currentColor;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+/* Column spans from the V3 design */
+.tbm-c-l { grid-column: 1 / 7; }
+.tbm-c-r { grid-column: 7 / 13; }
+.tbm-c-l5 { grid-column: 1 / 6; }
+.tbm-c-all { grid-column: 1 / -1; }
+.tbm-c-q { grid-column: span 3; }
+.tbm-c-t { grid-column: span 4; }
+.tbm-c-8 { grid-column: span 8; }
+.tbm-c-4 { grid-column: span 4; }
+.tbm-c-f1 { grid-column: 1 / 4; }
+.tbm-c-f2 { grid-column: 4 / 7; }
+.tbm-c-f3 { grid-column: 7 / 10; }
+.tbm-c-f4 { grid-column: 10 / 13; }
+
+@media (max-width: 1024px) {
+    .tbm-c-q { grid-column: span 6; }
+}
+@media (max-width: 900px) {
+    .tbm-hide-sm { display: none !important; }
+    .tbm-c-l,
+    .tbm-c-r,
+    .tbm-c-l5,
+    .tbm-c-t,
+    .tbm-c-8,
+    .tbm-c-4,
+    .tbm-c-f1,
+    .tbm-c-f2 { grid-column: 1 / -1; }
+    .tbm-c-f3,
+    .tbm-c-f4 { grid-column: span 6; }
+}
+@media (max-width: 560px) {
+    .tbm-c-q { grid-column: 1 / -1; }
 }

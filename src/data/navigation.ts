@@ -1,5 +1,5 @@
 /**
- * Navigation types + defaults.
+ * Navigation types + TBM defaults.
  *
  * Lives outside the "use server" actions file because Next forbids
  * non-async-function exports from server-action modules. Both server and
@@ -11,7 +11,7 @@ export type NavLink = {
     id: number;
     /** Display text shown in the header. */
     label: string;
-    /** Path the link points to (e.g. "/about", "/corporate-yoga", "/"). */
+    /** Path the link points to (e.g. "/studios", "/classes", "/"). */
     pageSlug: string;
     /** Up to one level of children — renders as a hover dropdown. */
     children: NavLink[];
@@ -29,30 +29,30 @@ export type AvailablePage = {
 };
 
 /**
- * Default nav used as a fallback when no DB row exists yet.
- * Placeholder links (pageSlug "#") demonstrate the top-level + dropdown
- * structure without 404ing — point them at real pages as you build them.
+ * Default header nav — exactly the seven items on the approved V3 design.
+ * "NEW HERE?" anchors to the 21-day block on the home page; everything
+ * else is its own folder route under src/app/.
  */
 export const defaultNavLinks: NavLink[] = [
-    { id: 1, label: "Home", pageSlug: "/", children: [] },
-    {
-        id: 2,
-        label: "Pages",
-        pageSlug: "#",
-        children: [
-            { id: 21, label: "Page One", pageSlug: "#", children: [] },
-            { id: 22, label: "Page Two", pageSlug: "#", children: [] },
-            { id: 23, label: "Page Three", pageSlug: "#", children: [] },
-        ],
-    },
-    { id: 3, label: "Contact", pageSlug: "#", children: [] },
+    { id: 1, label: "NEW HERE?", pageSlug: "/#new-here", children: [] },
+    { id: 2, label: "STUDIOS", pageSlug: "/studios", children: [] },
+    { id: 3, label: "CLASSES", pageSlug: "/classes", children: [] },
+    { id: 4, label: "MEMBERSHIPS", pageSlug: "/memberships", children: [] },
+    { id: 5, label: "PRIVATE PILATES", pageSlug: "/private-pilates", children: [] },
+    { id: 6, label: "LIFE AT TBM", pageSlug: "/life-at-tbm", children: [] },
+    { id: 7, label: "OUR PEOPLE", pageSlug: "/our-people", children: [] },
 ];
 
 /**
  * Static (folder-route) pages — the routes that always exist as folder
- * routes under src/app/, with admin-friendly labels. Only Home ships in
- * the template; add an entry here whenever you add a new folder route.
+ * routes under src/app/. Shown in the admin page-picker.
  */
 export const STATIC_PAGES: AvailablePage[] = [
     { path: "/", label: "Home", group: "Core" },
+    { path: "/studios", label: "Studios", group: "Core" },
+    { path: "/classes", label: "Classes", group: "Core" },
+    { path: "/memberships", label: "Memberships", group: "Core" },
+    { path: "/private-pilates", label: "Private Pilates", group: "Service" },
+    { path: "/life-at-tbm", label: "Life at TBM", group: "Core" },
+    { path: "/our-people", label: "Our People", group: "Core" },
 ];

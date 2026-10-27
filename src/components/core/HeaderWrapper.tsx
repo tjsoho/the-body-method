@@ -1,23 +1,18 @@
 /* ************************************************************
-   Server component wrapper for Header.
-   Fetches the header CTA text from the home page content and the
-   navigation tree from the DB (falling back to defaults).
+   Server component wrapper for the TBM Header.
+
+   Fetches the admin-managed navigation tree. The BOOK button is a fixed
+   Momence booking link so it is NOT driven by nav items — it sits in
+   its own slot on the right of the bar.
 ************************************************************ */
-import getPage from "@/server-actions/page";
-import { homePageFallbackData, HomePageProps } from "@/app/_config";
 import { getNavigation } from "@/server-actions/navigation";
 import Header from "./Header";
 
-export default async function HeaderWrapper() {
-    const [homePage, navItems] = await Promise.all([
-        getPage<HomePageProps>("home", homePageFallbackData),
-        getNavigation(),
-    ]);
+/** TODO Toby/Sarah: swap for the real Momence URL when it is confirmed. */
+const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || "/book";
 
-    return (
-        <Header
-            headerButtonText={homePage.content.heroButton1Text}
-            navItems={navItems}
-        />
-    );
+export default async function HeaderWrapper() {
+    const navItems = await getNavigation();
+
+    return <Header navItems={navItems} bookingUrl={BOOKING_URL} />;
 }
