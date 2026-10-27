@@ -13,7 +13,7 @@
 
 import Link from "next/link";
 import type { TwoStudiosContent, StudioCard } from "@/app/_config";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 function StudioArticle({
     card,
@@ -34,7 +34,7 @@ function StudioArticle({
                 borderLeft: withLeftBorder ? "1px solid #c9c7bd" : undefined,
             }}
         >
-            <div style={{ position: "relative", overflow: "hidden" }}>
+            <Reveal amount={0.2} style={{ position: "relative", overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={card.image}
@@ -46,7 +46,7 @@ function StudioArticle({
                         objectPosition: "center 45%",
                     }}
                 />
-            </div>
+            </Reveal>
             <div
                 style={{
                     padding: "clamp(32px, 4vw, 64px)",
@@ -57,43 +57,49 @@ function StudioArticle({
                     background: "#f4f2ed",
                 }}
             >
-                <h3
-                    style={{
-                        margin: 0,
-                        fontWeight: 400,
-                        fontSize: "clamp(34px, 3.4vw, 48px)",
-                        lineHeight: 1.05,
-                        color: "var(--tbm-ink)",
-                        fontFamily: "var(--font-lora)",
-                    }}
-                >
-                    {card.name}
-                </h3>
-                <p
-                    style={{
-                        margin: 0,
-                        fontSize: 21,
-                        lineHeight: 1.45,
-                        fontStyle: "italic",
-                        color: "var(--tbm-ink)",
-                        fontFamily: "var(--font-lora)",
-                    }}
-                >
-                    {card.italicLine}
-                </p>
-                <p
-                    style={{
-                        margin: 0,
-                        fontSize: 16,
-                        lineHeight: 1.7,
-                        color: "var(--tbm-text-muted)",
-                        maxWidth: 520,
-                        fontFamily: "var(--font-lora)",
-                    }}
-                >
-                    {card.body}
-                </p>
-                <div style={{ paddingTop: 8, marginTop: "auto" }}>
+                <Reveal delay={0.15} amount={0.3}>
+                    <h3
+                        style={{
+                            margin: 0,
+                            fontWeight: 400,
+                            fontSize: "clamp(34px, 3.4vw, 48px)",
+                            lineHeight: 1.05,
+                            color: "var(--tbm-ink)",
+                            fontFamily: "var(--font-lora)",
+                        }}
+                    >
+                        {card.name}
+                    </h3>
+                </Reveal>
+                <Reveal delay={0.3} amount={0.3}>
+                    <p
+                        style={{
+                            margin: 0,
+                            fontSize: 21,
+                            lineHeight: 1.45,
+                            fontStyle: "italic",
+                            color: "var(--tbm-ink)",
+                            fontFamily: "var(--font-lora)",
+                        }}
+                    >
+                        {card.italicLine}
+                    </p>
+                </Reveal>
+                <Reveal delay={0.45} amount={0.3}>
+                    <p
+                        style={{
+                            margin: 0,
+                            fontSize: 16,
+                            lineHeight: 1.7,
+                            color: "var(--tbm-text-muted)",
+                            maxWidth: 520,
+                            fontFamily: "var(--font-lora)",
+                        }}
+                    >
+                        {card.body}
+                    </p>
+                </Reveal>
+                <Reveal delay={0.6} amount={0.3} style={{ paddingTop: 8, marginTop: "auto" }}>
                     <Link
                         className="tbm-lnk"
                         href={card.ctaHref}
@@ -101,7 +107,7 @@ function StudioArticle({
                     >
                         {card.ctaLabel} <span aria-hidden="true">→</span>
                     </Link>
-                </div>
+                </Reveal>
             </div>
         </article>
     );
@@ -120,47 +126,46 @@ export default function TwoStudios({ content }: { content: TwoStudiosContent }) 
             }}
         >
             <div className="tbm-wrap" style={{ paddingBottom: 75 }}>
-                <h2
-                    style={{
-                        margin: 0,
-                        fontWeight: 400,
-                        fontSize: "clamp(36px, 4vw, 58px)",
-                        lineHeight: 1.1,
-                        textAlign: "center",
-                    }}
-                >
-                    {content.headingLead}
-                    <br />
-                    <em style={{ color: "var(--tbm-green-accent)" }}>
-                        {content.headingItalic}
-                    </em>
-                </h2>
+                <Reveal amount={0.5}>
+                    <h2
+                        style={{
+                            margin: 0,
+                            fontWeight: 400,
+                            fontSize: "clamp(36px, 4vw, 58px)",
+                            lineHeight: 1.1,
+                            textAlign: "center",
+                        }}
+                    >
+                        {content.headingLead}
+                        <br />
+                        <em style={{ color: "var(--tbm-green-accent)" }}>
+                            {content.headingItalic}
+                        </em>
+                    </h2>
+                </Reveal>
             </div>
 
-            <Stagger
+            {/* No outer stagger here — each StudioArticle runs its own
+                internal Reveal cascade (name → italic → body → CTA). */}
+            <div
                 style={{
                     display: "grid",
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(min(520px, 100%), 1fr))",
                     gap: 0,
                 }}
-                stagger={0.22}
             >
-                <StaggerItem>
-                    <StudioArticle
-                        card={content.tugunBeach}
-                        withLeftBorder={false}
-                        linkColor="var(--tbm-forest)"
-                    />
-                </StaggerItem>
-                <StaggerItem>
-                    <StudioArticle
-                        card={content.cornerstone}
-                        withLeftBorder={true}
-                        linkColor="var(--tbm-ink)"
-                    />
-                </StaggerItem>
-            </Stagger>
+                <StudioArticle
+                    card={content.tugunBeach}
+                    withLeftBorder={false}
+                    linkColor="var(--tbm-forest)"
+                />
+                <StudioArticle
+                    card={content.cornerstone}
+                    withLeftBorder={true}
+                    linkColor="var(--tbm-ink)"
+                />
+            </div>
 
             {/* Dual Membership block — centred under the cards on cream. */}
             <div style={{ background: "var(--tbm-cream)", color: "var(--tbm-ink)" }}>

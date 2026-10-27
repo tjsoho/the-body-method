@@ -10,6 +10,7 @@
 import Link from "next/link";
 import type { GreatTeachingContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 export type Teacher = {
     id: string;
@@ -39,55 +40,60 @@ export default function GreatTeaching({ content, teachers }: Props) {
                 className="tbm-wrap tbm-g12"
                 style={{ rowGap: 64, alignItems: "start" }}
             >
-                <h2
-                    className="tbm-c-l"
-                    style={{
-                        margin: 0,
-                        fontWeight: 400,
-                        fontSize: "clamp(36px, 4vw, 56px)",
-                        lineHeight: 1.1,
-                        paddingRight: 24,
-                    }}
-                >
-                    {content.headingLead}
-                    <em style={{ color: "var(--tbm-green-accent)" }}>
-                        {content.headingItalic}
-                    </em>
-                </h2>
-                <div
-                    className="tbm-c-r"
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 16,
-                        fontSize: 18,
-                        lineHeight: 1.7,
-                        color: "var(--tbm-text-body)",
-                        paddingTop: 8,
-                    }}
-                >
-                    {content.body.map((para, i) => (
-                        <p key={i} style={{ margin: 0 }}>
-                            {para}
-                        </p>
-                    ))}
-                    <p
+                <Reveal className="tbm-c-l" style={{ paddingRight: 24 }} amount={0.3}>
+                    <h2
                         style={{
                             margin: 0,
-                            fontStyle: "italic",
-                            fontSize: 21,
-                            lineHeight: 1.5,
-                            color: "var(--tbm-ink)",
+                            fontWeight: 400,
+                            fontSize: "clamp(36px, 4vw, 56px)",
+                            lineHeight: 1.1,
                         }}
                     >
-                        {content.italicCloser}
-                    </p>
-                </div>
+                        {content.headingLead}
+                        <em style={{ color: "var(--tbm-green-accent)" }}>
+                            {content.headingItalic}
+                        </em>
+                    </h2>
+                </Reveal>
+                <Reveal
+                    delay={0.15}
+                    amount={0.25}
+                    className="tbm-c-r"
+                    style={{ paddingTop: 8 }}
+                >
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 16,
+                            fontSize: 18,
+                            lineHeight: 1.7,
+                            color: "var(--tbm-text-body)",
+                        }}
+                    >
+                        {content.body.map((para, i) => (
+                            <p key={i} style={{ margin: 0 }}>
+                                {para}
+                            </p>
+                        ))}
+                        <p
+                            style={{
+                                margin: 0,
+                                fontStyle: "italic",
+                                fontSize: 21,
+                                lineHeight: 1.5,
+                                color: "var(--tbm-ink)",
+                            }}
+                        >
+                            {content.italicCloser}
+                        </p>
+                    </div>
+                </Reveal>
 
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 48 }}
-                    stagger={0.14}
+                    stagger={0.32}
                 >
                     {teachers.slice(0, 4).map((t) => (
                         <StaggerItem

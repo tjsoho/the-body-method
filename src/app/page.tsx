@@ -16,7 +16,6 @@ import GreatTeaching from "@/components/Home/GreatTeaching";
 import PrivatePilates from "@/components/Home/PrivatePilates";
 import LifeAtTbm from "@/components/Home/LifeAtTbm";
 import FinalCta from "@/components/Home/FinalCta";
-import FadeUp from "@/components/motion/FadeUp";
 import { buildPageMetadata } from "@/utils/seo";
 
 // Force dynamic so admin edits in the CMS show on next request without
@@ -44,17 +43,18 @@ export default async function Home() {
     return (
         <>
             <Hero content={content.hero} />
-            {/* Each section manages its own interior stagger wave; here we
-                add only the lightest section-level lift so the whole block
-                arrives gently without competing with the cards' cascade. */}
-            <FadeUp y={28}><Belong content={content.belong} /></FadeUp>
-            <FadeUp y={28}><TwoStudios content={content.twoStudios} /></FadeUp>
-            <FadeUp y={28}><TwentyOneDay content={content.twentyOneDay} /></FadeUp>
-            <FadeUp y={28}><WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} /></FadeUp>
-            <FadeUp y={28}><GreatTeaching content={content.greatTeaching} teachers={teachers} /></FadeUp>
-            <FadeUp y={28}><PrivatePilates content={content.privatePilates} /></FadeUp>
-            <FadeUp y={28}><LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} /></FadeUp>
-            <FadeUp y={28}><FinalCta content={content.finalCta} /></FadeUp>
+            {/* Each section runs its own interior motion — the headline
+                lifts in, then the body, then the row of cards cascades
+                one by one. No outer wrapper fade here; it was firing in
+                parallel and masking the wave inside. */}
+            <Belong content={content.belong} />
+            <TwoStudios content={content.twoStudios} />
+            <TwentyOneDay content={content.twentyOneDay} />
+            <WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} />
+            <GreatTeaching content={content.greatTeaching} teachers={teachers} />
+            <PrivatePilates content={content.privatePilates} />
+            <LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} />
+            <FinalCta content={content.finalCta} />
         </>
     );
 }

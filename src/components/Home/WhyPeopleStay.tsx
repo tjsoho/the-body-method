@@ -13,6 +13,7 @@
 
 import type { WhyPeopleStayContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 export type MemberStory = {
     id: string;
@@ -45,27 +46,31 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                     className="tbm-c-l"
                     style={{ display: "flex", flexDirection: "column", gap: 24 }}
                 >
-                    <h2
-                        style={{
-                            margin: 0,
-                            fontWeight: 400,
-                            fontSize: "clamp(36px, 4vw, 56px)",
-                            lineHeight: 1.1,
-                        }}
-                    >
-                        {content.heading}
-                    </h2>
-                    <p
-                        style={{
-                            margin: 0,
-                            fontSize: 21,
-                            lineHeight: 1.5,
-                            fontStyle: "italic",
-                            color: "var(--tbm-green-accent)",
-                        }}
-                    >
-                        {content.italicLine}
-                    </p>
+                    <Reveal amount={0.4}>
+                        <h2
+                            style={{
+                                margin: 0,
+                                fontWeight: 400,
+                                fontSize: "clamp(36px, 4vw, 56px)",
+                                lineHeight: 1.1,
+                            }}
+                        >
+                            {content.heading}
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={0.15} amount={0.3}>
+                        <p
+                            style={{
+                                margin: 0,
+                                fontSize: 21,
+                                lineHeight: 1.5,
+                                fontStyle: "italic",
+                                color: "var(--tbm-green-accent)",
+                            }}
+                        >
+                            {content.italicLine}
+                        </p>
+                    </Reveal>
                 </div>
                 <div
                     className="tbm-c-r tbm-hide-sm"
@@ -113,7 +118,7 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 56 }}
-                    stagger={0.18}
+                    stagger={0.38}
                 >
                     {stories.slice(0, 3).map((story) => (
                         <StaggerItem

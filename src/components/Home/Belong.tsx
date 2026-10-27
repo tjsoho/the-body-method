@@ -8,6 +8,7 @@
 
 import type { BelongContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 export default function Belong({ content }: { content: BelongContent }) {
     return (
@@ -32,51 +33,55 @@ export default function Belong({ content }: { content: BelongContent }) {
                         gap: 32,
                     }}
                 >
-                    <h2
-                        style={{
-                            margin: 0,
-                            fontWeight: 400,
-                            fontSize: "clamp(36px, 4vw, 56px)",
-                            lineHeight: 1.1,
-                            letterSpacing: "-.01em",
-                            textWrap: "balance",
-                        }}
-                    >
-                        {content.headingLead}
-                        <em style={{ color: "var(--tbm-green-accent)" }}>
-                            {content.headingItalic}
-                        </em>
-                    </h2>
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 16,
-                            fontSize: 18,
-                            lineHeight: 1.7,
-                            color: "var(--tbm-text-body)",
-                        }}
-                    >
-                        <p
+                    <Reveal amount={0.3}>
+                        <h2
                             style={{
                                 margin: 0,
-                                fontStyle: "italic",
-                                fontSize: 21,
-                                lineHeight: 1.5,
-                                color: "var(--tbm-ink)",
+                                fontWeight: 400,
+                                fontSize: "clamp(36px, 4vw, 56px)",
+                                lineHeight: 1.1,
+                                letterSpacing: "-.01em",
+                                textWrap: "balance",
                             }}
                         >
-                            {content.italicLine}
-                        </p>
-                        {content.body.map((para, i) => (
-                            <p key={i} style={{ margin: 0 }}>
-                                {para}
+                            {content.headingLead}
+                            <em style={{ color: "var(--tbm-green-accent)" }}>
+                                {content.headingItalic}
+                            </em>
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={0.15} amount={0.2}>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 16,
+                                fontSize: 18,
+                                lineHeight: 1.7,
+                                color: "var(--tbm-text-body)",
+                            }}
+                        >
+                            <p
+                                style={{
+                                    margin: 0,
+                                    fontStyle: "italic",
+                                    fontSize: 21,
+                                    lineHeight: 1.5,
+                                    color: "var(--tbm-ink)",
+                                }}
+                            >
+                                {content.italicLine}
                             </p>
-                        ))}
-                    </div>
+                            {content.body.map((para, i) => (
+                                <p key={i} style={{ margin: 0 }}>
+                                    {para}
+                                </p>
+                            ))}
+                        </div>
+                    </Reveal>
                 </div>
 
-                <div className="tbm-c-r" style={{ position: "relative" }}>
+                <Reveal delay={0.1} amount={0.2} className="tbm-c-r" style={{ position: "relative" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={content.image}
@@ -88,7 +93,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                             objectPosition: "center 35%",
                         }}
                     />
-                </div>
+                </Reveal>
 
                 {/* Four pillars — wave in left to right once the row
                     enters the viewport. 160ms between pillars gives a
@@ -100,7 +105,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                         borderTop: "1px solid var(--tbm-rule)",
                         paddingTop: 40,
                     }}
-                    stagger={0.16}
+                    stagger={0.35}
                 >
                     {content.pillars.map((p, i) => (
                         <StaggerItem

@@ -12,6 +12,7 @@
 import Link from "next/link";
 import type { TwentyOneDayContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 export default function TwentyOneDay({ content }: { content: TwentyOneDayContent }) {
     return (
@@ -35,35 +36,41 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         paddingRight: 24,
                     }}
                 >
-                    <div
-                        className="tbm-lbl"
-                        style={{ color: "var(--tbm-on-dark-label)", fontSize: 13 }}
-                    >
-                        {content.label}
-                    </div>
-                    <h2
-                        style={{
-                            margin: 0,
-                            fontWeight: 400,
-                            fontSize: "clamp(40px, 4.6vw, 64px)",
-                            lineHeight: 1.05,
-                            letterSpacing: "-.01em",
-                        }}
-                    >
-                        {content.headingLead}
-                        <em>{content.headingItalic}</em>
-                    </h2>
-                    <p
-                        style={{
-                            margin: 0,
-                            fontSize: 21,
-                            lineHeight: 1.5,
-                            fontStyle: "italic",
-                            color: "var(--tbm-on-dark-strong)",
-                        }}
-                    >
-                        {content.italicLine}
-                    </p>
+                    <Reveal amount={0.4}>
+                        <div
+                            className="tbm-lbl"
+                            style={{ color: "var(--tbm-on-dark-label)", fontSize: 13 }}
+                        >
+                            {content.label}
+                        </div>
+                    </Reveal>
+                    <Reveal delay={0.1} amount={0.3}>
+                        <h2
+                            style={{
+                                margin: 0,
+                                fontWeight: 400,
+                                fontSize: "clamp(40px, 4.6vw, 64px)",
+                                lineHeight: 1.05,
+                                letterSpacing: "-.01em",
+                            }}
+                        >
+                            {content.headingLead}
+                            <em>{content.headingItalic}</em>
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={0.25} amount={0.3}>
+                        <p
+                            style={{
+                                margin: 0,
+                                fontSize: 21,
+                                lineHeight: 1.5,
+                                fontStyle: "italic",
+                                color: "var(--tbm-on-dark-strong)",
+                            }}
+                        >
+                            {content.italicLine}
+                        </p>
+                    </Reveal>
                 </div>
 
                 <div
@@ -75,28 +82,32 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         paddingTop: 42,
                     }}
                 >
-                    <p
-                        style={{
-                            margin: 0,
-                            fontSize: 18,
-                            lineHeight: 1.7,
-                            color: "var(--tbm-on-dark-body)",
-                            maxWidth: "34em",
-                        }}
-                    >
-                        {content.body}
-                    </p>
-                    <p
-                        style={{
-                            margin: 0,
-                            borderTop: "1px solid rgba(175,177,161,.35)",
-                            paddingTop: 32,
-                            fontSize: "clamp(34px, 3.6vw, 52px)",
-                            lineHeight: 1.1,
-                        }}
-                    >
-                        {content.priceLine}
-                    </p>
+                    <Reveal delay={0.15} amount={0.3}>
+                        <p
+                            style={{
+                                margin: 0,
+                                fontSize: 18,
+                                lineHeight: 1.7,
+                                color: "var(--tbm-on-dark-body)",
+                                maxWidth: "34em",
+                            }}
+                        >
+                            {content.body}
+                        </p>
+                    </Reveal>
+                    <Reveal delay={0.3} amount={0.3}>
+                        <p
+                            style={{
+                                margin: 0,
+                                borderTop: "1px solid rgba(175,177,161,.35)",
+                                paddingTop: 32,
+                                fontSize: "clamp(34px, 3.6vw, 52px)",
+                                lineHeight: 1.1,
+                            }}
+                        >
+                            {content.priceLine}
+                        </p>
+                    </Reveal>
                 </div>
 
                 <Stagger
@@ -107,7 +118,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         padding: 0,
                         rowGap: 40,
                     }}
-                    stagger={0.18}
+                    stagger={0.4}
                 >
                     {content.steps.map((step, i) => {
                         const isLast = i === content.steps.length - 1;

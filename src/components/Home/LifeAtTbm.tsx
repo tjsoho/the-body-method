@@ -11,6 +11,7 @@
 import Link from "next/link";
 import type { LifeAtTbmContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import Reveal from "@/components/motion/Reveal";
 
 export type LifeTile = {
     id: string;
@@ -52,39 +53,44 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                 className="tbm-wrap tbm-g12"
                 style={{ rowGap: 64, alignItems: "start" }}
             >
-                <h2
-                    className="tbm-c-l"
-                    style={{
-                        margin: 0,
-                        fontWeight: 400,
-                        fontSize: "clamp(36px, 4vw, 56px)",
-                        lineHeight: 1.1,
-                        paddingRight: 24,
-                    }}
-                >
-                    {content.headingLead}
-                    <em style={{ color: "var(--tbm-on-dark-sage-soft)" }}>
-                        {content.headingItalic}
-                    </em>
-                </h2>
-                <p
+                <Reveal className="tbm-c-l" style={{ paddingRight: 24 }} amount={0.3}>
+                    <h2
+                        style={{
+                            margin: 0,
+                            fontWeight: 400,
+                            fontSize: "clamp(36px, 4vw, 56px)",
+                            lineHeight: 1.1,
+                        }}
+                    >
+                        {content.headingLead}
+                        <em style={{ color: "var(--tbm-on-dark-sage-soft)" }}>
+                            {content.headingItalic}
+                        </em>
+                    </h2>
+                </Reveal>
+                <Reveal
+                    delay={0.15}
+                    amount={0.3}
                     className="tbm-c-r"
-                    style={{
-                        margin: 0,
-                        paddingTop: 8,
-                        fontSize: 18,
-                        lineHeight: 1.7,
-                        color: "var(--tbm-on-dark-body)",
-                        maxWidth: "34em",
-                    }}
+                    style={{ paddingTop: 8 }}
                 >
-                    {content.body}
-                </p>
+                    <p
+                        style={{
+                            margin: 0,
+                            fontSize: 18,
+                            lineHeight: 1.7,
+                            color: "var(--tbm-on-dark-body)",
+                            maxWidth: "34em",
+                        }}
+                    >
+                        {content.body}
+                    </p>
+                </Reveal>
 
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 24 }}
-                    stagger={0.22}
+                    stagger={0.4}
                 >
                     {tiles.map((tile) => (
                         <StaggerItem

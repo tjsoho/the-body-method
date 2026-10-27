@@ -34,23 +34,22 @@ import {
 import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-const SOFT_SPRING = {
-    type: "spring" as const,
-    damping: 26,
-    stiffness: 70,
-    mass: 0.9,
-};
+/* Explicit tween, not a spring. Springs settle fast and can be hard
+   to perceive; a 1.6s cubic ease over a 100px travel + 20px blur
+   is what reads as a wave rolling across the row. */
+const EASE = [0.22, 0.61, 0.36, 1] as const;
+const DURATION = 1.6;
 
 const StaggerContext = createContext<{ stagger: number; baseDelay: number }>({
-    stagger: 0.14,
-    baseDelay: 0.12,
+    stagger: 0.35,
+    baseDelay: 0.1,
 });
 
 type StaggerProps = {
     children: ReactNode;
     className?: string;
     style?: CSSProperties;
-    /** Seconds between each child's start. */
+    /** Seconds between each child's start. House default 350ms. */
     stagger?: number;
     /** Seconds before the first child starts. */
     delay?: number;
@@ -60,8 +59,8 @@ export function Stagger({
     children,
     className,
     style,
-    stagger = 0.14,
-    delay = 0.12,
+    stagger = 0.35,
+    delay = 0.1,
 }: StaggerProps) {
     // Walk the children and inject a per-item index so each
     // StaggerItem can derive its own delay. This keeps the API
@@ -94,8 +93,10 @@ type ItemProps = {
     children: ReactNode;
     className?: string;
     style?: CSSProperties;
-    /** Rise distance in px. Default 56. */
+    /** Rise distance in px. Default 100 — a real editorial travel. */
     y?: number;
+    /** Horizontal drift in px. Default -14 — slight left-to-right drift. */
+    x?: number;
     /** Injected by Stagger — do not pass directly. */
     _index?: number;
 };
@@ -104,7 +105,8 @@ export function StaggerItem({
     children,
     className,
     style,
-    y = 56,
+    y = 100,
+    x = -14,
     _index = 0,
 }: ItemProps) {
     const prefersReduced = useReducedMotion();
@@ -124,14 +126,22 @@ export function StaggerItem({
         <motion.div
             className={className}
             style={style}
-            initial={{ opacity: 0, y, filter: "blur(10px)" }}
+            initial={{
+                opacity: 0,
+                y,
+                x,
+                filter: "blur(20px)",
+                scale: 0.94,
+            }}
             whileInView={{
                 opacity: 1,
                 y: 0,
+                x: 0,
                 filter: "blur(0px)",
-                transition: { ...SOFT_SPRING, delay },
+                scale: 1,
+                transition: { duration: DURATION, ease: EASE, delay },
             }}
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.25 }}
         >
             {children}
         </motion.div>
