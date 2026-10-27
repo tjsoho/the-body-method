@@ -45,6 +45,35 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
         };
     }, [open]);
 
+    // Escape key closes the menu.
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setOpen(false);
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [open]);
+
+    // Auto-close when the viewport grows past the hamburger breakpoint,
+    // so the stale overlay doesn't sit on top of the full desktop nav
+    // after a window resize.                                           */
+    useEffect(() => {
+        if (!open) return;
+        const mql = window.matchMedia("(min-width: 1241px)");
+        const onChange = () => {
+            if (mql.matches) setOpen(false);
+        };
+        onChange();
+        mql.addEventListener("change", onChange);
+        return () => mql.removeEventListener("change", onChange);
+    }, [open]);
+
+    // Close whenever the route changes (e.g. clicking a nav link).
+    useEffect(() => {
+        setOpen(false);
+    }, [pathname]);
+
     const Wordmark = (
         <Link
             href="/"
@@ -113,10 +142,56 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                     <div
                         style={{
                             display: "flex",
-                            gap: 8,
+                            gap: 10,
                             alignItems: "center",
                         }}
                     >
+                        {/* Luxurious MENU button — cream outline (matches
+                            wordmark), same 44px height as BOOK, lives next
+                            to BOOK whenever the nav is overflowing. The
+                            text swaps to CLOSE when the overlay is open. */}
+                        <button
+                            type="button"
+                            aria-label={open ? "Close menu" : "Open menu"}
+                            aria-expanded={open}
+                            onClick={() => setOpen((o) => !o)}
+                            className="tbm-btn tbm-btn-menu tbm-nav-mobile-btn"
+                            style={{
+                                background: "transparent",
+                                color: "#f4f2ed",
+                                border: "1px solid rgba(244,242,237,.85)",
+                                minHeight: 44,
+                                cursor: "pointer",
+                                gap: 10,
+                                fontFamily: "var(--font-hanken)",
+                            }}
+                        >
+                            <span
+                                aria-hidden="true"
+                                style={{
+                                    display: "inline-flex",
+                                    flexDirection: "column",
+                                    gap: 4,
+                                    width: 16,
+                                }}
+                            >
+                                {open ? (
+                                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true" style={{ display: "block" }}>
+                                        <line x1="1.5" y1="1.5" x2="14.5" y2="10.5" />
+                                        <line x1="1.5" y1="10.5" x2="14.5" y2="1.5" />
+                                    </svg>
+                                ) : (
+                                    <>
+                                        <span style={{ height: 1, background: "currentColor", display: "block" }} />
+                                        <span style={{ height: 1, background: "currentColor", display: "block" }} />
+                                    </>
+                                )}
+                            </span>
+                            <span className="tbm-menu-label">
+                                {open ? "CLOSE" : "MENU"}
+                            </span>
+                        </button>
+
                         <a
                             href={bookingUrl}
                             className="tbm-btn tbm-btn-book"
@@ -131,39 +206,13 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                         >
                             BOOK
                         </a>
-                        <button
-                            type="button"
-                            aria-label={open ? "Close menu" : "Open menu"}
-                            onClick={() => setOpen((o) => !o)}
-                            className="tbm-nav-mobile-btn"
-                            style={{
-                                width: 44,
-                                height: 44,
-                                border: "1px solid rgba(244,242,237,.6)",
-                                background: "transparent",
-                                color: "#f4f2ed",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                cursor: "pointer",
-                            }}
-                        >
-                            {open ? (
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-                                    <line x1="2" y1="2" x2="16" y2="16" />
-                                    <line x1="2" y1="16" x2="16" y2="2" />
-                                </svg>
-                            ) : (
-                                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-                                    <line x1="0" y1="1" x2="20" y2="1" />
-                                    <line x1="0" y1="11" x2="20" y2="11" />
-                                </svg>
-                            )}
-                        </button>
                     </div>
                 </div>
             </header>
 
-            {/* Mobile overlay */}
+            {/* Menu overlay — forest field, oversized Hanken Grotesk labels
+                with hairline rules between them. Generous side padding so
+                the links breathe at every width.                        */}
             {open && (
                 <div
                     role="dialog"
@@ -174,31 +223,66 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                         background: "#1b2518",
                         color: "#f4f2ed",
                         zIndex: 49,
-                        padding: "32px clamp(20px, 5vw, 72px)",
+                        padding: "clamp(32px, 7vh, 72px) clamp(20px, 5vw, 72px) 48px",
                         display: "flex",
                         flexDirection: "column",
-                        gap: 20,
+                        gap: 0,
                         overflowY: "auto",
                     }}
                 >
-                    {links.map((item) => (
-                        <Link
-                            key={item.id}
-                            href={item.pageSlug}
-                            onClick={() => setOpen(false)}
-                            className="tbm-lbl"
-                            style={{
-                                color: "#f4f2ed",
-                                textDecoration: "none",
-                                fontSize: 16,
-                                letterSpacing: ".14em",
-                                paddingBottom: 16,
-                                borderBottom: "1px solid rgba(244,242,237,.14)",
-                            }}
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
+                    <div
+                        style={{
+                            width: "100%",
+                            maxWidth: 1200,
+                            margin: "0 auto",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 0,
+                        }}
+                    >
+                        {links.map((item, i) => (
+                            <Link
+                                key={item.id}
+                                href={item.pageSlug}
+                                onClick={() => setOpen(false)}
+                                style={{
+                                    color: "#f4f2ed",
+                                    textDecoration: "none",
+                                    fontFamily: "var(--font-hanken)",
+                                    fontSize: "clamp(20px, 4vw, 34px)",
+                                    fontWeight: 400,
+                                    letterSpacing: ".12em",
+                                    textTransform: "uppercase",
+                                    padding: "clamp(18px, 3vh, 28px) 0",
+                                    borderTop:
+                                        i === 0
+                                            ? "1px solid rgba(244,242,237,.14)"
+                                            : "none",
+                                    borderBottom:
+                                        "1px solid rgba(244,242,237,.14)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 20,
+                                    lineHeight: 1,
+                                }}
+                            >
+                                <span
+                                    style={{
+                                        fontFamily: "var(--font-lora)",
+                                        fontStyle: "italic",
+                                        fontSize: "0.5em",
+                                        letterSpacing: 0,
+                                        color: "#a9bfae",
+                                        minWidth: "2.4em",
+                                        textTransform: "lowercase",
+                                    }}
+                                >
+                                    0{i + 1}.
+                                </span>
+                                {item.label}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             )}
 

@@ -64,8 +64,8 @@ export default function Hero({ content }: { content: HeroContent }) {
                 }}
             >
                 <div
+                    className="tbm-c-l7"
                     style={{
-                        gridColumn: "1 / 8",
                         display: "flex",
                         flexDirection: "column",
                         gap: 24,

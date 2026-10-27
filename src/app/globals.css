@@ -143,6 +143,7 @@ a:hover {
 
 /* Column spans from the V3 design */
 .tbm-c-l { grid-column: 1 / 7; }
+.tbm-c-l7 { grid-column: 1 / 8; }
 .tbm-c-r { grid-column: 7 / 13; }
 .tbm-c-l5 { grid-column: 1 / 6; }
 .tbm-c-all { grid-column: 1 / -1; }
@@ -161,6 +162,7 @@ a:hover {
 @media (max-width: 900px) {
     .tbm-hide-sm { display: none !important; }
     .tbm-c-l,
+    .tbm-c-l7,
     .tbm-c-r,
     .tbm-c-l5,
     .tbm-c-t,
@@ -172,32 +174,70 @@ a:hover {
     .tbm-c-f4 { grid-column: span 6; }
 }
 @media (max-width: 560px) {
+    .tbm-c-f3,
+    .tbm-c-f4 { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
     .tbm-c-q { grid-column: 1 / -1; }
 }
 
 /* Header responsive — kept here (not inside the Header client component)
- * so styled-jsx scoping doesn't swallow the class selectors.           */
+ * so styled-jsx scoping doesn't swallow the class selectors.
+ *
+ * Switch to the hamburger overlay at 1240px because below that the seven
+ * nav items start wrapping to two lines (measured — see audit note). We
+ * never want a nav item to run to two lines; as soon as that would happen,
+ * the links move into the overlay and only the MENU + BOOK pair remains. */
 .tbm-nav-desktop { display: flex; }
 .tbm-nav-mobile-btn { display: none; }
-@media (max-width: 900px) {
+@media (max-width: 1240px) {
     .tbm-nav-desktop { display: none !important; }
     .tbm-nav-mobile-btn { display: inline-flex !important; }
 }
 
-/* Wordmark — scales down on narrow screens so the whole bar
- * (wordmark + BOOK + hamburger) fits inside a phone viewport.          */
+/* Wordmark + the MENU and BOOK buttons share a single horizontal rhythm.
+ * MENU is a cream-outlined button, BOOK is cream-filled: that pairing
+ * (secondary → primary) matches the V3 design and reads as one trio with
+ * the wordmark across every width.                                     */
 .tbm-wordmark {
     display: inline-block;
     padding: 8px 14px 10px;
     font-size: 17px;
     letter-spacing: 0.3em;
 }
+.tbm-btn-menu,
 .tbm-btn-book { padding: 0 24px; }
+
+@media (max-width: 720px) {
+    .tbm-wordmark {
+        padding: 7px 12px 8px;
+        font-size: 15px;
+        letter-spacing: 0.26em;
+    }
+    .tbm-btn-menu,
+    .tbm-btn-book { padding: 0 18px; font-size: 12px; }
+}
 @media (max-width: 560px) {
     .tbm-wordmark {
         padding: 6px 10px 7px;
         font-size: 13px;
         letter-spacing: 0.24em;
     }
-    .tbm-btn-book { padding: 0 14px; font-size: 11px; }
+    .tbm-btn-menu,
+    .tbm-btn-book { padding: 0 14px; font-size: 11px; letter-spacing: 0.14em; }
+}
+@media (max-width: 400px) {
+    .tbm-wordmark {
+        padding: 5px 8px 6px;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+    }
+    .tbm-btn-menu,
+    .tbm-btn-book { padding: 0 11px; font-size: 10px; letter-spacing: 0.12em; }
+}
+/* Ultra-narrow phones (SE, old iPhone): drop the MENU label so the
+   wordmark + icon + BOOK trio still fits without horizontal scroll. */
+@media (max-width: 360px) {
+    .tbm-btn-menu .tbm-menu-label { display: none; }
+    .tbm-btn-menu { gap: 0 !important; padding: 0 10px; min-width: 40px; }
 }
