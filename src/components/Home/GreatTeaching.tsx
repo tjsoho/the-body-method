@@ -9,6 +9,7 @@
 
 import Link from "next/link";
 import type { GreatTeachingContent } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export type Teacher = {
     id: string;
@@ -83,9 +84,13 @@ export default function GreatTeaching({ content, teachers }: Props) {
                     </p>
                 </div>
 
-                <div className="tbm-c-all tbm-g12" style={{ rowGap: 48 }}>
+                <Stagger
+                    className="tbm-c-all tbm-g12"
+                    style={{ rowGap: 48 }}
+                    stagger={0.14}
+                >
                     {teachers.slice(0, 4).map((t) => (
-                        <article
+                        <StaggerItem
                             key={t.id}
                             className="tbm-c-q"
                             style={{
@@ -126,9 +131,9 @@ export default function GreatTeaching({ content, teachers }: Props) {
                             >
                                 {t.intro}
                             </p>
-                        </article>
+                        </StaggerItem>
                     ))}
-                </div>
+                </Stagger>
 
                 <div className="tbm-c-all">
                     <Link

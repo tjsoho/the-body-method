@@ -18,7 +18,7 @@
 ************************************************************ */
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type Props = {
     delay?: number;
@@ -27,31 +27,43 @@ type Props = {
     once?: boolean;
     children?: ReactNode;
     className?: string;
+    style?: CSSProperties;
 };
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
+const SOFT_SPRING = {
+    type: "spring" as const,
+    damping: 28,
+    stiffness: 60,
+    mass: 1,
+};
 
 export default function FadeUp({
     delay = 0,
-    y = 24,
-    amount = 0.2,
+    y = 56,
+    amount = 0.15,
     once = true,
     children,
     className,
+    style,
 }: Props) {
     const prefersReduced = useReducedMotion();
 
     if (prefersReduced) {
-        return <div className={className}>{children}</div>;
+        return (
+            <div className={className} style={style}>
+                {children}
+            </div>
+        );
     }
 
     return (
         <motion.div
             className={className}
-            initial={{ opacity: 0, y, filter: "blur(6px)" }}
+            style={style}
+            initial={{ opacity: 0, y, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once, amount }}
-            transition={{ duration: 0.9, ease: EASE, delay }}
+            transition={{ ...SOFT_SPRING, delay }}
         >
             {children}
         </motion.div>

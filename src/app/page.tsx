@@ -44,14 +44,17 @@ export default async function Home() {
     return (
         <>
             <Hero content={content.hero} />
-            <FadeUp><Belong content={content.belong} /></FadeUp>
-            <FadeUp><TwoStudios content={content.twoStudios} /></FadeUp>
-            <FadeUp><TwentyOneDay content={content.twentyOneDay} /></FadeUp>
-            <FadeUp><WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} /></FadeUp>
-            <FadeUp><GreatTeaching content={content.greatTeaching} teachers={teachers} /></FadeUp>
-            <FadeUp><PrivatePilates content={content.privatePilates} /></FadeUp>
-            <FadeUp><LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} /></FadeUp>
-            <FadeUp><FinalCta content={content.finalCta} /></FadeUp>
+            {/* Each section manages its own interior stagger wave; here we
+                add only the lightest section-level lift so the whole block
+                arrives gently without competing with the cards' cascade. */}
+            <FadeUp y={28}><Belong content={content.belong} /></FadeUp>
+            <FadeUp y={28}><TwoStudios content={content.twoStudios} /></FadeUp>
+            <FadeUp y={28}><TwentyOneDay content={content.twentyOneDay} /></FadeUp>
+            <FadeUp y={28}><WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} /></FadeUp>
+            <FadeUp y={28}><GreatTeaching content={content.greatTeaching} teachers={teachers} /></FadeUp>
+            <FadeUp y={28}><PrivatePilates content={content.privatePilates} /></FadeUp>
+            <FadeUp y={28}><LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} /></FadeUp>
+            <FadeUp y={28}><FinalCta content={content.finalCta} /></FadeUp>
         </>
     );
 }

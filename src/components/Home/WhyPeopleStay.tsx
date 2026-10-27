@@ -12,6 +12,7 @@
 ************************************************************ */
 
 import type { WhyPeopleStayContent } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export type MemberStory = {
     id: string;
@@ -109,9 +110,13 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                     </button>
                 </div>
 
-                <div className="tbm-c-all tbm-g12" style={{ rowGap: 56 }}>
+                <Stagger
+                    className="tbm-c-all tbm-g12"
+                    style={{ rowGap: 56 }}
+                    stagger={0.18}
+                >
                     {stories.slice(0, 3).map((story) => (
-                        <figure
+                        <StaggerItem
                             key={story.id}
                             className="tbm-c-t"
                             style={{
@@ -176,9 +181,9 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                                     {story.favouriteClassTeacher}
                                 </span>
                             </figcaption>
-                        </figure>
+                        </StaggerItem>
                     ))}
-                </div>
+                </Stagger>
             </div>
         </section>
     );

@@ -10,6 +10,7 @@
 
 import Link from "next/link";
 import type { LifeAtTbmContent } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export type LifeTile = {
     id: string;
@@ -80,9 +81,13 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                     {content.body}
                 </p>
 
-                <div className="tbm-c-all tbm-g12" style={{ rowGap: 24 }}>
+                <Stagger
+                    className="tbm-c-all tbm-g12"
+                    style={{ rowGap: 24 }}
+                    stagger={0.22}
+                >
                     {tiles.map((tile) => (
-                        <div
+                        <StaggerItem
                             key={tile.id}
                             className={TILE_SPAN_CLASS[tile.size]}
                             style={{
@@ -107,9 +112,9 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                                             : "center",
                                 }}
                             />
-                        </div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </Stagger>
 
                 <div className="tbm-c-all">
                     <Link

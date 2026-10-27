@@ -11,6 +11,7 @@
 
 import Link from "next/link";
 import type { TwentyOneDayContent } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export default function TwentyOneDay({ content }: { content: TwentyOneDayContent }) {
     return (
@@ -98,7 +99,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                     </p>
                 </div>
 
-                <ol
+                <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{
                         listStyle: "none",
@@ -106,6 +107,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         padding: 0,
                         rowGap: 40,
                     }}
+                    stagger={0.18}
                 >
                     {content.steps.map((step, i) => {
                         const isLast = i === content.steps.length - 1;
@@ -116,7 +118,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                             ? "#a88d66"
                             : "var(--tbm-on-dark-sage)";
                         return (
-                            <li
+                            <StaggerItem
                                 key={i}
                                 className="tbm-c-q"
                                 style={{
@@ -161,10 +163,10 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                                 >
                                     {step.body}
                                 </p>
-                            </li>
+                            </StaggerItem>
                         );
                     })}
-                </ol>
+                </Stagger>
 
                 <div className="tbm-c-all">
                     <Link

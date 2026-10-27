@@ -7,6 +7,7 @@
 ************************************************************ */
 
 import type { BelongContent } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export default function Belong({ content }: { content: BelongContent }) {
     return (
@@ -89,17 +90,20 @@ export default function Belong({ content }: { content: BelongContent }) {
                     />
                 </div>
 
-                {/* Four pillars */}
-                <div
+                {/* Four pillars — wave in left to right once the row
+                    enters the viewport. 160ms between pillars gives a
+                    slow, flowing cadence (not a snap).                  */}
+                <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{
                         rowGap: 40,
                         borderTop: "1px solid var(--tbm-rule)",
                         paddingTop: 40,
                     }}
+                    stagger={0.16}
                 >
                     {content.pillars.map((p, i) => (
-                        <div
+                        <StaggerItem
                             key={i}
                             className="tbm-c-q"
                             style={{
@@ -129,9 +133,9 @@ export default function Belong({ content }: { content: BelongContent }) {
                             >
                                 {p.body}
                             </p>
-                        </div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </Stagger>
             </div>
         </section>
     );

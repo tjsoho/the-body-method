@@ -13,6 +13,7 @@
 
 import Link from "next/link";
 import type { TwoStudiosContent, StudioCard } from "@/app/_config";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 function StudioArticle({
     card,
@@ -136,25 +137,30 @@ export default function TwoStudios({ content }: { content: TwoStudiosContent }) 
                 </h2>
             </div>
 
-            <div
+            <Stagger
                 style={{
                     display: "grid",
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(min(520px, 100%), 1fr))",
                     gap: 0,
                 }}
+                stagger={0.22}
             >
-                <StudioArticle
-                    card={content.tugunBeach}
-                    withLeftBorder={false}
-                    linkColor="var(--tbm-forest)"
-                />
-                <StudioArticle
-                    card={content.cornerstone}
-                    withLeftBorder={true}
-                    linkColor="var(--tbm-ink)"
-                />
-            </div>
+                <StaggerItem>
+                    <StudioArticle
+                        card={content.tugunBeach}
+                        withLeftBorder={false}
+                        linkColor="var(--tbm-forest)"
+                    />
+                </StaggerItem>
+                <StaggerItem>
+                    <StudioArticle
+                        card={content.cornerstone}
+                        withLeftBorder={true}
+                        linkColor="var(--tbm-ink)"
+                    />
+                </StaggerItem>
+            </Stagger>
 
             {/* Dual Membership block — centred under the cards on cream. */}
             <div style={{ background: "var(--tbm-cream)", color: "var(--tbm-ink)" }}>
