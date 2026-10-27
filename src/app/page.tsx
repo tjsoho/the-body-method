@@ -16,6 +16,7 @@ import GreatTeaching from "@/components/Home/GreatTeaching";
 import PrivatePilates from "@/components/Home/PrivatePilates";
 import LifeAtTbm from "@/components/Home/LifeAtTbm";
 import FinalCta from "@/components/Home/FinalCta";
+import FadeUp from "@/components/motion/FadeUp";
 import { buildPageMetadata } from "@/utils/seo";
 
 // Force dynamic so admin edits in the CMS show on next request without
@@ -43,14 +44,14 @@ export default async function Home() {
     return (
         <>
             <Hero content={content.hero} />
-            <Belong content={content.belong} />
-            <TwoStudios content={content.twoStudios} />
-            <TwentyOneDay content={content.twentyOneDay} />
-            <WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} />
-            <GreatTeaching content={content.greatTeaching} teachers={teachers} />
-            <PrivatePilates content={content.privatePilates} />
-            <LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} />
-            <FinalCta content={content.finalCta} />
+            <FadeUp><Belong content={content.belong} /></FadeUp>
+            <FadeUp><TwoStudios content={content.twoStudios} /></FadeUp>
+            <FadeUp><TwentyOneDay content={content.twentyOneDay} /></FadeUp>
+            <FadeUp><WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} /></FadeUp>
+            <FadeUp><GreatTeaching content={content.greatTeaching} teachers={teachers} /></FadeUp>
+            <FadeUp><PrivatePilates content={content.privatePilates} /></FadeUp>
+            <FadeUp><LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} /></FadeUp>
+            <FadeUp><FinalCta content={content.finalCta} /></FadeUp>
         </>
     );
 }

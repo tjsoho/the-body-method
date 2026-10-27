@@ -12,8 +12,13 @@
    the slot exists to wire the real controls into later.
 ************************************************************ */
 
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import type { HeroContent } from "@/app/_config";
+
+const EASE = [0.22, 0.61, 0.36, 1] as const;
 
 export default function Hero({ content }: { content: HeroContent }) {
     return (
@@ -28,11 +33,20 @@ export default function Hero({ content }: { content: HeroContent }) {
                 flexDirection: "column",
             }}
         >
-            {/* Background image (placeholder — swap for <video> loop later). */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            {/* Background image (placeholder — swap for <video> loop later).
+                Ambient Ken-Burns pan brings the still to life until the
+                real looped footage lands. 24s cycle, scale 1 → 1.08.    */}
+            <motion.img
                 src={content.fallbackImage}
                 alt={content.fallbackImageAlt}
+                initial={{ scale: 1.02 }}
+                animate={{ scale: 1.08 }}
+                transition={{
+                    duration: 24,
+                    ease: "linear",
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                }}
                 style={{
                     position: "absolute",
                     inset: 0,
@@ -40,6 +54,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     height: "100%",
                     objectFit: "cover",
                     objectPosition: "center 40%",
+                    transformOrigin: "center center",
                 }}
             />
             {/* Double-gradient overlay for WCAG AA on hero text. */}
@@ -71,7 +86,10 @@ export default function Hero({ content }: { content: HeroContent }) {
                         gap: 24,
                     }}
                 >
-                    <h1
+                    <motion.h1
+                        initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ duration: 1.1, ease: EASE, delay: 0.15 }}
                         style={{
                             textShadow: "0 1px 24px rgba(0,0,0,.25)",
                             margin: 0,
@@ -84,8 +102,11 @@ export default function Hero({ content }: { content: HeroContent }) {
                         }}
                     >
                         {content.heading}
-                    </h1>
-                    <p
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
                         style={{
                             margin: 0,
                             fontSize: 21,
@@ -97,8 +118,11 @@ export default function Hero({ content }: { content: HeroContent }) {
                         }}
                     >
                         {content.italicSubheading}
-                    </p>
-                    <p
+                    </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
                         style={{
                             margin: 0,
                             fontSize: 17,
@@ -109,8 +133,12 @@ export default function Hero({ content }: { content: HeroContent }) {
                         }}
                     >
                         {content.body}
-                    </p>
-                    <div
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
+                        className="tbm-hero-ctas"
                         style={{
                             display: "flex",
                             gap: 16,
@@ -120,14 +148,14 @@ export default function Hero({ content }: { content: HeroContent }) {
                     >
                         <Link
                             href={content.primaryCta.href}
-                            className="tbm-btn"
+                            className="tbm-btn tbm-hero-cta"
                             style={{ background: "#f4f2ed", color: "#1b2518" }}
                         >
                             {content.primaryCta.label}
                         </Link>
                         <Link
                             href={content.secondaryCta.href}
-                            className="tbm-btn"
+                            className="tbm-btn tbm-hero-cta"
                             style={{
                                 color: "#f4f2ed",
                                 border: "1px solid rgba(244,242,237,.7)",
@@ -135,7 +163,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                         >
                             {content.secondaryCta.label}
                         </Link>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Video progress + pause slot (right column, hidden on mobile). */}

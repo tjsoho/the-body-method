@@ -18,6 +18,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { NavLink, defaultNavLinks } from "@/data/navigation";
 
 interface HeaderProps {
@@ -211,81 +212,110 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                 </div>
             </header>
 
-            {/* Menu overlay — forest field, oversized Hanken Grotesk labels
-                with hairline rules between them. Generous side padding so
-                the links breathe at every width.                        */}
-            {open && (
-                <div
-                    role="dialog"
-                    aria-label="Menu"
-                    style={{
-                        position: "fixed",
-                        inset: "84px 0 0 0",
-                        background: "#1b2518",
-                        color: "#f4f2ed",
-                        zIndex: 49,
-                        padding: "clamp(32px, 7vh, 72px) clamp(20px, 5vw, 72px) 48px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 0,
-                        overflowY: "auto",
-                    }}
-                >
-                    <div
+            {/* Menu overlay — forest field, display-scale Lora headlines
+                staggered on open. Links feel like a chapter list, not a
+                nav bar: generous breathing space, serif italic numerals,
+                hairline underline-on-hover that draws from left to right. */}
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        role="dialog"
+                        aria-label="Menu"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
                         style={{
-                            width: "100%",
-                            maxWidth: 1200,
-                            margin: "0 auto",
+                            position: "fixed",
+                            inset: "84px 0 0 0",
+                            background: "#1b2518",
+                            color: "#f4f2ed",
+                            zIndex: 49,
+                            padding:
+                                "clamp(48px, 10vh, 120px) clamp(20px, 5vw, 72px) clamp(48px, 8vh, 96px)",
                             display: "flex",
                             flexDirection: "column",
-                            gap: 0,
+                            overflowY: "auto",
                         }}
                     >
-                        {links.map((item, i) => (
-                            <Link
-                                key={item.id}
-                                href={item.pageSlug}
-                                onClick={() => setOpen(false)}
-                                style={{
-                                    color: "#f4f2ed",
-                                    textDecoration: "none",
-                                    fontFamily: "var(--font-hanken)",
-                                    fontSize: "clamp(20px, 4vw, 34px)",
-                                    fontWeight: 400,
-                                    letterSpacing: ".12em",
-                                    textTransform: "uppercase",
-                                    padding: "clamp(18px, 3vh, 28px) 0",
-                                    borderTop:
-                                        i === 0
-                                            ? "1px solid rgba(244,242,237,.14)"
-                                            : "none",
-                                    borderBottom:
-                                        "1px solid rgba(244,242,237,.14)",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: 20,
-                                    lineHeight: 1,
-                                }}
-                            >
-                                <span
-                                    style={{
-                                        fontFamily: "var(--font-lora)",
-                                        fontStyle: "italic",
-                                        fontSize: "0.5em",
-                                        letterSpacing: 0,
-                                        color: "#a9bfae",
-                                        minWidth: "2.4em",
-                                        textTransform: "lowercase",
+                        <div
+                            style={{
+                                width: "100%",
+                                maxWidth: 1200,
+                                margin: "0 auto",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 0,
+                            }}
+                        >
+                            {links.map((item, i) => (
+                                <motion.div
+                                    key={item.id}
+                                    initial={{ opacity: 0, y: 24 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 12 }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 0.08 + i * 0.05,
+                                        ease: [0.22, 0.61, 0.36, 1],
                                     }}
                                 >
-                                    0{i + 1}.
-                                </span>
-                                {item.label}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            )}
+                                    <Link
+                                        href={item.pageSlug}
+                                        onClick={() => setOpen(false)}
+                                        className="tbm-menu-link"
+                                        style={{
+                                            color: "#f4f2ed",
+                                            textDecoration: "none",
+                                            fontFamily: "var(--font-lora)",
+                                            fontWeight: 400,
+                                            letterSpacing: "-0.01em",
+                                            padding:
+                                                "clamp(26px, 4.4vh, 44px) 0",
+                                            borderTop:
+                                                i === 0
+                                                    ? "1px solid rgba(244,242,237,.14)"
+                                                    : "none",
+                                            borderBottom:
+                                                "1px solid rgba(244,242,237,.14)",
+                                            display: "flex",
+                                            alignItems: "baseline",
+                                            gap: "clamp(16px, 2.5vw, 40px)",
+                                            lineHeight: 1,
+                                            position: "relative",
+                                            overflow: "hidden",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                fontFamily: "var(--font-hanken)",
+                                                fontSize: "clamp(10px, 1vw, 12px)",
+                                                letterSpacing: "0.24em",
+                                                color: "#a9bfae",
+                                                minWidth: "3em",
+                                                textTransform: "uppercase",
+                                                fontWeight: 500,
+                                            }}
+                                        >
+                                            0{i + 1}
+                                        </span>
+                                        <span
+                                            className="tbm-menu-label-text"
+                                            style={{
+                                                fontSize:
+                                                    "clamp(36px, 7.6vw, 92px)",
+                                                lineHeight: 0.98,
+                                            }}
+                                        >
+                                            {item.label}
+                                        </span>
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
         </>
     );

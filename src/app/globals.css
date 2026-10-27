@@ -177,6 +177,13 @@ a:hover {
     .tbm-c-f3,
     .tbm-c-f4 { grid-column: 1 / -1; }
 }
+
+/* Hero CTAs — as soon as the two buttons stack vertically, give both
+ * the same width so they read as a pair, not as two different widths.  */
+@media (max-width: 560px) {
+    .tbm-hero-ctas { flex-direction: column; align-items: stretch; }
+    .tbm-hero-cta { width: 100%; }
+}
 @media (max-width: 560px) {
     .tbm-c-q { grid-column: 1 / -1; }
 }
@@ -205,8 +212,9 @@ a:hover {
     font-size: 17px;
     letter-spacing: 0.3em;
 }
-.tbm-btn-menu,
-.tbm-btn-book { padding: 0 24px; }
+/* BOOK sits a little wider than MENU so it reads as the primary CTA. */
+.tbm-btn-menu { padding: 0 24px; }
+.tbm-btn-book { padding: 0 40px; letter-spacing: 0.18em; }
 
 @media (max-width: 720px) {
     .tbm-wordmark {
@@ -214,8 +222,8 @@ a:hover {
         font-size: 15px;
         letter-spacing: 0.26em;
     }
-    .tbm-btn-menu,
-    .tbm-btn-book { padding: 0 18px; font-size: 12px; }
+    .tbm-btn-menu { padding: 0 18px; font-size: 12px; }
+    .tbm-btn-book { padding: 0 30px; font-size: 12px; }
 }
 @media (max-width: 560px) {
     .tbm-wordmark {
@@ -223,8 +231,8 @@ a:hover {
         font-size: 13px;
         letter-spacing: 0.24em;
     }
-    .tbm-btn-menu,
-    .tbm-btn-book { padding: 0 14px; font-size: 11px; letter-spacing: 0.14em; }
+    .tbm-btn-menu { padding: 0 14px; font-size: 11px; letter-spacing: 0.14em; }
+    .tbm-btn-book { padding: 0 22px; font-size: 11px; letter-spacing: 0.14em; }
 }
 @media (max-width: 400px) {
     .tbm-wordmark {
@@ -232,12 +240,66 @@ a:hover {
         font-size: 12px;
         letter-spacing: 0.2em;
     }
-    .tbm-btn-menu,
-    .tbm-btn-book { padding: 0 11px; font-size: 10px; letter-spacing: 0.12em; }
+    .tbm-btn-menu { padding: 0 11px; font-size: 10px; letter-spacing: 0.12em; }
+    .tbm-btn-book { padding: 0 18px; font-size: 10px; letter-spacing: 0.12em; }
 }
 /* Ultra-narrow phones (SE, old iPhone): drop the MENU label so the
    wordmark + icon + BOOK trio still fits without horizontal scroll. */
 @media (max-width: 360px) {
     .tbm-btn-menu .tbm-menu-label { display: none; }
     .tbm-btn-menu { gap: 0 !important; padding: 0 10px; min-width: 40px; }
+}
+
+/* ---- Motion primitives --------------------------------------------- */
+
+/* Menu overlay links — a sage underline draws from left on hover.
+ * The transform/opacity sweep keeps TBM calm; no scale, no bounce.    */
+.tbm-menu-link { transition: color 0.35s ease; }
+.tbm-menu-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: #a9bfae;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.tbm-menu-link:hover { color: #dfdede; }
+.tbm-menu-link:hover::after { transform: scaleX(1); }
+.tbm-menu-link .tbm-menu-label-text {
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.tbm-menu-link:hover .tbm-menu-label-text { transform: translateX(14px); }
+
+/* Buttons breathe on hover — background shift only, no scale.          */
+.tbm-btn { transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease; }
+.tbm-btn-book:hover { background: #ece9e2 !important; }
+.tbm-btn-menu:hover { background: rgba(244,242,237,0.08) !important; }
+
+/* Luxurious image hover for cards / tiles: a slow, subtle zoom.        */
+.tbm-media-zoom { overflow: hidden; }
+.tbm-media-zoom > img,
+.tbm-media-zoom > div > img {
+    transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+}
+.tbm-media-zoom:hover > img,
+.tbm-media-zoom:hover > div > img {
+    transform: scale(1.04);
+}
+
+/* Respect motion preferences — anything above collapses to no-op.      */
+@media (prefers-reduced-motion: reduce) {
+    .tbm-menu-link,
+    .tbm-menu-link::after,
+    .tbm-menu-link .tbm-menu-label-text,
+    .tbm-btn,
+    .tbm-media-zoom > img,
+    .tbm-media-zoom > div > img {
+        transition: none !important;
+    }
 }
