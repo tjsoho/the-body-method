@@ -97,7 +97,7 @@ export default function Footer() {
                         lineHeight: 1.4,
                     }}
                 >
-                    <Link href="/our-story" style={{ color: "#dfdede" }}>Our Story</Link>
+                    <Link href="/about" style={{ color: "#dfdede" }}>Our Story</Link>
                     <Link href="/faq" style={{ color: "#dfdede" }}>FAQ</Link>
                     <Link href="/contact" style={{ color: "#dfdede" }}>Contact + Locations</Link>
                     <Link href="/member-login" style={{ color: "#dfdede" }}>Member Login</Link>

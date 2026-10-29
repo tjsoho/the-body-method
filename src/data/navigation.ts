@@ -34,8 +34,16 @@ export type AvailablePage = {
  * else is its own folder route under src/app/.
  */
 export const defaultNavLinks: NavLink[] = [
-    { id: 1, label: "NEW HERE?", pageSlug: "/#new-here", children: [] },
-    { id: 2, label: "STUDIOS", pageSlug: "/studios", children: [] },
+    { id: 1, label: "NEW HERE?", pageSlug: "/new-here", children: [] },
+    {
+        id: 2,
+        label: "STUDIOS",
+        pageSlug: "/studios",
+        children: [
+            { id: 21, label: "TUGUN BEACH", pageSlug: "/studios/tugun-beach", children: [] },
+            { id: 22, label: "CORNERSTONE", pageSlug: "/studios/cornerstone", children: [] },
+        ],
+    },
     { id: 3, label: "CLASSES", pageSlug: "/classes", children: [] },
     { id: 4, label: "MEMBERSHIPS", pageSlug: "/memberships", children: [] },
     { id: 5, label: "PRIVATE PILATES", pageSlug: "/private-pilates", children: [] },
@@ -49,10 +57,17 @@ export const defaultNavLinks: NavLink[] = [
  */
 export const STATIC_PAGES: AvailablePage[] = [
     { path: "/", label: "Home", group: "Core" },
+    { path: "/new-here", label: "New here? (21-Day Immersion)", group: "Core" },
     { path: "/studios", label: "Studios", group: "Core" },
+    { path: "/studios/tugun-beach", label: "Tugun Beach studio", group: "Core" },
+    { path: "/studios/cornerstone", label: "Cornerstone studio", group: "Core" },
     { path: "/classes", label: "Classes", group: "Core" },
     { path: "/memberships", label: "Memberships", group: "Core" },
     { path: "/private-pilates", label: "Private Pilates", group: "Service" },
-    { path: "/life-at-tbm", label: "Life at TBM", group: "Core" },
     { path: "/our-people", label: "Our People", group: "Core" },
+    { path: "/life-at-tbm", label: "Life at TBM", group: "Core" },
+    { path: "/about", label: "About / Our Story", group: "Core" },
+    { path: "/book", label: "Book", group: "Core" },
+    { path: "/faq", label: "FAQ", group: "Core" },
+    { path: "/contact", label: "Contact + Locations", group: "Core" },
 ];

@@ -15,7 +15,22 @@ const STATIC_ROUTES: Array<{
     path: string;
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
     priority: number;
-}> = [{ path: "/", changeFrequency: "weekly", priority: 1.0 }];
+}> = [
+    { path: "/", changeFrequency: "weekly", priority: 1.0 },
+    { path: "/new-here", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/studios", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/studios/tugun-beach", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/studios/cornerstone", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/classes", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/memberships", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/private-pilates", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/our-people", changeFrequency: "monthly", priority: 0.7 },
+    { path: "/life-at-tbm", changeFrequency: "monthly", priority: 0.7 },
+    { path: "/about", changeFrequency: "monthly", priority: 0.6 },
+    { path: "/book", changeFrequency: "weekly", priority: 0.9 },
+    { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
+    { path: "/contact", changeFrequency: "monthly", priority: 0.7 },
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = siteConfig.url || "https://example.com";

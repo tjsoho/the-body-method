@@ -146,6 +146,7 @@ a:hover {
 .tbm-c-l7 { grid-column: 1 / 8; }
 .tbm-c-r { grid-column: 7 / 13; }
 .tbm-c-l5 { grid-column: 1 / 6; }
+.tbm-c-r5 { grid-column: 8 / 13; } /* 5-col image on the right, with a 1-col gutter */
 .tbm-c-all { grid-column: 1 / -1; }
 .tbm-c-q { grid-column: span 3; }
 .tbm-c-t { grid-column: span 4; }
@@ -165,6 +166,7 @@ a:hover {
     .tbm-c-l7,
     .tbm-c-r,
     .tbm-c-l5,
+    .tbm-c-r5,
     .tbm-c-t,
     .tbm-c-8,
     .tbm-c-4,
@@ -303,3 +305,40 @@ a:hover {
         transition: none !important;
     }
 }
+
+/* ---- Book page routing rows ---------------------------------------- *
+ * Three-column layout: heading, description, CTA. Collapses to a
+ * single stacked column at 900px (as per design/book.html).           */
+.tbm-book-h { grid-column: 1 / 6; }
+.tbm-book-d { grid-column: 6 / 10; }
+.tbm-book-b { grid-column: 10 / 13; }
+@media (max-width: 900px) {
+    .tbm-book-h,
+    .tbm-book-d,
+    .tbm-book-b { grid-column: 1 / -1 !important; }
+}
+
+/* ---- FAQ accordions ------------------------------------------------- *
+ * Native <details>/<summary> so every answer stays in the DOM for SEO
+ * and the FAQPage schema matches the on-page text. The marker is
+ * suppressed and replaced with a plus icon that rotates to a cross on
+ * open. No React state involved.                                       */
+.tbm-faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    min-height: 44px;
+}
+.tbm-faq summary::-webkit-details-marker { display: none; }
+.tbm-faq-ic {
+    transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+    flex: none;
+}
+.tbm-faq details[open] .tbm-faq-ic { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) {
+    .tbm-faq-ic { transition: none !important; }
+}
+
