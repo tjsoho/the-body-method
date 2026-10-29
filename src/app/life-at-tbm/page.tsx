@@ -31,19 +31,27 @@ const memberStories = [
     },
 ];
 
-/* Friends of TBM (partners). */
+/* Friends of TBM (partners). Logos are the partner's own brand assets,
+   shown as a white silhouette so the three read as a consistent row on
+   the forest band. The CSS `filter: brightness(0) invert(1)` strips
+   colour and inverts to white regardless of the source file's palette,
+   so Tugun's green mark, The Upside's white SVG and Barre Body's white
+   SVG all land the same tonal weight. */
 const partners = [
     {
         name: "Tugun Osteopathy",
         href: "https://www.tugunosteopathy.com/",
+        logo: "/images/tbm-partners/tugun-osteopathy.webp",
     },
     {
         name: "The Upside",
         href: "https://www.theupside.com.au/",
+        logo: "/images/tbm-partners/the-upside.svg",
     },
     {
         name: "Barre Body Teacher Training",
         href: "https://barrebody.com.au",
+        logo: "/images/tbm-partners/barre-body.svg",
     },
 ];
 
@@ -755,7 +763,11 @@ export default function LifeAtTbmPage() {
                                     gap: 14,
                                 }}
                             >
-                                <div
+                                <a
+                                    href={p.href}
+                                    target="_blank"
+                                    rel="noopener"
+                                    aria-label={`Visit ${p.name}`}
                                     style={{
                                         position: "relative",
                                         aspectRatio: "3 / 2",
@@ -763,8 +775,22 @@ export default function LifeAtTbmPage() {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
+                                        padding: 36,
                                     }}
-                                />
+                                >
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src={p.logo}
+                                        alt={`${p.name} logo`}
+                                        style={{
+                                            maxWidth: "100%",
+                                            maxHeight: "100%",
+                                            objectFit: "contain",
+                                            filter: "brightness(0) invert(1)",
+                                            opacity: 0.9,
+                                        }}
+                                    />
+                                </a>
                                 <h3
                                     style={{
                                         margin: 0,
