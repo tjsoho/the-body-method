@@ -57,7 +57,7 @@ function StudioArticle({
                     background: "#f4f2ed",
                 }}
             >
-                <Reveal delay={0.15} amount={0.3}>
+                <Reveal delay={0.08} amount={0.3}>
                     <h3
                         style={{
                             margin: 0,
@@ -71,7 +71,7 @@ function StudioArticle({
                         {card.name}
                     </h3>
                 </Reveal>
-                <Reveal delay={0.3} amount={0.3}>
+                <Reveal delay={0.16} amount={0.3}>
                     <p
                         style={{
                             margin: 0,
@@ -85,7 +85,7 @@ function StudioArticle({
                         {card.italicLine}
                     </p>
                 </Reveal>
-                <Reveal delay={0.45} amount={0.3}>
+                <Reveal delay={0.24} amount={0.3}>
                     <p
                         style={{
                             margin: 0,
@@ -99,7 +99,7 @@ function StudioArticle({
                         {card.body}
                     </p>
                 </Reveal>
-                <Reveal delay={0.6} amount={0.3} style={{ paddingTop: 8, marginTop: "auto" }}>
+                <Reveal delay={0.32} amount={0.3} style={{ paddingTop: 8, marginTop: "auto" }}>
                     <Link
                         className="tbm-lnk"
                         href={card.ctaHref}

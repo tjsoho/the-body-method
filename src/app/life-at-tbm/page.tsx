@@ -122,7 +122,7 @@ export default function LifeAtTbmPage() {
                                 More than the hour you spend on the mat.
                             </h1>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -192,7 +192,7 @@ export default function LifeAtTbmPage() {
                     </Reveal>
                     <Reveal
                         amount={0.3}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -226,7 +226,7 @@ export default function LifeAtTbmPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 48 }}
-                        stagger={0.4}
+                        stagger={0.22}
                     >
                         <StaggerItem
                             className="tbm-c-l"
@@ -366,7 +366,7 @@ export default function LifeAtTbmPage() {
                     </Reveal>
                     <Reveal
                         amount={0.3}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -400,7 +400,7 @@ export default function LifeAtTbmPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 24 }}
-                        stagger={0.38}
+                        stagger={0.2}
                     >
                         {memberStories.map((m, i) => (
                             <StaggerItem
@@ -499,7 +499,7 @@ export default function LifeAtTbmPage() {
                     </Reveal>
                     <Reveal
                         amount={0.3}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -533,7 +533,7 @@ export default function LifeAtTbmPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 48 }}
-                        stagger={0.4}
+                        stagger={0.22}
                     >
                         <StaggerItem
                             className="tbm-c-l"
@@ -699,7 +699,7 @@ export default function LifeAtTbmPage() {
                     </Reveal>
                     <Reveal
                         amount={0.3}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -743,7 +743,7 @@ export default function LifeAtTbmPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 32 }}
-                        stagger={0.35}
+                        stagger={0.2}
                     >
                         {partners.map((p) => (
                             <StaggerItem

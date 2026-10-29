@@ -125,7 +125,7 @@ export default function ContactPage() {
                                 }}
                             />
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.1}>
+                        <Reveal amount={0.3} delay={0.05}>
                             <h2
                                 style={{
                                     margin: 0,
@@ -139,12 +139,12 @@ export default function ContactPage() {
                                 TUGUN BEACH
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.2}>
+                        <Reveal amount={0.3} delay={0.11}>
                             <p style={{ margin: 0, fontSize: 20, lineHeight: 1.45, fontWeight: 500 }}>
                                 3/5 Toolona Street, Tugun QLD 4224
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -315,7 +315,7 @@ export default function ContactPage() {
                                 }}
                             />
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.1}>
+                        <Reveal amount={0.3} delay={0.05}>
                             <h2
                                 style={{
                                     margin: 0,
@@ -329,12 +329,12 @@ export default function ContactPage() {
                                 CORNERSTONE
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.2}>
+                        <Reveal amount={0.3} delay={0.11}>
                             <p style={{ margin: 0, fontSize: 20, lineHeight: 1.45, fontWeight: 500 }}>
                                 Upstairs, Level 1, Cornerstone Stores, Shop 8, 570 Gold Coast Highway, Tugun QLD 4224
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -520,7 +520,7 @@ export default function ContactPage() {
                                 General enquiries
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             {/* TODO: wire up to the real submit endpoint once the
                                 client confirms where enquiries should land. */}
                             <form

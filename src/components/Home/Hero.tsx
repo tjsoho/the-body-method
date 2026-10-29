@@ -90,7 +90,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     <motion.h1
                         initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 1.1, ease: EASE, delay: 0.15 }}
+                        transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
                         style={{
                             textShadow: "0 1px 24px rgba(0,0,0,.25)",
                             margin: 0,
@@ -107,7 +107,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     <motion.p
                         initial={{ opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
+                        transition={{ duration: 0.6, ease: EASE, delay: 0.26 }}
                         style={{
                             margin: 0,
                             fontSize: 21,
@@ -123,7 +123,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     <motion.p
                         initial={{ opacity: 0, y: 14 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
+                        transition={{ duration: 0.6, ease: EASE, delay: 0.36 }}
                         style={{
                             margin: 0,
                             fontSize: 17,
@@ -138,7 +138,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
+                        transition={{ duration: 0.6, ease: EASE, delay: 0.46 }}
                         className="tbm-hero-ctas"
                         style={{
                             display: "flex",

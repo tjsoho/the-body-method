@@ -663,7 +663,7 @@ export default function OurPeoplePage() {
                                 The people behind the way you move.
                             </h1>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -679,7 +679,7 @@ export default function OurPeoplePage() {
                                 </strong>
                             </p>
                         </Reveal>
-                        <Reveal delay={0.3} amount={0.3}>
+                        <Reveal delay={0.16} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -739,7 +739,7 @@ export default function OurPeoplePage() {
                                 SARAH - OWNER + DIRECTOR
                             </h2>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.2}>
+                        <Reveal delay={0.08} amount={0.2}>
                             <div
                                 style={{
                                     display: "flex",
@@ -812,7 +812,7 @@ export default function OurPeoplePage() {
                                 </p>
                             </div>
                         </Reveal>
-                        <Reveal delay={0.3} amount={0.3}>
+                        <Reveal delay={0.16} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -828,7 +828,7 @@ export default function OurPeoplePage() {
                                 That ripple effect is what drives Sarah&apos;s vision for The Body Method. A place where exceptional teaching meets genuine care, where movement makes everyday life better, and where the benefits extend far beyond the studio walls.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.45} amount={0.3}>
+                        <Reveal delay={0.24} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -874,7 +874,7 @@ export default function OurPeoplePage() {
                             flexDirection: "column",
                             gap: 0,
                         }}
-                        stagger={0.32}
+                        stagger={0.1}
                     >
                         {teachers.map((t) => (
                             <StaggerItem key={t.name}>

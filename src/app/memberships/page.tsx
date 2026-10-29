@@ -81,7 +81,7 @@ export default function MembershipsPage() {
                                 Find your rhythm:
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -94,7 +94,7 @@ export default function MembershipsPage() {
                                 The best membership isn&apos;t the one with the most classes.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -143,7 +143,7 @@ export default function MembershipsPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 24, alignItems: "stretch" }}
-                        stagger={0.35}
+                        stagger={0.2}
                     >
                         {/* Cornerstone Unlimited */}
                         <StaggerItem
@@ -429,7 +429,7 @@ export default function MembershipsPage() {
                                 PRIVATE PILATES
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -441,7 +441,7 @@ export default function MembershipsPage() {
                                 Want a little more individual attention? Private Pilates gives you dedicated time with a senior instructor and a session shaped around your body, your goals and what you need that day.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -487,7 +487,7 @@ export default function MembershipsPage() {
                                 </ul>
                             </div>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                 <h3
                                     style={{
@@ -516,7 +516,7 @@ export default function MembershipsPage() {
                                 </ul>
                             </div>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3} style={{ gridColumn: "1 / -1" }}>
+                        <Reveal amount={0.2} delay={0.16} style={{ gridColumn: "1 / -1" }}>
                             <a
                                 className="tbm-btn"
                                 href="#momence-private"
@@ -565,7 +565,7 @@ export default function MembershipsPage() {
                                 CLASS PACKS
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -603,7 +603,7 @@ export default function MembershipsPage() {
                                     </ul>
                                 </div>
                             </Reveal>
-                            <Reveal amount={0.2} delay={0.15}>
+                            <Reveal amount={0.2} delay={0.08}>
                                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                     <h3 style={{ margin: 0, fontWeight: 500, fontSize: 21, lineHeight: 1.3 }}>
                                         Tugun Beach Reformer
@@ -624,7 +624,7 @@ export default function MembershipsPage() {
                                 </div>
                             </Reveal>
                         </div>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <a
                                 className="tbm-btn"
                                 href="#momence-packs"
@@ -658,7 +658,7 @@ export default function MembershipsPage() {
                                 CASUAL OPTIONS
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -671,7 +671,7 @@ export default function MembershipsPage() {
                                 Just want to drop in? You&rsquo;re always welcome.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <ul
                                 style={{
                                     listStyle: "none",
@@ -688,7 +688,7 @@ export default function MembershipsPage() {
                                 </li>
                             </ul>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.45}>
+                        <Reveal amount={0.3} delay={0.24}>
                             <p
                                 style={{
                                     margin: 0,
@@ -700,7 +700,7 @@ export default function MembershipsPage() {
                                 Choose your class, book your spot and come move with us.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.6}>
+                        <Reveal amount={0.3} delay={0.32}>
                             <Link
                                 className="tbm-btn"
                                 href="/book"

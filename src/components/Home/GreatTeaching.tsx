@@ -56,7 +56,7 @@ export default function GreatTeaching({ content, teachers }: Props) {
                     </h2>
                 </Reveal>
                 <Reveal
-                    delay={0.15}
+                    delay={0.08}
                     amount={0.25}
                     className="tbm-c-r"
                     style={{ paddingTop: 8 }}
@@ -93,7 +93,7 @@ export default function GreatTeaching({ content, teachers }: Props) {
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 48 }}
-                    stagger={0.32}
+                    stagger={0.1}
                 >
                     {teachers.slice(0, 4).map((t) => (
                         <StaggerItem

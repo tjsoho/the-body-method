@@ -155,7 +155,7 @@ export default function TugunBeachPage() {
                                 Boutique classes and movement made personal.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -197,7 +197,7 @@ export default function TugunBeachPage() {
                             To watch how you move. Make adjustments, and help your body to refine your technique and then challenge you appropriately.
                         </p>
                     </Reveal>
-                    <Reveal amount={0.3} delay={0.15}>
+                    <Reveal amount={0.3} delay={0.08}>
                         <p
                             style={{
                                 margin: 0,
@@ -262,7 +262,7 @@ export default function TugunBeachPage() {
                                 Six people changes the experience.
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -274,7 +274,7 @@ export default function TugunBeachPage() {
                                 You&rsquo;re not one of twenty bodies following instructions from the front of a room.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -318,7 +318,7 @@ export default function TugunBeachPage() {
                                 Reformer Pilates at The Body Method
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -330,7 +330,7 @@ export default function TugunBeachPage() {
                                 Strength, control, mobility and intelligent progression using the Reformer - taught with the individual attention our small classes allow.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -352,7 +352,7 @@ export default function TugunBeachPage() {
                                 All ages and fitness levels, including pregnancy and postpartum, those returning from injury, or anyone looking for a strong, effective workout that builds core strength and stability.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.45}>
+                        <Reveal amount={0.3} delay={0.24}>
                             <div style={{ paddingTop: 8 }}>
                                 <Link
                                     className="tbm-btn"
@@ -369,7 +369,7 @@ export default function TugunBeachPage() {
                     </div>
                     <Reveal
                         amount={0.2}
-                        delay={0.1}
+                        delay={0.05}
                         style={{ gridColumn: "8 / 13", position: "relative" }}
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -441,7 +441,7 @@ export default function TugunBeachPage() {
                                 Movement that is all about you.
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -453,7 +453,7 @@ export default function TugunBeachPage() {
                                 Private Pilates gives you the dedicated attention of your own teacher, with movement tailored entirely to your body, goals and needs. Whether you&rsquo;re working on something specific, returning to movement or simply wanting to deepen your practice, it&rsquo;s your time to focus on you.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <div style={{ paddingTop: 8 }}>
                                 <Link
                                     className="tbm-btn"
@@ -491,7 +491,7 @@ export default function TugunBeachPage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 48 }}
-                        stagger={0.32}
+                        stagger={0.1}
                     >
                         {TEACHERS.map((t) => (
                             <StaggerItem
@@ -663,7 +663,7 @@ export default function TugunBeachPage() {
                             START WITH 21 DAYS
                         </Link>
                     </Reveal>
-                    <Reveal amount={0.5} delay={0.15}>
+                    <Reveal amount={0.5} delay={0.08}>
                         <a
                             className="tbm-btn"
                             href="#momence-reformer"

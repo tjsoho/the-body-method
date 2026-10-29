@@ -111,7 +111,7 @@ export default function AboutPage() {
                                 A different idea of strength.
                             </h1>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -154,7 +154,7 @@ export default function AboutPage() {
                                 It&apos;s confidence in your body - the capacity to keep doing the things you love.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -169,7 +169,7 @@ export default function AboutPage() {
                     </div>
                     <Reveal
                         amount={0.2}
-                        delay={0.1}
+                        delay={0.05}
                         style={{ gridColumn: "8 / 13", position: "relative" }}
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -235,7 +235,7 @@ export default function AboutPage() {
                                 We actually genuinely care.
                             </h2>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -247,7 +247,7 @@ export default function AboutPage() {
                                 About the quality of the teaching, about the people who walk through our doors. About remembering your name and understanding your body and about creating somewhere people feel better for having spent time.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.3} amount={0.3}>
+                        <Reveal delay={0.16} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -287,7 +287,7 @@ export default function AboutPage() {
                             borderTop: "1px solid var(--tbm-rule)",
                             rowGap: 40,
                         }}
-                        stagger={0.35}
+                        stagger={0.2}
                     >
                         {beliefs.map((b) => (
                             <StaggerItem
@@ -372,7 +372,7 @@ export default function AboutPage() {
                                 Today, The Body Method lives across two Tugun studios with different personalities and one shared philosophy.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.15} amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -384,7 +384,7 @@ export default function AboutPage() {
                                 And we&apos;re still building, not toward being the biggest.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.3} amount={0.3}>
+                        <Reveal delay={0.16} amount={0.3}>
                             <p
                                 style={{
                                     margin: 0,
@@ -397,7 +397,7 @@ export default function AboutPage() {
                                 Toward being one of the places that matters most to the people who choose it.
                             </p>
                         </Reveal>
-                        <Reveal delay={0.45} amount={0.3}>
+                        <Reveal delay={0.24} amount={0.3}>
                             <div
                                 className="tbm-hero-ctas"
                                 style={{

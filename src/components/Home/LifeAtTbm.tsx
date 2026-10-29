@@ -69,7 +69,7 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                     </h2>
                 </Reveal>
                 <Reveal
-                    delay={0.15}
+                    delay={0.08}
                     amount={0.3}
                     className="tbm-c-r"
                     style={{ paddingTop: 8 }}
@@ -90,7 +90,7 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 24 }}
-                    stagger={0.4}
+                    stagger={0.22}
                 >
                     {tiles.map((tile) => (
                         <StaggerItem

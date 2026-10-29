@@ -183,7 +183,7 @@ export default function CornerstonePage() {
                                 More ways to move and more reasons to stay.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -241,7 +241,7 @@ export default function CornerstonePage() {
                                 Cornerstone gives you room to explore different ways of moving and a community to experience them with.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <ul
                                 style={{
                                     listStyle: "none",
@@ -272,7 +272,7 @@ export default function CornerstonePage() {
                                 ))}
                             </ul>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -316,7 +316,7 @@ export default function CornerstonePage() {
                     </Reveal>
                     <Reveal
                         amount={0.3}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -372,7 +372,7 @@ export default function CornerstonePage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 24 }}
-                        stagger={0.4}
+                        stagger={0.22}
                     >
                         {CLASS_CARDS.map((c) => (
                             <StaggerItem
@@ -460,7 +460,7 @@ export default function CornerstonePage() {
                                 The hour matters and so does what happens around it.
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -472,7 +472,7 @@ export default function CornerstonePage() {
                                 Cornerstone is our main community home - classes, conversations, workshops, events and all the little moments in between.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -485,7 +485,7 @@ export default function CornerstonePage() {
                                 Come for your class - don&rsquo;t be surprised if you stay for a chat.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.45}>
+                        <Reveal amount={0.3} delay={0.24}>
                             <div style={{ paddingTop: 8 }}>
                                 <Link
                                     className="tbm-lnk"
@@ -580,7 +580,7 @@ export default function CornerstonePage() {
                     {/* Member story */}
                     <Reveal
                         amount={0.2}
-                        delay={0.1}
+                        delay={0.05}
                         className="tbm-c-r"
                         style={{
                             display: "flex",
@@ -686,7 +686,7 @@ export default function CornerstonePage() {
                         plus the address and GET DIRECTIONS button. */}
                     <Reveal
                         amount={0.2}
-                        delay={0.1}
+                        delay={0.05}
                         className="tbm-c-r"
                         style={{
                             display: "flex",

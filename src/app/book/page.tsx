@@ -116,7 +116,7 @@ export default function BookPage() {
                         paddingTop: 0,
                         paddingBottom: 0,
                     }}
-                    stagger={0.18}
+                    stagger={0.1}
                 >
                     {rows.map((row) => (
                         <StaggerItem

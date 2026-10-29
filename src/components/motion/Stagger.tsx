@@ -39,11 +39,11 @@ import { motion, useReducedMotion } from "framer-motion";
    just needs to be enough to notice, not dramatic. 50px rise +
    8px blur over 1.2s reads as a gentle lift, not a block drop. */
 const EASE = [0.22, 0.61, 0.36, 1] as const;
-const DURATION = 1.2;
+const DURATION = 0.8;
 
 const StaggerContext = createContext<{ stagger: number; baseDelay: number }>({
-    stagger: 0.35,
-    baseDelay: 0.1,
+    stagger: 0.2,
+    baseDelay: 0.05,
 });
 
 type StaggerProps = {
@@ -60,8 +60,8 @@ export function Stagger({
     children,
     className,
     style,
-    stagger = 0.35,
-    delay = 0.1,
+    stagger = 0.2,
+    delay = 0.05,
 }: StaggerProps) {
     // Walk every valid-element child and inject _index so each
     // StaggerItem can derive its own delay. The server/client

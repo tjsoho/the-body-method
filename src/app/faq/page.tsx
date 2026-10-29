@@ -872,7 +872,7 @@ export default function FaqPage() {
                                 Questions? Start here.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -887,7 +887,7 @@ export default function FaqPage() {
                                 or Pilates class?
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -953,7 +953,7 @@ export default function FaqPage() {
                                         borderTop: "1px solid var(--tbm-rule)",
                                     }}
                                 >
-                                    <Stagger stagger={0.18}>
+                                    <Stagger stagger={0.1}>
                                         {group.items.map((item, i) => {
                                             const isFirst = !seenFirst;
                                             if (isFirst) seenFirst = true;
@@ -1045,7 +1045,7 @@ export default function FaqPage() {
                             STILL NOT SURE? Can&apos;t find your answer?
                         </h2>
                     </Reveal>
-                    <Reveal amount={0.3} delay={0.15}>
+                    <Reveal amount={0.3} delay={0.08}>
                         <p
                             style={{
                                 margin: 0,

@@ -85,7 +85,7 @@ export default function NewHerePage() {
                                 21 days to find your kind of movement.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -99,7 +99,7 @@ export default function NewHerePage() {
                                 Come as you are and find the movement that fits your life.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -113,7 +113,7 @@ export default function NewHerePage() {
                                 both of our Tugun studios.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.45}>
+                        <Reveal amount={0.2} delay={0.24}>
                             <div style={{ paddingTop: 8 }}>
                                 <a
                                     className="tbm-btn"
@@ -165,7 +165,7 @@ export default function NewHerePage() {
                                 What are the 21 days for?
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -180,7 +180,7 @@ export default function NewHerePage() {
                                 evening one.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -194,7 +194,7 @@ export default function NewHerePage() {
                                 your life.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.45}>
+                        <Reveal amount={0.2} delay={0.24}>
                             <div
                                 style={{
                                     borderTop: "1px solid var(--tbm-rule)",
@@ -233,7 +233,7 @@ export default function NewHerePage() {
                     </div>
                     <Reveal
                         amount={0.2}
-                        delay={0.15}
+                        delay={0.08}
                         className="tbm-c-r5"
                         style={{ position: "relative" }}
                     >
@@ -301,7 +301,7 @@ export default function NewHerePage() {
                                 You don&rsquo;t need to be &ldquo;ready&rdquo;.
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <ul
                                 style={{
                                     listStyle: "none",
@@ -351,7 +351,7 @@ export default function NewHerePage() {
                                 </li>
                             </ul>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -399,7 +399,7 @@ export default function NewHerePage() {
                 <Stagger
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 48 }}
-                    stagger={0.4}
+                    stagger={0.22}
                 >
                     <StaggerItem
                         className="tbm-c-l"
@@ -579,7 +579,7 @@ export default function NewHerePage() {
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 40 }}
-                        stagger={0.3}
+                        stagger={0.17}
                     >
                         <StaggerItem
                             className="tbm-c-t"
@@ -737,7 +737,7 @@ export default function NewHerePage() {
                         </Reveal>
                         <Reveal
                             amount={0.2}
-                            delay={0.15}
+                            delay={0.08}
                             className="tbm-c-r"
                             style={{
                                 display: "flex",
@@ -826,7 +826,7 @@ export default function NewHerePage() {
                                 Your first class
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -839,7 +839,7 @@ export default function NewHerePage() {
                                 should know about your body or experience.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.3}>
+                        <Reveal amount={0.2} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -852,7 +852,7 @@ export default function NewHerePage() {
                                 Then let us take care of the rest.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.45}>
+                        <Reveal amount={0.2} delay={0.24}>
                             <div style={{ paddingTop: 8 }}>
                                 <a
                                     className="tbm-btn"
@@ -899,7 +899,7 @@ export default function NewHerePage() {
                         className="tbm-c-r tbm-faq"
                         style={{ borderTop: "1px solid var(--tbm-rule)" }}
                     >
-                        <Stagger stagger={0.18}>
+                        <Stagger stagger={0.1}>
                             <StaggerItem>
                                 <details
                                     open

@@ -44,7 +44,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                             {content.label}
                         </div>
                     </Reveal>
-                    <Reveal delay={0.1} amount={0.3}>
+                    <Reveal delay={0.05} amount={0.3}>
                         <h2
                             style={{
                                 margin: 0,
@@ -58,7 +58,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                             <em>{content.headingItalic}</em>
                         </h2>
                     </Reveal>
-                    <Reveal delay={0.25} amount={0.3}>
+                    <Reveal delay={0.14} amount={0.3}>
                         <p
                             style={{
                                 margin: 0,
@@ -82,7 +82,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         paddingTop: 42,
                     }}
                 >
-                    <Reveal delay={0.15} amount={0.3}>
+                    <Reveal delay={0.08} amount={0.3}>
                         <p
                             style={{
                                 margin: 0,
@@ -95,7 +95,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                             {content.body}
                         </p>
                     </Reveal>
-                    <Reveal delay={0.3} amount={0.3}>
+                    <Reveal delay={0.16} amount={0.3}>
                         <p
                             style={{
                                 margin: 0,
@@ -118,7 +118,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                         padding: 0,
                         rowGap: 40,
                     }}
-                    stagger={0.4}
+                    stagger={0.22}
                 >
                     {content.steps.map((step, i) => {
                         const isLast = i === content.steps.length - 1;

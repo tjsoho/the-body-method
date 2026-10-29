@@ -50,7 +50,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                             </em>
                         </h2>
                     </Reveal>
-                    <Reveal delay={0.15} amount={0.2}>
+                    <Reveal delay={0.08} amount={0.2}>
                         <div
                             style={{
                                 display: "flex",
@@ -81,7 +81,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                     </Reveal>
                 </div>
 
-                <Reveal delay={0.1} amount={0.2} className="tbm-c-r" style={{ position: "relative" }}>
+                <Reveal delay={0.05} amount={0.2} className="tbm-c-r" style={{ position: "relative" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={content.image}
@@ -105,7 +105,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                         borderTop: "1px solid var(--tbm-rule)",
                         paddingTop: 40,
                     }}
-                    stagger={0.35}
+                    stagger={0.2}
                 >
                     {content.pillars.map((p, i) => (
                         <StaggerItem

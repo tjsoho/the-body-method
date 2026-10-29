@@ -58,7 +58,7 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                             {content.heading}
                         </h2>
                     </Reveal>
-                    <Reveal delay={0.15} amount={0.3}>
+                    <Reveal delay={0.08} amount={0.3}>
                         <p
                             style={{
                                 margin: 0,
@@ -118,7 +118,7 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                 <Stagger
                     className="tbm-c-all tbm-g12"
                     style={{ rowGap: 56 }}
-                    stagger={0.38}
+                    stagger={0.2}
                 >
                     {stories.slice(0, 3).map((story) => (
                         <StaggerItem

@@ -17,7 +17,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
-const DURATION = 1.1;
+const DURATION = 0.75;
 
 type Props = {
     children: ReactNode;

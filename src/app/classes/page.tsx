@@ -141,7 +141,7 @@ export default function ClassesPage() {
                                 Find the way you want to move today.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -154,7 +154,7 @@ export default function ClassesPage() {
                                 Strength, control, mobility, stretching, energy and stillness - different days ask different things of us.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -184,7 +184,7 @@ export default function ClassesPage() {
                 <Stagger
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 75 }}
-                    stagger={0.35}
+                    stagger={0.2}
                 >
                     {classes.map((c) => (
                         <StaggerItem

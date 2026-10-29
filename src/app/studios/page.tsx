@@ -141,7 +141,7 @@ export default function StudiosPage() {
                             Cornerstone card lifts just behind Tugun. */}
                         <Stagger
                             className="tbm-c-all tbm-g12"
-                            stagger={0.25}
+                            stagger={0.14}
                             style={{ rowGap: 0 }}
                         >
                             <StaggerItem className="tbm-c-l">
@@ -328,7 +328,7 @@ export default function StudiosPage() {
                             Want both?
                         </h2>
                     </Reveal>
-                    <Reveal amount={0.3} delay={0.15}>
+                    <Reveal amount={0.3} delay={0.08}>
                         <p
                             style={{
                                 margin: 0,

@@ -91,7 +91,7 @@ export default function PrivatePilatesPage() {
                                 Movement built around you.
                             </h1>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -104,7 +104,7 @@ export default function PrivatePilatesPage() {
                                 Sometimes a group class is exactly what you need.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -178,7 +178,7 @@ export default function PrivatePilatesPage() {
                             Private Pilates can be particularly useful when you&apos;re:
                         </h2>
                     </Reveal>
-                    <Reveal amount={0.2} delay={0.15} className="tbm-c-r">
+                    <Reveal amount={0.2} delay={0.08} className="tbm-c-r">
                         <ul
                             style={{
                                 listStyle: "none",
@@ -241,7 +241,7 @@ export default function PrivatePilatesPage() {
                     </Reveal>
                     <Reveal
                         amount={0.2}
-                        delay={0.15}
+                        delay={0.08}
                         style={{
                             gridColumn: "6 / 13",
                             marginLeft: -24,
@@ -353,7 +353,7 @@ export default function PrivatePilatesPage() {
                                 Private doesn&rsquo;t have to mean forever.
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.15}>
+                        <Reveal amount={0.3} delay={0.08}>
                             <p
                                 style={{
                                     margin: 0,
@@ -365,7 +365,7 @@ export default function PrivatePilatesPage() {
                                 For some people, private Pilates is their preferred way to move.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.3}>
+                        <Reveal amount={0.3} delay={0.16}>
                             <p
                                 style={{
                                     margin: 0,
@@ -395,7 +395,7 @@ export default function PrivatePilatesPage() {
                                 </strong>
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.45}>
+                        <Reveal amount={0.3} delay={0.24}>
                             <p
                                 style={{
                                     margin: 0,
@@ -407,7 +407,7 @@ export default function PrivatePilatesPage() {
                                 When you&apos;re ready, we can help you find the next environment that works for you.
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.6}>
+                        <Reveal amount={0.3} delay={0.32}>
                             <p
                                 style={{
                                     margin: 0,
@@ -477,7 +477,7 @@ export default function PrivatePilatesPage() {
                                 </ul>
                             </div>
                         </Reveal>
-                        <Reveal amount={0.2} delay={0.15}>
+                        <Reveal amount={0.2} delay={0.08}>
                             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                 <h3 style={{ margin: 0, fontWeight: 500, fontSize: 21, lineHeight: 1.3 }}>
                                     1:2 Private Pilates
@@ -501,7 +501,7 @@ export default function PrivatePilatesPage() {
                         </Reveal>
                         <Reveal
                             amount={0.2}
-                            delay={0.3}
+                            delay={0.16}
                             style={{
                                 gridColumn: "1 / -1",
                                 display: "flex",
