@@ -770,21 +770,26 @@ export default function LifeAtTbmPage() {
                                     aria-label={`Visit ${p.name}`}
                                     style={{
                                         position: "relative",
+                                        width: "100%",
                                         aspectRatio: "3 / 2",
                                         border: "1px solid rgba(175,177,161,.35)",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        padding: 36,
+                                        overflow: "hidden",
                                     }}
                                 >
+                                    {/* Each logo is capped to the same visual height (72px)
+                                        with contain-fit so wordmarks and stacked marks read
+                                        as the same tonal weight across the row. */}
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={p.logo}
                                         alt={`${p.name} logo`}
                                         style={{
-                                            maxWidth: "100%",
-                                            maxHeight: "100%",
+                                            width: "auto",
+                                            height: 72,
+                                            maxWidth: "70%",
                                             objectFit: "contain",
                                             filter: "brightness(0) invert(1)",
                                             opacity: 0.9,
