@@ -3,7 +3,23 @@
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import React from "react";
-import { Home, Menu, Search, type LucideIcon } from "lucide-react";
+import {
+    BookOpen,
+    CalendarDays,
+    Dumbbell,
+    Heart,
+    Home,
+    Images,
+    Info,
+    Mail,
+    Menu,
+    MessageCircleQuestion,
+    Search,
+    Sparkles,
+    Tag,
+    Users,
+    type LucideIcon,
+} from "lucide-react";
 
 interface AdminTile {
     href: string;
@@ -22,13 +38,92 @@ const sections: AdminTileSection[] = [
     {
         title: "Page Content",
         description:
-            "Edit the copy, imagery and CTAs that live on each public page.",
+            "Every public page. Copy, photographs, buttons and prices.",
         tiles: [
             {
                 href: "/admin/home",
                 icon: Home,
                 title: "Home",
-                description: "Hero, cards, FAQ, stats and CTAs.",
+                description:
+                    "Every section: copy, photos, buttons and the teaching roster.",
+            },
+            {
+                href: "/admin/new-here",
+                icon: Sparkles,
+                title: "New Here",
+                description: "The 21-Day Immersion page, start to finish.",
+            },
+            {
+                href: "/admin/classes",
+                icon: Dumbbell,
+                title: "Classes",
+                description: "Every class type, its photo and its description.",
+            },
+            {
+                href: "/admin/memberships",
+                icon: Tag,
+                title: "Memberships",
+                description: "Tiers, prices, class packs and casual rates.",
+            },
+            {
+                href: "/admin/studios",
+                icon: CalendarDays,
+                title: "Studios",
+                description: "The hub page and the comparison table.",
+            },
+            {
+                href: "/admin/studios-tugun-beach",
+                icon: CalendarDays,
+                title: "Studios: Tugun Beach",
+                description: "The Reformer studio page and its FAQ.",
+            },
+            {
+                href: "/admin/studios-cornerstone",
+                icon: CalendarDays,
+                title: "Studios: Cornerstone",
+                description: "The Cornerstone page, its cards and its FAQ.",
+            },
+            {
+                href: "/admin/private-pilates",
+                icon: Heart,
+                title: "Private Pilates",
+                description: "One-to-one and duet sessions, and their prices.",
+            },
+            {
+                href: "/admin/our-people",
+                icon: Users,
+                title: "Our People",
+                description: "The hero and Sarah's story. Teachers live under Home.",
+            },
+            {
+                href: "/admin/life-at-tbm",
+                icon: Sparkles,
+                title: "Life at TBM",
+                description: "Events, workshops, member stories and partners.",
+            },
+            {
+                href: "/admin/about",
+                icon: Info,
+                title: "About",
+                description: "The story and the four things you believe.",
+            },
+            {
+                href: "/admin/faq",
+                icon: MessageCircleQuestion,
+                title: "FAQ",
+                description: "Every question, grouped. Also feeds Google.",
+            },
+            {
+                href: "/admin/contact",
+                icon: Mail,
+                title: "Contact",
+                description: "Addresses, parking, opening times and the form.",
+            },
+            {
+                href: "/admin/book",
+                icon: BookOpen,
+                title: "Book",
+                description: "The booking rows and where each one sends people.",
             },
         ],
     },
@@ -42,6 +137,13 @@ const sections: AdminTileSection[] = [
                 title: "Header Navigation",
                 description:
                     "Top menu links — add, reorder, and nest dropdowns.",
+            },
+            {
+                href: "/admin/media",
+                icon: Images,
+                title: "Media Library",
+                description:
+                    "Every photo on the site, plus anything you upload.",
             },
             {
                 href: "/admin/seo",

@@ -1,61 +1,177 @@
 /* ************************************************************
-   /life-at-tbm — More than the hour on the mat.
+   /life-at-tbm — everything around the hour on the mat.
 
-   Faithful conversion of design/life-at-tbm.html. Server component
-   with Reveal + Stagger motion primitives.
+   Hero, a centred lede, what's happening, the member stories,
+   workshops and learning, then the partner row on forest.
+
+   Events, workshops and partners are lists, because they are
+   the parts of this page that turn over. Partner logos are shown
+   as white silhouettes so the row reads with one tonal weight
+   whatever palette the source file uses.
+
+   Editable at /admin/life-at-tbm. Fallback copy in ./_config.
 ************************************************************ */
 
 import type { Metadata } from "next";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { PhotoHero } from "@/components/core/PageHero";
+import StoryCarousel from "@/components/carousel/StoryCarousel";
+import getPage from "@/server-actions/page";
+import { buildPageMetadata } from "@/utils/seo";
+import {
+    LIFE_AT_TBM_SLUG,
+    lifeAtTbmFallbackData,
+    type EventCard,
+    type LifeAtTbmPageProps,
+} from "./_config";
 
-export const metadata: Metadata = {
-    title: "Life at The Body Method",
-    description:
-        "More than the hour you spend on the mat. Workshops, events, friendships and the people who make The Body Method.",
-};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-/* Member story cards (placeholder content until CMS lands). */
-const memberStories = [
-    {
-        image: "/images/tbm-placeholders/member-1-downdog.jpg",
-        imageAlt: "Downward facing dog on a sage mat",
-    },
-    {
-        image: "/images/tbm-placeholders/member-2-reformer-arms.jpg",
-        imageAlt: "Kneeling arm work with straps on a Reformer",
-    },
-    {
-        image: "/images/tbm-placeholders/member-3-childs-pose.jpg",
-        imageAlt: "Child’s pose in soft window light",
-    },
-];
+export async function generateMetadata(): Promise<Metadata> {
+    return buildPageMetadata(LIFE_AT_TBM_SLUG);
+}
 
-/* Friends of TBM (partners). Logos are the partner's own brand assets,
-   shown as a white silhouette so the three read as a consistent row on
-   the forest band. The CSS `filter: brightness(0) invert(1)` strips
-   colour and inverts to white regardless of the source file's palette,
-   so Tugun's green mark, The Upside's white SVG and Barre Body's white
-   SVG all land the same tonal weight. */
-const partners = [
-    {
-        name: "Tugun Osteopathy",
-        href: "https://www.tugunosteopathy.com/",
-        logo: "/images/tbm-partners/tugun-osteopathy.webp",
-    },
-    {
-        name: "The Upside",
-        href: "https://www.theupside.com.au/",
-        logo: "/images/tbm-partners/the-upside.svg",
-    },
-    {
-        name: "Barre Body Teacher Training",
-        href: "https://barrebody.com.au",
-        logo: "/images/tbm-partners/barre-body.svg",
-    },
-];
+function SectionHeader({
+    label,
+    heading,
+    body,
+}: {
+    label: string;
+    heading: string;
+    body: string | string[];
+}) {
+    const paragraphs = Array.isArray(body) ? body : [body];
+    return (
+        <>
+            <Reveal amount={0.4} className="tbm-c-l5">
+                <h2
+                    style={{
+                        margin: 0,
+                        fontWeight: 400,
+                        fontSize: "clamp(36px, 4vw, 56px)",
+                        lineHeight: 1.1,
+                        letterSpacing: "-.01em",
+                    }}
+                >
+                    {label}
+                </h2>
+            </Reveal>
+            <Reveal
+                amount={0.3}
+                delay={0.08}
+                className="tbm-c-r"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 16,
+                }}
+            >
+                <p
+                    style={{
+                        margin: 0,
+                        fontSize: 24,
+                        lineHeight: 1.4,
+                        fontStyle: "italic",
+                        color: "var(--tbm-green-accent)",
+                    }}
+                >
+                    {heading}
+                </p>
+                {paragraphs.map((para, i) => (
+                    <p
+                        key={i}
+                        style={{
+                            margin: 0,
+                            fontSize: 18,
+                            lineHeight: 1.7,
+                            color: "var(--tbm-text-body)",
+                        }}
+                    >
+                        {para}
+                    </p>
+                ))}
+            </Reveal>
+        </>
+    );
+}
 
-export default function LifeAtTbmPage() {
+function EventTile({ card, side }: { card: EventCard; side: "l" | "r" }) {
+    return (
+        <StaggerItem
+            className={side === "l" ? "tbm-c-l" : "tbm-c-r"}
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 14,
+                paddingRight: side === "l" ? "clamp(0px, 2vw, 24px)" : undefined,
+                paddingLeft: side === "r" ? "clamp(0px, 2vw, 24px)" : undefined,
+            }}
+        >
+            <div style={{ position: "relative" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={card.image}
+                    alt={card.imageAlt}
+                    style={{
+                        width: "100%",
+                        aspectRatio: "3 / 2",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                    }}
+                />
+            </div>
+            <p
+                className="tbm-lbl"
+                style={{ margin: "8px 0 0", color: "var(--tbm-bronze-label)" }}
+            >
+                {card.meta}
+            </p>
+            <h3
+                style={{
+                    margin: 0,
+                    fontWeight: 400,
+                    fontSize: "clamp(30px, 3vw, 40px)",
+                    lineHeight: 1.1,
+                }}
+            >
+                {card.title}
+            </h3>
+            <p
+                style={{
+                    margin: 0,
+                    fontSize: 16,
+                    lineHeight: 1.7,
+                    color: "var(--tbm-text-muted)",
+                    maxWidth: "34em",
+                }}
+            >
+                {card.body}
+            </p>
+            {card.linkLabel && (
+                <div style={{ paddingTop: 4 }}>
+                    <a
+                        className="tbm-lnk"
+                        href={card.linkHref}
+                        style={{ color: "var(--tbm-forest)" }}
+                    >
+                        {card.linkLabel} <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+            )}
+        </StaggerItem>
+    );
+}
+
+export default async function LifeAtTbmPage() {
+    const page = await getPage<LifeAtTbmPageProps>(
+        LIFE_AT_TBM_SLUG,
+        lifeAtTbmFallbackData,
+    );
+    const { hero, lede, happening, community, workshops, partners } =
+        page.content;
+
     return (
         <div
             style={{
@@ -64,88 +180,7 @@ export default function LifeAtTbmPage() {
                 fontFamily: "var(--font-lora)",
             }}
         >
-            {/* ============ HERO ============ */}
-            <section
-                style={{
-                    position: "relative",
-                    minHeight: 760,
-                    marginTop: -85,
-                    paddingTop: 85,
-                    color: "#f4f2ed",
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
-                }}
-            >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src="/images/tbm-placeholders/hero-life.jpg"
-                    alt="Hands holding coffee cups around a timber table near a sunny window"
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center 50%",
-                    }}
-                />
-                <div
-                    aria-hidden="true"
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                            "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,0) 78%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)",
-                    }}
-                />
-                <div
-                    className="tbm-wrap tbm-g12"
-                    style={{
-                        position: "relative",
-                        marginTop: "auto",
-                        paddingBottom: 75,
-                    }}
-                >
-                    <div
-                        className="tbm-c-l7"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 24,
-                        }}
-                    >
-                        <Reveal amount={0.3}>
-                            <h1
-                                style={{
-                                    textShadow: "0 1px 24px rgba(0,0,0,.25)",
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(42px, 5.4vw, 80px)",
-                                    lineHeight: 1.04,
-                                    letterSpacing: "-.015em",
-                                    textWrap: "balance",
-                                }}
-                            >
-                                More than the hour you spend on the mat.
-                            </h1>
-                        </Reveal>
-                        <Reveal delay={0.08} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 17,
-                                    lineHeight: 1.6,
-                                    maxWidth: "34em",
-                                    color: "#ece9e2",
-                                }}
-                            >
-                                Movement brings us together, but some of the best things happen around it.
-                            </p>
-                        </Reveal>
-                    </div>
-                </div>
-            </section>
+            <PhotoHero content={hero} />
 
             {/* ============ INTRO LEDE ============ */}
             <section style={{ paddingTop: 75, paddingBottom: 75 }}>
@@ -167,7 +202,7 @@ export default function LifeAtTbmPage() {
                                 color: "var(--tbm-ink)",
                             }}
                         >
-                            Life at TBM is a little window into everything that makes The Body Method more than a place to exercise. The people, the friendships, the learning, the experiences and the connections that grow beyond the weekly timetable.
+                            {lede.body}
                         </p>
                     </Reveal>
                 </div>
@@ -185,164 +220,23 @@ export default function LifeAtTbmPage() {
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 48, alignItems: "start" }}
                 >
-                    <Reveal amount={0.4} className="tbm-c-l5">
-                        <h2
-                            style={{
-                                margin: 0,
-                                fontWeight: 400,
-                                fontSize: "clamp(36px, 4vw, 56px)",
-                                lineHeight: 1.1,
-                                letterSpacing: "-.01em",
-                            }}
-                        >
-                            WHAT&apos;S HAPPENING
-                        </h2>
-                    </Reveal>
-                    <Reveal
-                        amount={0.3}
-                        delay={0.08}
-                        className="tbm-c-r"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 16,
-                        }}
-                    >
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 24,
-                                lineHeight: 1.4,
-                                fontStyle: "italic",
-                                color: "var(--tbm-green-accent)",
-                            }}
-                        >
-                            Good things are always worth coming together for.
-                        </p>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 18,
-                                lineHeight: 1.7,
-                                color: "var(--tbm-text-body)",
-                            }}
-                        >
-                            From workshops and special events to movement experiences and opportunities to learn something new, here&apos;s what&apos;s happening in and around our studios.
-                        </p>
-                    </Reveal>
-
+                    <SectionHeader
+                        label={happening.label}
+                        heading={happening.heading}
+                        body={happening.body}
+                    />
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 48 }}
                         stagger={0.22}
                     >
-                        <StaggerItem
-                            className="tbm-c-l"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 14,
-                                paddingRight: "clamp(0px, 2vw, 24px)",
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/images/tbm-placeholders/landscape-life-walk.jpg"
-                                    alt="Women walking along the water at sunrise"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "3 / 2",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                    }}
-                                />
-                            </div>
-                            <p
-                                className="tbm-lbl"
-                                style={{
-                                    margin: "8px 0 0",
-                                    color: "var(--tbm-bronze-label)",
-                                }}
-                            >
-                                [Day, date · time · studio]
-                            </p>
-                            <h3
-                                style={{
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(30px, 3vw, 40px)",
-                                    lineHeight: 1.1,
-                                }}
-                            >
-                                [Event name]
-                            </h3>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 16,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-muted)",
-                                    maxWidth: "34em",
-                                }}
-                            >
-                                [One or two lines about the event]
-                            </p>
-                        </StaggerItem>
-
-                        <StaggerItem
-                            className="tbm-c-r"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 14,
-                                paddingLeft: "clamp(0px, 2vw, 24px)",
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/images/tbm-placeholders/landscape-life-retreat.jpg"
-                                    alt="Mats laid out on a timber deck among trees"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "3 / 2",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                    }}
-                                />
-                            </div>
-                            <p
-                                className="tbm-lbl"
-                                style={{
-                                    margin: "8px 0 0",
-                                    color: "var(--tbm-bronze-label)",
-                                }}
-                            >
-                                [Day, date · time · studio]
-                            </p>
-                            <h3
-                                style={{
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(30px, 3vw, 40px)",
-                                    lineHeight: 1.1,
-                                }}
-                            >
-                                [Event name]
-                            </h3>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 16,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-muted)",
-                                    maxWidth: "34em",
-                                }}
-                            >
-                                [One or two lines about the event]
-                            </p>
-                        </StaggerItem>
+                        {happening.cards.map((card, i) => (
+                            <EventTile
+                                key={card.id}
+                                card={card}
+                                side={i % 2 === 0 ? "l" : "r"}
+                            />
+                        ))}
                     </Stagger>
                 </div>
             </section>
@@ -359,130 +253,17 @@ export default function LifeAtTbmPage() {
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 48, alignItems: "start" }}
                 >
-                    <Reveal amount={0.4} className="tbm-c-l5">
-                        <h2
-                            style={{
-                                margin: 0,
-                                fontWeight: 400,
-                                fontSize: "clamp(36px, 4vw, 56px)",
-                                lineHeight: 1.1,
-                                letterSpacing: "-.01em",
-                            }}
-                        >
-                            OUR COMMUNITY
-                        </h2>
-                    </Reveal>
-                    <Reveal
-                        amount={0.3}
-                        delay={0.08}
-                        className="tbm-c-r"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 16,
-                        }}
-                    >
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 24,
-                                lineHeight: 1.4,
-                                fontStyle: "italic",
-                                color: "var(--tbm-green-accent)",
-                            }}
-                        >
-                            The people make the place.
-                        </p>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 18,
-                                lineHeight: 1.7,
-                                color: "var(--tbm-text-body)",
-                            }}
-                        >
-                            Meet some of the wonderful humans who bring The Body Method to life. The familiar faces, personal stories, shared moments and little things that make our studios feel like somewhere you belong.
-                        </p>
-                    </Reveal>
-
-                    <Stagger
-                        className="tbm-c-all tbm-g12"
-                        style={{ rowGap: 24 }}
-                        stagger={0.2}
-                    >
-                        {memberStories.map((m, i) => (
-                            <StaggerItem
-                                key={i}
-                                className="tbm-c-t"
-                                style={{
-                                    margin: 0,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: 16,
-                                }}
-                            >
-                                <div style={{ position: "relative" }}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src={m.image}
-                                        alt={m.imageAlt}
-                                        style={{
-                                            width: "100%",
-                                            aspectRatio: "4 / 5",
-                                            objectFit: "cover",
-                                            objectPosition: "center",
-                                        }}
-                                    />
-                                </div>
-                                <div
-                                    className="tbm-lbl"
-                                    style={{
-                                        color: "var(--tbm-bronze-label)",
-                                        paddingTop: 4,
-                                    }}
-                                >
-                                    &ldquo;Why I stay.&rdquo;
-                                </div>
-                                <blockquote
-                                    style={{
-                                        margin: 0,
-                                        fontSize: 24,
-                                        lineHeight: 1.35,
-                                        fontStyle: "italic",
-                                    }}
-                                >
-                                    Short quote
-                                </blockquote>
-                                <figcaption
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 4,
-                                        borderTop: "1px solid var(--tbm-rule)",
-                                        paddingTop: 14,
-                                    }}
-                                >
-                                    <span style={{ fontSize: 16 }}>Member name</span>
-                                    <span
-                                        style={{
-                                            fontSize: 14,
-                                            color: "var(--tbm-text-subtle)",
-                                        }}
-                                    >
-                                        Member since XXXX
-                                    </span>
-                                    <span
-                                        style={{
-                                            fontSize: 14,
-                                            color: "var(--tbm-text-subtle)",
-                                        }}
-                                    >
-                                        Favourite class / teacher
-                                    </span>
-                                </figcaption>
-                            </StaggerItem>
-                        ))}
-                    </Stagger>
+                    <SectionHeader
+                        label={community.label}
+                        heading={community.heading}
+                        body={community.body}
+                    />
+                    <StoryCarousel
+                        stories={community.stories}
+                        cardLabel={community.cardLabel}
+                        memberSinceLabel={community.memberSinceLabel}
+                        arrowSlot="above"
+                    />
                 </div>
             </section>
 
@@ -492,187 +273,36 @@ export default function LifeAtTbmPage() {
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 48, alignItems: "start" }}
                 >
-                    <Reveal amount={0.4} className="tbm-c-l5">
-                        <h2
-                            style={{
-                                margin: 0,
-                                fontWeight: 400,
-                                fontSize: "clamp(36px, 4vw, 56px)",
-                                lineHeight: 1.1,
-                                letterSpacing: "-.01em",
-                            }}
-                        >
-                            WORKSHOPS + LEARNING
-                        </h2>
-                    </Reveal>
-                    <Reveal
-                        amount={0.3}
-                        delay={0.08}
-                        className="tbm-c-r"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 16,
-                        }}
-                    >
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 24,
-                                lineHeight: 1.4,
-                                fontStyle: "italic",
-                                color: "var(--tbm-green-accent)",
-                            }}
-                        >
-                            Curiosity looks good on everybody.
-                        </p>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 18,
-                                lineHeight: 1.7,
-                                color: "var(--tbm-text-body)",
-                            }}
-                        >
-                            We love creating opportunities to explore movement a little further. From Pilates and barre training to specialist workshops and new ways of understanding your body, there&apos;s always something worth learning.
-                        </p>
-                    </Reveal>
-
+                    <SectionHeader
+                        label={workshops.label}
+                        heading={workshops.heading}
+                        body={workshops.body}
+                    />
                     <Stagger
                         className="tbm-c-all tbm-g12"
                         style={{ rowGap: 48 }}
                         stagger={0.22}
                     >
-                        <StaggerItem
-                            className="tbm-c-l"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 14,
-                                paddingRight: "clamp(0px, 2vw, 24px)",
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/images/tbm-placeholders/landscape-life-workshop.jpg"
-                                    alt="A small group on mats watching a teacher demonstrate with a spine model"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "3 / 2",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                    }}
-                                />
-                            </div>
-                            <p
-                                className="tbm-lbl"
-                                style={{
-                                    margin: "8px 0 0",
-                                    color: "var(--tbm-bronze-label)",
-                                }}
-                            >
-                                [Date · time] · Cornerstone
-                            </p>
-                            <h3
-                                style={{
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(30px, 3vw, 40px)",
-                                    lineHeight: 1.1,
-                                }}
-                            >
-                                Intro to Ballet Workshops
-                            </h3>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 16,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-muted)",
-                                    maxWidth: "34em",
-                                }}
-                            >
-                                Creating a welcoming space for adults to reconnect with dance, explore ballet fundamentals and experience the joy of movement, regardless of their previous dance experience.
-                            </p>
-                        </StaggerItem>
-
-                        <StaggerItem
-                            className="tbm-c-r"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 14,
-                                paddingLeft: "clamp(0px, 2vw, 24px)",
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src="/images/tbm-placeholders/landscape-life-training.jpg"
-                                    alt="Legs at a timber barre during a training session"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "3 / 2",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                    }}
-                                />
-                            </div>
-                            <p
-                                className="tbm-lbl"
-                                style={{
-                                    margin: "8px 0 0",
-                                    color: "var(--tbm-bronze-label)",
-                                }}
-                            >
-                                [Date · time] · [Studio]
-                            </p>
-                            <h3
-                                style={{
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(30px, 3vw, 40px)",
-                                    lineHeight: 1.1,
-                                }}
-                            >
-                                Barre Body Teacher Training
-                            </h3>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 16,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-muted)",
-                                    maxWidth: "34em",
-                                }}
-                            >
-                                [One or two lines about the training]
-                            </p>
-                            <div style={{ paddingTop: 4 }}>
-                                <a
-                                    className="tbm-lnk"
-                                    href="https://barrebody.com.au"
-                                    style={{ color: "var(--tbm-forest)" }}
-                                >
-                                    https://barrebody.com.au{" "}
-                                    <span aria-hidden="true">→</span>
-                                </a>
-                            </div>
-                        </StaggerItem>
+                        {workshops.cards.map((card, i) => (
+                            <EventTile
+                                key={card.id}
+                                card={card}
+                                side={i % 2 === 0 ? "l" : "r"}
+                            />
+                        ))}
                     </Stagger>
 
                     <div className="tbm-c-all">
                         <Reveal amount={0.4}>
                             <a
                                 className="tbm-btn"
-                                href="#whats-on"
+                                href={workshops.cta.href}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
                                 }}
                             >
-                                SEE WHAT&apos;S COMING UP
+                                {workshops.cta.label}
                             </a>
                         </Reveal>
                     </div>
@@ -702,7 +332,7 @@ export default function LifeAtTbmPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            FRIENDS OF TBM
+                            {partners.label}
                         </h2>
                     </Reveal>
                     <Reveal
@@ -721,31 +351,24 @@ export default function LifeAtTbmPage() {
                                 fontSize: 24,
                                 lineHeight: 1.4,
                                 fontStyle: "italic",
-                                color: "#f4f2ed",
+                                color: "var(--tbm-on-dark-sage-soft)",
                             }}
                         >
-                            Good people doing good things.
+                            {partners.heading}
                         </p>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 18,
-                                lineHeight: 1.7,
-                                color: "var(--tbm-on-dark-body)",
-                            }}
-                        >
-                            We&apos;re lucky to be surrounded by talented practitioners, thoughtful businesses and people who share our belief in taking good care of others.
-                        </p>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 18,
-                                lineHeight: 1.7,
-                                color: "var(--tbm-on-dark-body)",
-                            }}
-                        >
-                            These are some of the people and brands we&apos;re proud to work alongside.
-                        </p>
+                        {partners.body.map((para, i) => (
+                            <p
+                                key={i}
+                                style={{
+                                    margin: 0,
+                                    fontSize: 18,
+                                    lineHeight: 1.7,
+                                    color: "var(--tbm-on-dark-body)",
+                                }}
+                            >
+                                {para}
+                            </p>
+                        ))}
                     </Reveal>
 
                     <Stagger
@@ -753,9 +376,9 @@ export default function LifeAtTbmPage() {
                         style={{ rowGap: 32 }}
                         stagger={0.2}
                     >
-                        {partners.map((p) => (
+                        {partners.items.map((partner) => (
                             <StaggerItem
-                                key={p.name}
+                                key={partner.id}
                                 className="tbm-c-t"
                                 style={{
                                     display: "flex",
@@ -764,10 +387,10 @@ export default function LifeAtTbmPage() {
                                 }}
                             >
                                 <a
-                                    href={p.href}
+                                    href={partner.href}
                                     target="_blank"
                                     rel="noopener"
-                                    aria-label={`Visit ${p.name}`}
+                                    aria-label={`Visit ${partner.name}`}
                                     style={{
                                         position: "relative",
                                         width: "100%",
@@ -779,13 +402,14 @@ export default function LifeAtTbmPage() {
                                         overflow: "hidden",
                                     }}
                                 >
-                                    {/* Each logo is capped to the same visual height (72px)
-                                        with contain-fit so wordmarks and stacked marks read
-                                        as the same tonal weight across the row. */}
+                                    {/* Capped to one visual height with a
+                                        contain fit, then flattened to white,
+                                        so every logo reads at the same weight
+                                        whatever its own palette is. */}
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                        src={p.logo}
-                                        alt={`${p.name} logo`}
+                                        src={partner.logo}
+                                        alt={`${partner.name} logo`}
                                         style={{
                                             width: "auto",
                                             height: 72,
@@ -805,24 +429,17 @@ export default function LifeAtTbmPage() {
                                     }}
                                 >
                                     <a
-                                        href={p.href}
+                                        href={partner.href}
+                                        target="_blank"
+                                        rel="noopener"
                                         style={{
                                             color: "#f4f2ed",
                                             textDecoration: "none",
                                         }}
                                     >
-                                        {p.name}
+                                        {partner.name}
                                     </a>
                                 </h3>
-                                <a
-                                    href={p.href}
-                                    style={{
-                                        fontSize: 15,
-                                        color: "var(--tbm-on-dark-body)",
-                                    }}
-                                >
-                                    {p.href}
-                                </a>
                             </StaggerItem>
                         ))}
                     </Stagger>

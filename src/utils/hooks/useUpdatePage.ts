@@ -16,11 +16,13 @@ export default function useUpdatePage<TContent>(slug: string) {
 
     try {
       // First check if the page exists
+      // maybeSingle, not single: the first save of a page has no row to
+      // find, and single() answers that with a 406.
       const { data: existingPage } = await supabase
         .from("pages")
         .select("*")
         .eq("slug", slug)
-        .single();
+        .maybeSingle();
 
       console.log("useUpdatePage - Existing page:", existingPage);
 

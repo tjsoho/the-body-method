@@ -43,7 +43,7 @@ function StudioArticle({
                         width: "100%",
                         aspectRatio: "4 / 4.4",
                         objectFit: "cover",
-                        objectPosition: "center 45%",
+                        objectPosition: card.imageFocus,
                     }}
                 />
             </Reveal>

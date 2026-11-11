@@ -6,12 +6,17 @@ import { siteConfig, siteConfigReady } from "@/config/site";
 /**
  * Per-page meta builder.
  *
- * The builder is a strict opt-in: it emits a <title>, description, OG and
- * Twitter card, canonical and robots directive ONLY when the site has
- * been configured (NEXT_PUBLIC_SITE_NAME + NEXT_PUBLIC_BASE_URL set) AND
- * the route has a title (either stored in `seo_metadata` or declared in
- * seo-pages.ts as a fallback). Everything else returns `{}` so a
- * pre-launch deploy never leaks "Your Site" to Google or an LLM.
+ * A page always gets its <title> and description, from `seo_metadata`
+ * if an admin has edited them and from seo-pages.ts otherwise. Those
+ * are the studio's own words and belong in the browser tab whatever
+ * else is configured.
+ *
+ * Everything that announces the site to the outside world is gated on
+ * the site actually being configured (NEXT_PUBLIC_SITE_NAME and
+ * NEXT_PUBLIC_BASE_URL): no canonical, no Open Graph, no Twitter card,
+ * and no robots directive until then. A pre-launch deploy therefore
+ * still cannot leak placeholder branding to Google or an LLM, and is
+ * left to the host's own default rather than being told to index.
  */
 
 const ROBOTS_INDEX = {
@@ -42,21 +47,29 @@ export async function buildPageMetadata(
   const keywordsRaw =
     storedEntry?.keywords || pageConfig?.defaultKeywords || "";
 
-  // No branded content yet — emit nothing. Google and LLM crawlers see a
-  // bare page rather than a confident "Your Site" placeholder.
-  if (!siteConfigReady() || !title) return overrides ?? {};
+  // Nothing to say about this route at all.
+  if (!title) return overrides ?? {};
 
-  const baseUrl = siteConfig.url;
-  const canonicalPath = pageConfig?.path ?? "/";
-  const canonicalUrl = `${baseUrl}${canonicalPath}`.replace(/\/$/, "") || baseUrl;
   const keywords = keywordsRaw
     ? keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean)
     : undefined;
 
-  return {
+  const base: Metadata = {
     title,
     description: description || undefined,
     keywords,
+  };
+
+  // Until the site is configured, stop at the title. No canonical URL
+  // to point at the wrong host, no card carrying a placeholder name.
+  if (!siteConfigReady()) return { ...base, ...overrides };
+
+  const baseUrl = siteConfig.url;
+  const canonicalPath = pageConfig?.path ?? "/";
+  const canonicalUrl = `${baseUrl}${canonicalPath}`.replace(/\/$/, "") || baseUrl;
+
+  return {
+    ...base,
     robots: ROBOTS_INDEX,
     alternates: { canonical: canonicalUrl },
     openGraph: {

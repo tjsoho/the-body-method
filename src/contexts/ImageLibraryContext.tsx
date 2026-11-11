@@ -39,7 +39,7 @@ export function ImageLibraryProvider({ children }: { children: ReactNode }) {
                 .from('image_library')
                 .select('*')
                 .eq('url', url)
-                .single();
+                .maybeSingle();
 
             if (existingImages) {
                 // Update existing image usage

@@ -1,43 +1,35 @@
 /* ************************************************************
-   TBM Home — Life at TBM (editorial grid, dark charcoal).
+   TBM Home — Life at TBM (editorial gallery, dark charcoal).
 
    Split headline where the italic second half reads over a soft
-   sage, body paragraph in the right column, then an editorial
-   gallery: an 8/4 pair on the first row and a full-width image
-   underneath. Each tile is a dark window the real photography
-   fills — grid cells are 480px / 480px / 400px tall per the V3.
+   sage, body paragraph in the right column, then the editorial
+   gallery. The V3 stacked three tall tiles (480 / 480 / 400); the
+   same photography now runs sideways as a carousel at full
+   editorial height, with the "SEE LIFE AT TBM" link underneath.
+   Same vision, a third of the scroll.
+
+   `size` is kept on the tile so the crop a wide frame was shot
+   for still holds when it comes round in the carousel.
 ************************************************************ */
 
 import Link from "next/link";
 import type { LifeAtTbmContent } from "@/app/_config";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import GalleryCarousel from "@/components/carousel/GalleryCarousel";
 import Reveal from "@/components/motion/Reveal";
 
 export type LifeTile = {
     id: string;
     image: string;
     imageAlt: string;
-    size: "wide-8" | "narrow-4" | "wide-all";
+    /** Where to hold the crop, so a swapped photo can be re-framed. */
+    objectPosition: string;
 };
 
 type Props = {
     content: LifeAtTbmContent;
-    tiles: LifeTile[];
 };
 
-const TILE_HEIGHT: Record<LifeTile["size"], number> = {
-    "wide-8": 480,
-    "narrow-4": 480,
-    "wide-all": 400,
-};
-
-const TILE_SPAN_CLASS: Record<LifeTile["size"], string> = {
-    "wide-8": "tbm-c-8",
-    "narrow-4": "tbm-c-4",
-    "wide-all": "tbm-c-all",
-};
-
-export default function LifeAtTbm({ content, tiles }: Props) {
+export default function LifeAtTbm({ content }: Props) {
     return (
         <section
             id="life-at-tbm"
@@ -87,40 +79,7 @@ export default function LifeAtTbm({ content, tiles }: Props) {
                     </p>
                 </Reveal>
 
-                <Stagger
-                    className="tbm-c-all tbm-g12"
-                    style={{ rowGap: 24 }}
-                    stagger={0.22}
-                >
-                    {tiles.map((tile) => (
-                        <StaggerItem
-                            key={tile.id}
-                            className={TILE_SPAN_CLASS[tile.size]}
-                            style={{
-                                position: "relative",
-                                height: TILE_HEIGHT[tile.size],
-                                overflow: "hidden",
-                            }}
-                        >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src={tile.image}
-                                alt={tile.imageAlt}
-                                style={{
-                                    position: "absolute",
-                                    inset: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    objectPosition:
-                                        tile.size === "wide-all"
-                                            ? "center 60%"
-                                            : "center",
-                                }}
-                            />
-                        </StaggerItem>
-                    ))}
-                </Stagger>
+                <GalleryCarousel tiles={content.tiles} />
 
                 <div className="tbm-c-all">
                     <Link

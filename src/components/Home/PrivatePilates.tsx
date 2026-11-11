@@ -92,7 +92,7 @@ export default function PrivatePilates({ content }: { content: PrivatePilatesCon
                             aspectRatio: "4 / 5",
                             objectFit: "cover",
                             height: 529,
-                            objectPosition: "50% 0%",
+                            objectPosition: content.imageFocus,
                         }}
                     />
                 </div>

@@ -90,7 +90,7 @@ export default function Belong({ content }: { content: BelongContent }) {
                             width: "100%",
                             aspectRatio: "4 / 3",
                             objectFit: "cover",
-                            objectPosition: "center 35%",
+                            objectPosition: content.imageFocus,
                         }}
                     />
                 </Reveal>

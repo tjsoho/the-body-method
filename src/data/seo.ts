@@ -44,7 +44,7 @@ export async function fetchSeoEntry(
       .from("seo_metadata")
       .select("*")
       .eq("slug", slug)
-      .single();
+      .maybeSingle();
 
     if (error) {
       // Gracefully handle if table doesn't exist yet

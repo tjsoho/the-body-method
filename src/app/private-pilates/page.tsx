@@ -1,125 +1,95 @@
 /* ************************************************************
-   /private-pilates — Private Pilates.
+   /private-pilates — one-to-one and duet sessions.
 
-   Hero + centered pullquote + "useful when" list + first-session
-   panel + forest "Private → Semi-private → Small Group" split +
+   Hero, a centred intro, the "useful when" list, the first
+   session panel, a forest band with the progression chain, and
    pricing.
+
+   Editable at /admin/private-pilates. Fallback in ./_config.
 ************************************************************ */
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
+import RichText from "@/components/core/RichText";
+import { PhotoHero } from "@/components/core/PageHero";
+import getPage from "@/server-actions/page";
+import { buildPageMetadata } from "@/utils/seo";
+import {
+    PRIVATE_PILATES_SLUG,
+    privatePilatesFallbackData,
+    type PriceColumn,
+    type PrivatePilatesPageProps,
+} from "./_config";
 
-export const metadata: Metadata = {
-    title: "Private Pilates Tugun Gold Coast | The Body Method",
-    description:
-        "Dedicated time with an experienced teacher to understand your body, work toward something specific and move at the pace that’s right for you.",
-};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-const useCases = [
-    "Returning to movement after injury",
-    "Are a professional athlete wanting personalised training",
-    "New to Pilates and wanting confidence first",
-    "Working on technique",
-    "Pregnant or postpartum",
-    "Managing specific movement needs",
-    "Wanting individual attention",
-    "Building toward group classes",
-];
+export async function generateMetadata(): Promise<Metadata> {
+    return buildPageMetadata(PRIVATE_PILATES_SLUG);
+}
 
-export default function PrivatePilatesPage() {
+const ROW_STYLE = {
+    borderTop: "1px solid var(--tbm-rule)",
+    padding: "12px 0",
+    fontSize: 17,
+    lineHeight: 1.5,
+    color: "var(--tbm-text-body)",
+} as const;
+
+function PriceList({ column }: { column: PriceColumn }) {
     return (
-        <>
-            {/* ============ HERO ============ */}
-            <section
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <h3
                 style={{
-                    position: "relative",
-                    minHeight: 760,
-                    marginTop: -85,
-                    paddingTop: 85,
-                    color: "#f4f2ed",
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
+                    margin: 0,
+                    fontWeight: 500,
+                    fontSize: 21,
+                    lineHeight: 1.3,
                 }}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src="/images/tbm-placeholders/hero-private.jpg"
-                    alt="A teacher's hands supporting a client's leg in a Reformer strap"
+                {column.title}
+            </h3>
+            {column.note && (
+                <p
                     style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center 45%",
-                    }}
-                />
-                <div
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                            "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,0) 78%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)",
-                    }}
-                />
-                <div
-                    className="tbm-wrap tbm-g12"
-                    style={{
-                        position: "relative",
-                        marginTop: "auto",
-                        paddingBottom: 75,
+                        margin: "0 0 6px",
+                        fontSize: 14,
+                        color: "var(--tbm-text-body)",
                     }}
                 >
-                    <div
-                        className="tbm-c-l7"
-                        style={{ display: "flex", flexDirection: "column", gap: 24 }}
-                    >
-                        <Reveal amount={0.3}>
-                            <h1
-                                style={{
-                                    textShadow: "0 1px 24px rgba(0,0,0,.25)",
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(42px, 5.4vw, 80px)",
-                                    lineHeight: 1.04,
-                                    letterSpacing: "-.015em",
-                                    textWrap: "balance",
-                                }}
-                            >
-                                Movement built around you.
-                            </h1>
-                        </Reveal>
-                        <Reveal amount={0.3} delay={0.08}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 17,
-                                    lineHeight: 1.6,
-                                    maxWidth: "34em",
-                                    color: "#ece9e2",
-                                }}
-                            >
-                                Sometimes a group class is exactly what you need.
-                            </p>
-                        </Reveal>
-                        <Reveal amount={0.3} delay={0.16}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 17,
-                                    lineHeight: 1.6,
-                                    maxWidth: "34em",
-                                    color: "#ece9e2",
-                                }}
-                            >
-                                Sometimes it isn&apos;t.
-                            </p>
-                        </Reveal>
-                    </div>
-                </div>
-            </section>
+                    {column.note}
+                </p>
+            )}
+            <ul
+                style={{
+                    listStyle: "none",
+                    margin: 0,
+                    padding: 0,
+                    borderBottom: "1px solid var(--tbm-rule)",
+                }}
+            >
+                {column.rows.map((row, i) => (
+                    <li key={i} style={ROW_STYLE}>
+                        <RichText className="tbm-rich" value={row} />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+export default async function PrivatePilatesPage() {
+    const page = await getPage<PrivatePilatesPageProps>(
+        PRIVATE_PILATES_SLUG,
+        privatePilatesFallbackData,
+    );
+    const { hero, intro, useCases, firstSession, progression, pricing } =
+        page.content;
+
+    return (
+        <>
+            <PhotoHero content={hero} />
 
             {/* ============ Centered intro ============ */}
             <section
@@ -133,7 +103,11 @@ export default function PrivatePilatesPage() {
             >
                 <div
                     className="tbm-wrap"
-                    style={{ display: "flex", justifyContent: "center", textAlign: "center" }}
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                    }}
                 >
                     <Reveal amount={0.3}>
                         <p
@@ -145,7 +119,7 @@ export default function PrivatePilatesPage() {
                                 color: "var(--tbm-ink)",
                             }}
                         >
-                            Private Pilates gives you dedicated time with an experienced teacher to understand your body, work toward something specific and move at the pace that&apos;s right for you.
+                            {intro.body}
                         </p>
                     </Reveal>
                 </div>
@@ -175,7 +149,7 @@ export default function PrivatePilatesPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            Private Pilates can be particularly useful when you&apos;re:
+                            {useCases.heading}
                         </h2>
                     </Reveal>
                     <Reveal amount={0.2} delay={0.08} className="tbm-c-r">
@@ -190,9 +164,9 @@ export default function PrivatePilatesPage() {
                                 columnGap: 24,
                             }}
                         >
-                            {useCases.map((u) => (
+                            {useCases.items.map((item) => (
                                 <li
-                                    key={u}
+                                    key={item}
                                     style={{
                                         borderTop: "1px solid var(--tbm-rule)",
                                         padding: "16px 0",
@@ -201,7 +175,7 @@ export default function PrivatePilatesPage() {
                                         color: "var(--tbm-text-body)",
                                     }}
                                 >
-                                    {u}
+                                    {item}
                                 </li>
                             ))}
                         </ul>
@@ -230,8 +204,8 @@ export default function PrivatePilatesPage() {
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/tbm-placeholders/portrait-priv-first.jpg"
-                            alt="A teacher and client talking on a Reformer before a session"
+                            src={firstSession.image}
+                            alt={firstSession.imageAlt}
                             style={{
                                 width: "100%",
                                 aspectRatio: "4 / 5",
@@ -242,8 +216,8 @@ export default function PrivatePilatesPage() {
                     <Reveal
                         amount={0.2}
                         delay={0.08}
+                        className="tbm-c-panel"
                         style={{
-                            gridColumn: "6 / 13",
                             marginLeft: -24,
                             background: "var(--tbm-sand)",
                             display: "flex",
@@ -263,7 +237,7 @@ export default function PrivatePilatesPage() {
                                 maxWidth: "12em",
                             }}
                         >
-                            Your first session starts with you:
+                            {firstSession.heading}
                         </h2>
                         <div
                             style={{
@@ -274,27 +248,19 @@ export default function PrivatePilatesPage() {
                                 paddingTop: 32,
                             }}
                         >
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: "clamp(20px, 1.8vw, 24px)",
-                                    lineHeight: 1.5,
-                                    color: "var(--tbm-ink)",
-                                }}
-                            >
-                                Not a predetermined workout. We begin with where you are, what you&apos;re experiencing and what you&apos;d like movement to help you do.
-                            </p>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 24,
-                                    lineHeight: 1.4,
-                                    fontStyle: "italic",
-                                    color: "var(--tbm-green-accent)",
-                                }}
-                            >
-                                From there, your teacher builds the session around you.
-                            </p>
+                            {firstSession.body.map((para, i) => (
+                                <p
+                                    key={i}
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-text-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            ))}
                         </div>
                     </Reveal>
                 </div>
@@ -321,13 +287,13 @@ export default function PrivatePilatesPage() {
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/tbm-placeholders/landscape-priv-semi.jpg"
-                            alt="Three Reformers side by side in a small group session"
+                            src={progression.image}
+                            alt={progression.imageAlt}
                             style={{
                                 width: "100%",
                                 aspectRatio: "3 / 2",
                                 objectFit: "cover",
-                                objectPosition: "center",
+                                objectPosition: progression.imageFocus,
                             }}
                         />
                     </Reveal>
@@ -350,10 +316,27 @@ export default function PrivatePilatesPage() {
                                     letterSpacing: "-.01em",
                                 }}
                             >
-                                Private doesn&rsquo;t have to mean forever.
+                                {progression.heading}
                             </h2>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.08}>
+                        {progression.bodyBefore.map((para, i) => (
+                            <Reveal key={i} amount={0.3} delay={0.08 + i * 0.08}>
+                                <p
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-on-dark-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            </Reveal>
+                        ))}
+                        <Reveal
+                            amount={0.3}
+                            delay={0.08 + progression.bodyBefore.length * 0.08}
+                        >
                             <p
                                 style={{
                                     margin: 0,
@@ -362,19 +345,7 @@ export default function PrivatePilatesPage() {
                                     color: "var(--tbm-on-dark-body)",
                                 }}
                             >
-                                For some people, private Pilates is their preferred way to move.
-                            </p>
-                        </Reveal>
-                        <Reveal amount={0.3} delay={0.16}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-on-dark-body)",
-                                }}
-                            >
-                                For others, it&apos;s the beginning:
+                                {progression.chainLead}
                                 <strong
                                     style={{
                                         display: "flex",
@@ -387,39 +358,49 @@ export default function PrivatePilatesPage() {
                                         color: "var(--tbm-cream)",
                                     }}
                                 >
-                                    <span>Private</span>
-                                    <span aria-hidden="true" style={{ color: "var(--tbm-on-dark-bronze)", padding: "0 14px" }}>&rarr;</span>
-                                    <span>Semi-private</span>
-                                    <span aria-hidden="true" style={{ color: "var(--tbm-on-dark-bronze)", padding: "0 14px" }}>&rarr;</span>
-                                    <span>Small Group</span>
+                                    {progression.chain.map((step, i) => (
+                                        <span
+                                            key={step}
+                                            style={{ display: "contents" }}
+                                        >
+                                            {i > 0 && (
+                                                <span
+                                                    aria-hidden="true"
+                                                    style={{
+                                                        color: "var(--tbm-on-dark-bronze)",
+                                                        padding: "0 14px",
+                                                    }}
+                                                >
+                                                    &rarr;
+                                                </span>
+                                            )}
+                                            <span>{step}</span>
+                                        </span>
+                                    ))}
                                 </strong>
                             </p>
                         </Reveal>
-                        <Reveal amount={0.3} delay={0.24}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-on-dark-body)",
-                                }}
+                        {progression.bodyAfter.map((para, i) => (
+                            <Reveal
+                                key={i}
+                                amount={0.3}
+                                delay={
+                                    0.16 +
+                                    (progression.bodyBefore.length + i) * 0.08
+                                }
                             >
-                                When you&apos;re ready, we can help you find the next environment that works for you.
-                            </p>
-                        </Reveal>
-                        <Reveal amount={0.3} delay={0.32}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-on-dark-strong)",
-                                    fontStyle: "italic",
-                                }}
-                            >
-                                Perfect if you&rsquo;re new to Pilates, working with an injury, pregnant or postnatal, or simply prefer a more personalised approach.
-                            </p>
-                        </Reveal>
+                                <p
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-on-dark-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            </Reveal>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -448,7 +429,7 @@ export default function PrivatePilatesPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            Pricing:
+                            {pricing.heading}
                         </h2>
                     </Reveal>
                     <div
@@ -458,47 +439,11 @@ export default function PrivatePilatesPage() {
                             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                         }}
                     >
-                        <Reveal amount={0.2}>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 21, lineHeight: 1.3 }}>
-                                    1:1 Private Pilates
-                                </h3>
-                                <ul
-                                    style={{
-                                        listStyle: "none",
-                                        margin: 0,
-                                        padding: 0,
-                                        borderBottom: "1px solid var(--tbm-rule)",
-                                    }}
-                                >
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>Single session &mdash; $100</li>
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>5 sessions &mdash; $480</li>
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>10 sessions &mdash; $940</li>
-                                </ul>
-                            </div>
-                        </Reveal>
-                        <Reveal amount={0.2} delay={0.08}>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                                <h3 style={{ margin: 0, fontWeight: 500, fontSize: 21, lineHeight: 1.3 }}>
-                                    1:2 Private Pilates
-                                </h3>
-                                <p style={{ margin: "0 0 6px", fontSize: 14, color: "var(--tbm-text-body)" }}>
-                                    Come with a friend, partner or family member.
-                                </p>
-                                <ul
-                                    style={{
-                                        listStyle: "none",
-                                        margin: 0,
-                                        padding: 0,
-                                        borderBottom: "1px solid var(--tbm-rule)",
-                                    }}
-                                >
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>Single session &mdash; $70 per person</li>
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>5 sessions &mdash; $330 per person</li>
-                                    <li style={{ borderTop: "1px solid var(--tbm-rule)", padding: "12px 0", fontSize: 17, lineHeight: 1.5, color: "var(--tbm-text-body)" }}>10 sessions &mdash; $600 per person</li>
-                                </ul>
-                            </div>
-                        </Reveal>
+                        {pricing.columns.map((column, i) => (
+                            <Reveal key={column.id} amount={0.2} delay={i * 0.08}>
+                                <PriceList column={column} />
+                            </Reveal>
+                        ))}
                         <Reveal
                             amount={0.2}
                             delay={0.16}
@@ -512,17 +457,21 @@ export default function PrivatePilatesPage() {
                         >
                             <a
                                 className="tbm-btn"
-                                href="#momence-private"
-                                style={{ background: "var(--tbm-ink)", color: "var(--tbm-cream)" }}
+                                href={pricing.cta.href}
+                                style={{
+                                    background: "var(--tbm-ink)",
+                                    color: "var(--tbm-cream)",
+                                }}
                             >
-                                BOOK A PRIVATE
+                                {pricing.cta.label}
                             </a>
                             <Link
                                 className="tbm-lnk"
-                                href="/contact"
+                                href={pricing.link.href}
                                 style={{ color: "var(--tbm-forest)" }}
                             >
-                                TALK TO US ABOUT PRIVATE PILATES <span aria-hidden="true">&rarr;</span>
+                                {pricing.link.label}{" "}
+                                <span aria-hidden="true">&rarr;</span>
                             </Link>
                         </Reveal>
                     </div>

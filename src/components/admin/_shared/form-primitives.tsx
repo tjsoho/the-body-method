@@ -1362,3 +1362,485 @@ export function AddItemButton({
    ────────────────────────────────────────────────────────────────────────── */
 export const nextId = (items: { id: number }[]) =>
     items?.length ? Math.max(...items.map((i) => i.id)) + 1 : 1;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ImageFocusInput
+
+   A photo swapped in the panel is almost never cropped like the one it
+   replaced, so every image field gets a vertical crop control. The CSS
+   value is `object-position`, but nobody should have to know that, so
+   this reads as a slider from the top of the photo to the bottom.
+
+   Values written by hand earlier (or by a designer) are preserved: the
+   slider reads the vertical percentage out of whatever is stored and
+   writes "center <n>%" back.
+   ────────────────────────────────────────────────────────────────────────── */
+export function ImageFocusInput({
+    label = "Vertical crop",
+    value,
+    onChange,
+}: {
+    label?: string;
+    value: string;
+    onChange: (v: string) => void;
+}) {
+    const percent = parseFocusPercent(value);
+
+    const describe = (n: number) => {
+        if (n <= 10) return "Top of the photo";
+        if (n <= 35) return "Upper third";
+        if (n <= 65) return "Middle";
+        if (n <= 90) return "Lower third";
+        return "Bottom of the photo";
+    };
+
+    return (
+        <div>
+            <FieldLabel hint={`${describe(percent)} (${percent}%)`}>
+                {label}
+            </FieldLabel>
+            <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={percent}
+                onChange={(e) =>
+                    onChange(
+                        Number(e.target.value) === 50
+                            ? "center"
+                            : `center ${e.target.value}%`,
+                    )
+                }
+                className="w-full accent-brand-green"
+                aria-label={`${label}, ${percent} percent from the top`}
+            />
+            <p className="mt-1 text-[11px] text-brand-black/45">
+                Which part of the photo to keep when the frame is narrower
+                than the image.
+            </p>
+        </div>
+    );
+}
+
+/** Pulls the vertical percentage out of an object-position value. */
+function parseFocusPercent(value: string): number {
+    const raw = (value ?? "").trim().toLowerCase();
+    if (!raw || raw === "center" || raw === "center center") return 50;
+    if (raw === "top") return 0;
+    if (raw === "bottom") return 100;
+
+    const parts = raw.split(/\s+/);
+    const vertical = parts.length > 1 ? parts[1] : parts[0];
+    if (vertical === "top") return 0;
+    if (vertical === "bottom") return 100;
+    if (vertical === "center") return 50;
+
+    const match = /^(-?\d+(?:\.\d+)?)%$/.exec(vertical);
+    if (!match) return 50;
+    return Math.min(100, Math.max(0, Math.round(Number(match[1]))));
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ParagraphListInput
+
+   Several sections take an array of paragraphs rather than one block of
+   copy, because each paragraph is its own element on the page. One
+   textarea per paragraph, in order, with add, remove and reorder.
+   ────────────────────────────────────────────────────────────────────────── */
+export function ParagraphListInput({
+    label,
+    values,
+    onChange,
+    addLabel = "Add paragraph",
+    rows = 3,
+}: {
+    label: string;
+    values: string[];
+    onChange: (next: string[]) => void;
+    addLabel?: string;
+    rows?: number;
+}) {
+    const replace = (index: number, text: string) =>
+        onChange(values.map((item, i) => (i === index ? text : item)));
+
+    const remove = (index: number) =>
+        onChange(values.filter((_, i) => i !== index));
+
+    const move = (index: number, delta: number) => {
+        const target = index + delta;
+        if (target < 0 || target >= values.length) return;
+        const next = [...values];
+        [next[index], next[target]] = [next[target], next[index]];
+        onChange(next);
+    };
+
+    return (
+        <div>
+            <FieldLabel
+                hint={`${values.length} paragraph${values.length === 1 ? "" : "s"}`}
+            >
+                {label}
+            </FieldLabel>
+            <div className="space-y-2">
+                {values.map((text, index) => (
+                    <div
+                        key={index}
+                        className="rounded-lg border border-[rgba(18,23,23,0.10)] bg-[#fafbf7] p-3"
+                    >
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-brand-black/45">
+                                Paragraph {index + 1}
+                            </span>
+                            <div className="flex items-center gap-1">
+                                <SubtleButton
+                                    variant="ghost"
+                                    onClick={() => move(index, -1)}
+                                    disabled={index === 0}
+                                    title="Move up"
+                                >
+                                    Up
+                                </SubtleButton>
+                                <SubtleButton
+                                    variant="ghost"
+                                    onClick={() => move(index, 1)}
+                                    disabled={index === values.length - 1}
+                                    title="Move down"
+                                >
+                                    Down
+                                </SubtleButton>
+                                <SubtleButton
+                                    variant="danger"
+                                    onClick={() => remove(index)}
+                                    disabled={values.length <= 1}
+                                    title="Remove paragraph"
+                                >
+                                    <Trash2 className="h-3 w-3" />
+                                </SubtleButton>
+                            </div>
+                        </div>
+                        <textarea
+                            value={text}
+                            onChange={(e) => replace(index, e.target.value)}
+                            rows={rows}
+                            className={`${inputClass} resize-none leading-relaxed`}
+                        />
+                    </div>
+                ))}
+                <AddItemButton onClick={() => onChange([...values, ""])}>
+                    {addLabel}
+                </AddItemButton>
+            </div>
+        </div>
+    );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   RichTextInput
+
+   For copy that sometimes needs a link, a bit of emphasis or a bullet
+   list. Stored as the small Markdown subset that RichText renders, with
+   the rules spelled out under the box so nobody has to remember them.
+   ────────────────────────────────────────────────────────────────────────── */
+export function RichTextInput({
+    label,
+    value,
+    onChange,
+    rows = 5,
+    hint,
+    placeholder,
+}: {
+    label?: string;
+    value: string;
+    onChange: (v: string) => void;
+    rows?: number;
+    hint?: ReactNode;
+    placeholder?: string;
+}) {
+    return (
+        <div>
+            {label && <FieldLabel hint={hint}>{label}</FieldLabel>}
+            <textarea
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                rows={rows}
+                placeholder={placeholder}
+                className={`${inputClass} resize-none leading-relaxed`}
+            />
+            <p className="mt-1.5 text-[11px] leading-relaxed text-brand-black/45">
+                Blank line starts a new paragraph. Lines starting with
+                {" "}
+                <code className="rounded bg-brand-black/[0.06] px-1">- </code>
+                become a bullet list.{" "}
+                <code className="rounded bg-brand-black/[0.06] px-1">
+                    **bold**
+                </code>
+                ,{" "}
+                <code className="rounded bg-brand-black/[0.06] px-1">
+                    *italic*
+                </code>{" "}
+                and{" "}
+                <code className="rounded bg-brand-black/[0.06] px-1">
+                    [text](/page)
+                </code>{" "}
+                work too.
+            </p>
+        </div>
+    );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   FaqGroupsInput
+
+   Four pages carry an FAQ. Three of them are a flat list of questions,
+   the main FAQ page groups them under headings. One editor covers both:
+   `grouped={false}` hides the heading field and keeps a single group.
+   ────────────────────────────────────────────────────────────────────────── */
+export type FaqEntry = { question: string; answer: string };
+export type FaqGroupValue = { label: string; items: FaqEntry[] };
+
+export function FaqGroupsInput({
+    groups,
+    onChange,
+    grouped = true,
+    description,
+}: {
+    groups: FaqGroupValue[];
+    onChange: (next: FaqGroupValue[]) => void;
+    grouped?: boolean;
+    description?: string;
+}) {
+    const replaceGroup = (index: number, patch: Partial<FaqGroupValue>) =>
+        onChange(
+            groups.map((g, i) => (i === index ? { ...g, ...patch } : g)),
+        );
+
+    const moveWithin = <T,>(list: T[], index: number, delta: number): T[] => {
+        const target = index + delta;
+        if (target < 0 || target >= list.length) return list;
+        const next = [...list];
+        [next[index], next[target]] = [next[target], next[index]];
+        return next;
+    };
+
+    return (
+        <FieldGroup
+            title={grouped ? "Question groups" : "Questions"}
+            description={description}
+            toolbar={
+                <AddItemButton
+                    onClick={() =>
+                        grouped
+                            ? onChange([
+                                  ...groups,
+                                  { label: "NEW GROUP", items: [] },
+                              ])
+                            : onChange(
+                                  groups.length
+                                      ? groups.map((g, i) =>
+                                            i === 0
+                                                ? {
+                                                      ...g,
+                                                      items: [
+                                                          ...g.items,
+                                                          {
+                                                              question: "",
+                                                              answer: "",
+                                                          },
+                                                      ],
+                                                  }
+                                                : g,
+                                        )
+                                      : [
+                                            {
+                                                label: "",
+                                                items: [
+                                                    { question: "", answer: "" },
+                                                ],
+                                            },
+                                        ],
+                              )
+                    }
+                >
+                    {grouped ? "Add group" : "Add question"}
+                </AddItemButton>
+            }
+        >
+            {groups.map((group, groupIndex) => (
+                <div
+                    key={groupIndex}
+                    className="rounded-lg border border-[rgba(18,23,23,0.10)] bg-[#fafbf7] p-4 space-y-3"
+                >
+                    {grouped && (
+                        <>
+                            <div className="flex items-center justify-between gap-2">
+                                <span className="text-[10px] font-semibold uppercase tracking-wider text-brand-black/45">
+                                    Group {groupIndex + 1}
+                                </span>
+                                <div className="flex items-center gap-1">
+                                    <SubtleButton
+                                        variant="ghost"
+                                        onClick={() =>
+                                            onChange(
+                                                moveWithin(
+                                                    groups,
+                                                    groupIndex,
+                                                    -1,
+                                                ),
+                                            )
+                                        }
+                                        disabled={groupIndex === 0}
+                                    >
+                                        Up
+                                    </SubtleButton>
+                                    <SubtleButton
+                                        variant="ghost"
+                                        onClick={() =>
+                                            onChange(
+                                                moveWithin(
+                                                    groups,
+                                                    groupIndex,
+                                                    1,
+                                                ),
+                                            )
+                                        }
+                                        disabled={
+                                            groupIndex === groups.length - 1
+                                        }
+                                    >
+                                        Down
+                                    </SubtleButton>
+                                    <SubtleButton
+                                        variant="danger"
+                                        onClick={() =>
+                                            onChange(
+                                                groups.filter(
+                                                    (_, i) => i !== groupIndex,
+                                                ),
+                                            )
+                                        }
+                                    >
+                                        <Trash2 className="h-3 w-3" />
+                                    </SubtleButton>
+                                </div>
+                            </div>
+                            <TextInput
+                                label="Group heading"
+                                value={group.label}
+                                onChange={(label) =>
+                                    replaceGroup(groupIndex, { label })
+                                }
+                            />
+                        </>
+                    )}
+
+                    <div className="space-y-3">
+                        {group.items.map((item, itemIndex) => (
+                            <div
+                                key={itemIndex}
+                                className="rounded-lg border border-[rgba(18,23,23,0.10)] bg-white p-3 space-y-3"
+                            >
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-brand-black/45">
+                                        Question {itemIndex + 1}
+                                    </span>
+                                    <div className="flex items-center gap-1">
+                                        <SubtleButton
+                                            variant="ghost"
+                                            onClick={() =>
+                                                replaceGroup(groupIndex, {
+                                                    items: moveWithin(
+                                                        group.items,
+                                                        itemIndex,
+                                                        -1,
+                                                    ),
+                                                })
+                                            }
+                                            disabled={itemIndex === 0}
+                                        >
+                                            Up
+                                        </SubtleButton>
+                                        <SubtleButton
+                                            variant="ghost"
+                                            onClick={() =>
+                                                replaceGroup(groupIndex, {
+                                                    items: moveWithin(
+                                                        group.items,
+                                                        itemIndex,
+                                                        1,
+                                                    ),
+                                                })
+                                            }
+                                            disabled={
+                                                itemIndex ===
+                                                group.items.length - 1
+                                            }
+                                        >
+                                            Down
+                                        </SubtleButton>
+                                        <SubtleButton
+                                            variant="danger"
+                                            onClick={() =>
+                                                replaceGroup(groupIndex, {
+                                                    items: group.items.filter(
+                                                        (_, i) =>
+                                                            i !== itemIndex,
+                                                    ),
+                                                })
+                                            }
+                                        >
+                                            <Trash2 className="h-3 w-3" />
+                                        </SubtleButton>
+                                    </div>
+                                </div>
+                                <TextAreaInput
+                                    label="Question"
+                                    value={item.question}
+                                    onChange={(question) =>
+                                        replaceGroup(groupIndex, {
+                                            items: group.items.map((it, i) =>
+                                                i === itemIndex
+                                                    ? { ...it, question }
+                                                    : it,
+                                            ),
+                                        })
+                                    }
+                                    rows={2}
+                                />
+                                <RichTextInput
+                                    label="Answer"
+                                    value={item.answer}
+                                    onChange={(answer) =>
+                                        replaceGroup(groupIndex, {
+                                            items: group.items.map((it, i) =>
+                                                i === itemIndex
+                                                    ? { ...it, answer }
+                                                    : it,
+                                            ),
+                                        })
+                                    }
+                                    rows={5}
+                                />
+                            </div>
+                        ))}
+
+                        {grouped && (
+                            <AddItemButton
+                                onClick={() =>
+                                    replaceGroup(groupIndex, {
+                                        items: [
+                                            ...group.items,
+                                            { question: "", answer: "" },
+                                        ],
+                                    })
+                                }
+                            >
+                                Add question to this group
+                            </AddItemButton>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </FieldGroup>
+    );
+}

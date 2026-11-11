@@ -1,123 +1,135 @@
 /* ************************************************************
-   TBM — Studios hub.
+   /studios — the studios hub.
 
-   Hero + The Difference comparison table (two studio cards side
-   by side, six comparison rows) + "Want both?" band. Mirrors
-   design/studios.html from the v2 handoff.
+   Hero + The Difference + "Want both?" band.
+
+   The Difference is one set of cells that reflows: on desktop
+   each comparison row puts the studios side by side; on a phone
+   the same cells become one complete card per studio, each
+   carrying its own name and its own rows. Nothing is duplicated,
+   so a value lives in exactly one place in the DOM and no row
+   can end up orphaned from its studio.
+
+   The cells are emitted row by row, studio within row, which is
+   what the odd/even reflow in globals.css relies on. That holds
+   for any number of rows, so a row can be added in the panel.
+
+   Editable at /admin/studios. Fallback copy in ./_config.
 ************************************************************ */
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { PhotoHero } from "@/components/core/PageHero";
+import getPage from "@/server-actions/page";
+import { buildPageMetadata } from "@/utils/seo";
+import {
+    STUDIOS_SLUG,
+    studiosFallbackData,
+    type StudioSummary,
+    type StudiosPageProps,
+} from "./_config";
 
-export const metadata: Metadata = {
-    title: "Studios | The Body Method",
-    description:
-        "Two studios in Tugun — Tugun Beach Reformer Pilates and Cornerstone for Pilates, yoga, barre, yin, meditation and movement.",
-};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-/* Each comparison row: label + Tugun value + Cornerstone value. */
-const COMPARISON_ROWS = [
-    {
-        label: "Feeling",
-        tugun: "Intimate + personal",
-        cornerstone: "Expansive + community focused",
-    },
-    { label: "Size", tugun: "Max 6", cornerstone: "Max 18" },
-    {
-        label: "Movement",
-        tugun: "Reformer Pilates",
-        cornerstone:
-            "Pilates, yoga, barre, yin, meditation, stretch + movement",
-    },
-    {
-        label: "Best for",
-        tugun: "Attention, technique, confidence, core strength workout",
-        cornerstone:
-            "Variety, routine, energy, core strength + bodyweight training",
-    },
-    { label: "Privates", tugun: "Yes", cornerstone: "—" },
-    {
-        label: "Community/events",
-        tugun: "Some",
-        cornerstone: "Main community hub",
-    },
-] as const;
+export async function generateMetadata(): Promise<Metadata> {
+    return buildPageMetadata(STUDIOS_SLUG);
+}
 
-export default function StudiosPage() {
+function StudioCard({ studio }: { studio: StudioSummary }) {
     return (
-        <>
-            {/* ============ HERO ============ */}
-            <section
-                style={{
-                    position: "relative",
-                    minHeight: 760,
-                    marginTop: -85,
-                    paddingTop: 85,
-                    color: "#f4f2ed",
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
-                }}
-            >
+        <Link
+            href={studio.href}
+            style={{
+                background: "#ebe8e0",
+                display: "flex",
+                flexDirection: "column",
+                gap: 24,
+                padding: "12px 12px 8px",
+                color: "var(--tbm-ink)",
+                textDecoration: "none",
+            }}
+        >
+            <div className="tbm-media-zoom">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                    src="/images/tbm-placeholders/hero-studios.jpg"
-                    alt="A calm studio room with tall windows onto trees"
+                    src={studio.image}
+                    alt={studio.imageAlt}
                     style={{
-                        position: "absolute",
-                        inset: 0,
                         width: "100%",
-                        height: "100%",
+                        aspectRatio: "3 / 2",
                         objectFit: "cover",
-                        objectPosition: "center 45%",
+                        objectPosition: studio.imageFocus,
                     }}
                 />
-                <div
+            </div>
+            <span
+                style={{
+                    display: "block",
+                    padding: "0 20px",
+                    fontSize: "clamp(26px, 3.4vw, 48px)",
+                    lineHeight: 1.05,
+                    letterSpacing: "-.01em",
+                }}
+            >
+                {studio.name}
+            </span>
+        </Link>
+    );
+}
+
+function ComparisonCell({
+    label,
+    value,
+    studio,
+    isLast,
+}: {
+    label: string;
+    value: string;
+    studio: string;
+    isLast: boolean;
+}) {
+    return (
+        <div
+            className={`tbm-cmp-cell${isLast ? " tbm-cmp-cell-last" : ""}`}
+            role="group"
+            aria-label={`${studio}: ${label}`}
+        >
+            <div className="tbm-cmp-row">
+                <span
+                    className="tbm-lbl"
+                    style={{ color: "var(--tbm-bronze-label)" }}
+                >
+                    {label}
+                </span>
+                <span
                     style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                            "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,0) 78%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)",
-                    }}
-                />
-                <div
-                    className="tbm-wrap tbm-g12"
-                    style={{
-                        position: "relative",
-                        marginTop: "auto",
-                        paddingBottom: 75,
+                        fontSize: 18,
+                        lineHeight: 1.5,
+                        color: "var(--tbm-ink)",
                     }}
                 >
-                    <div
-                        style={{
-                            gridColumn: "1 / 8",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 24,
-                        }}
-                    >
-                        <Reveal amount={0.3}>
-                            <h1
-                                style={{
-                                    textShadow: "0 1px 24px rgba(0,0,0,.25)",
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(42px, 5.4vw, 80px)",
-                                    lineHeight: 1.04,
-                                    letterSpacing: "-.015em",
-                                    textWrap: "balance",
-                                }}
-                            >
-                                Two studios - One Body Method.
-                            </h1>
-                        </Reveal>
-                    </div>
-                </div>
-            </section>
+                    {value}
+                </span>
+            </div>
+        </div>
+    );
+}
 
-            {/* ============ THE DIFFERENCE — two studio cards + comparison rows ============ */}
+export default async function StudiosPage() {
+    const page = await getPage<StudiosPageProps>(
+        STUDIOS_SLUG,
+        studiosFallbackData,
+    );
+    const { hero, difference, wantBoth } = page.content;
+    const { studios, rows } = difference;
+
+    return (
+        <>
+            <PhotoHero content={hero} />
+
+            {/* ============ THE DIFFERENCE ============ */}
             <section style={{ paddingTop: 75, paddingBottom: 75 }}>
                 <div className="tbm-wrap">
                     <div className="tbm-g12" style={{ rowGap: 0 }}>
@@ -133,165 +145,41 @@ export default function StudiosPage() {
                                     display: "inline-block",
                                 }}
                             >
-                                The Difference
+                                {difference.label}
                             </h2>
                         </Reveal>
 
-                        {/* Two studio cards side by side — Stagger so the
-                            Cornerstone card lifts just behind Tugun. */}
-                        <Stagger
-                            className="tbm-c-all tbm-g12"
-                            stagger={0.14}
-                            style={{ rowGap: 0 }}
+                        {/* Cells go out row by row, studio within row. The
+                            mobile reflow groups them back into one card per
+                            studio from that order. */}
+                        <div
+                            className="tbm-c-all tbm-cmp"
+                            style={{
+                                gridTemplateColumns: `repeat(${studios.length}, minmax(0, 1fr))`,
+                            }}
                         >
-                            <StaggerItem className="tbm-c-l">
-                                <Link
-                                    href="/studios/tugun-beach"
-                                    style={{
-                                        background: "#ebe8e0",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 24,
-                                        padding: "12px 12px 8px",
-                                        color: "var(--tbm-ink)",
-                                        textDecoration: "none",
-                                    }}
+                            {studios.map((studio, i) => (
+                                <Reveal
+                                    key={studio.id}
+                                    amount={0.2}
+                                    delay={i * 0.14}
                                 >
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src="/images/tbm-placeholders/studio-tugun-reformer.jpg"
-                                        alt="Feet pressing the footbar of a timber Reformer"
-                                        style={{
-                                            width: "100%",
-                                            aspectRatio: "3 / 2",
-                                            objectFit: "cover",
-                                            objectPosition: "center 45%",
-                                        }}
-                                    />
-                                    <span
-                                        className="cmp-name"
-                                        style={{
-                                            display: "block",
-                                            padding: "0 20px",
-                                            fontSize: "clamp(26px, 3.4vw, 48px)",
-                                            lineHeight: 1.05,
-                                            letterSpacing: "-.01em",
-                                        }}
-                                    >
-                                        Tugun Beach
-                                    </span>
-                                </Link>
-                            </StaggerItem>
-                            <StaggerItem className="tbm-c-r">
-                                <Link
-                                    href="/studios/cornerstone"
-                                    style={{
-                                        background: "#ebe8e0",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 24,
-                                        padding: "12px 12px 8px",
-                                        color: "var(--tbm-ink)",
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src="/images/tbm-placeholders/studio-cornerstone-meditation.jpg"
-                                        alt="Seated meditation facing windows full of trees"
-                                        style={{
-                                            width: "100%",
-                                            aspectRatio: "3 / 2",
-                                            objectFit: "cover",
-                                            objectPosition: "center",
-                                        }}
-                                    />
-                                    <span
-                                        className="cmp-name"
-                                        style={{
-                                            display: "block",
-                                            padding: "0 20px",
-                                            fontSize: "clamp(26px, 3.4vw, 48px)",
-                                            lineHeight: 1.05,
-                                            letterSpacing: "-.01em",
-                                        }}
-                                    >
-                                        Cornerstone
-                                    </span>
-                                </Link>
-                            </StaggerItem>
-                        </Stagger>
+                                    <StudioCard studio={studio} />
+                                </Reveal>
+                            ))}
 
-                        {/* Comparison rows — each row has two paired cells.
-                            Keep the sand background flowing from the cards. */}
-                        {COMPARISON_ROWS.map((row, i) => {
-                            const isLast = i === COMPARISON_ROWS.length - 1;
-                            const cellStyle = {
-                                background: "#ebe8e0",
-                                padding: isLast ? "0 32px 32px" : "0 32px",
-                            } as const;
-                            const innerStyle = {
-                                borderTop: "1px solid #d6d1c3",
-                                padding: "18px 0",
-                                display: "grid",
-                                gridTemplateColumns:
-                                    "minmax(0, 176px) minmax(0, 1fr)",
-                                columnGap: 16,
-                                alignItems: "baseline",
-                            } as const;
-                            return (
-                                <div
-                                    key={row.label}
-                                    role="group"
-                                    aria-label={row.label}
-                                    className="tbm-c-all tbm-g12 cmp-row"
-                                    style={{ rowGap: 0 }}
-                                >
-                                    <div className="tbm-c-l" style={cellStyle}>
-                                        <div style={innerStyle}>
-                                            <span
-                                                className="tbm-lbl"
-                                                style={{
-                                                    color: "var(--tbm-bronze-label)",
-                                                }}
-                                            >
-                                                {row.label}
-                                            </span>
-                                            <span
-                                                style={{
-                                                    fontSize: 18,
-                                                    lineHeight: 1.5,
-                                                    color: "var(--tbm-ink)",
-                                                }}
-                                            >
-                                                {row.tugun}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="tbm-c-r" style={cellStyle}>
-                                        <div style={innerStyle}>
-                                            <span
-                                                className="tbm-lbl"
-                                                style={{
-                                                    color: "var(--tbm-bronze-label)",
-                                                }}
-                                            >
-                                                {row.label}
-                                            </span>
-                                            <span
-                                                style={{
-                                                    fontSize: 18,
-                                                    lineHeight: 1.5,
-                                                    color: "var(--tbm-ink)",
-                                                }}
-                                            >
-                                                {row.cornerstone}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                            {rows.map((row, rowIndex) =>
+                                studios.map((studio, studioIndex) => (
+                                    <ComparisonCell
+                                        key={`${row.id}-${studio.id}`}
+                                        label={row.label}
+                                        value={row.values[studioIndex] ?? ""}
+                                        studio={studio.name}
+                                        isLast={rowIndex === rows.length - 1}
+                                    />
+                                )),
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -325,7 +213,7 @@ export default function StudiosPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            Want both?
+                            {wantBoth.heading}
                         </h2>
                     </Reveal>
                     <Reveal amount={0.3} delay={0.08}>
@@ -339,8 +227,20 @@ export default function StudiosPage() {
                                 maxWidth: "24em",
                             }}
                         >
-                            Introducing the Dual Membership across both The Body Method Studios.
+                            {wantBoth.body}
                         </p>
+                    </Reveal>
+                    <Reveal amount={0.3} delay={0.16} style={{ marginTop: 12 }}>
+                        <Link
+                            className="tbm-btn"
+                            href={wantBoth.cta.href}
+                            style={{
+                                background: "var(--tbm-cream)",
+                                color: "var(--tbm-forest)",
+                            }}
+                        >
+                            {wantBoth.cta.label}
+                        </Link>
                     </Reveal>
                 </div>
             </section>

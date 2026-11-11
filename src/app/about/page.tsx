@@ -1,42 +1,32 @@
 /* ************************************************************
-   /about — Our Story.
+   /about — the story and the philosophy.
 
-   Faithful conversion of design/about.html. Server component with
-   Reveal (hero cascade + feature portraits) and the four Belief
-   pillars staggered as a row.
+   Hero, then two alternating feature blocks, the four beliefs,
+   and a forest band with the two onward links.
+
+   Editable at /admin/about. Fallback copy in ./_config.
 ************************************************************ */
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { PhotoHero } from "@/components/core/PageHero";
+import getPage from "@/server-actions/page";
+import { buildPageMetadata } from "@/utils/seo";
+import { ABOUT_SLUG, aboutFallbackData, type AboutPageProps } from "./_config";
 
-export const metadata: Metadata = {
-    title: "About The Body Method | Tugun, Gold Coast",
-    description:
-        "A different idea of strength. The story behind The Body Method and the philosophy that shapes our Tugun studios.",
-};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-const beliefs = [
-    {
-        title: "Exceptional Teaching",
-        body: "Technical, intuitive and adaptive.",
-    },
-    {
-        title: "Care You Can Feel",
-        body: "Where you are known and supported.",
-    },
-    {
-        title: "Strength for Life",
-        body: "Movement that supports how you move, work, play and live.",
-    },
-    {
-        title: "Community That Holds You",
-        body: "A place you actually want to come back to.",
-    },
-];
+export async function generateMetadata(): Promise<Metadata> {
+    return buildPageMetadata(ABOUT_SLUG);
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+    const page = await getPage<AboutPageProps>(ABOUT_SLUG, aboutFallbackData);
+    const { hero, strength, care, beliefs, closing } = page.content;
+
     return (
         <div
             style={{
@@ -45,88 +35,7 @@ export default function AboutPage() {
                 fontFamily: "var(--font-lora)",
             }}
         >
-            {/* ============ HERO ============ */}
-            <section
-                style={{
-                    position: "relative",
-                    minHeight: 760,
-                    marginTop: -85,
-                    paddingTop: 85,
-                    color: "#f4f2ed",
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
-                }}
-            >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src="/images/tbm-placeholders/hero-about.jpg"
-                    alt="A woman holding a side plank in front of tall windows"
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center 45%",
-                    }}
-                />
-                <div
-                    aria-hidden="true"
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                            "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,0) 78%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)",
-                    }}
-                />
-                <div
-                    className="tbm-wrap tbm-g12"
-                    style={{
-                        position: "relative",
-                        marginTop: "auto",
-                        paddingBottom: 75,
-                    }}
-                >
-                    <div
-                        className="tbm-c-l7"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 24,
-                        }}
-                    >
-                        <Reveal amount={0.3}>
-                            <h1
-                                style={{
-                                    textShadow: "0 1px 24px rgba(0,0,0,.25)",
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: "clamp(42px, 5.4vw, 80px)",
-                                    lineHeight: 1.04,
-                                    letterSpacing: "-.015em",
-                                    textWrap: "balance",
-                                }}
-                            >
-                                A different idea of strength.
-                            </h1>
-                        </Reveal>
-                        <Reveal delay={0.08} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 17,
-                                    lineHeight: 1.6,
-                                    maxWidth: "34em",
-                                    color: "#ece9e2",
-                                }}
-                            >
-                                Strength isn&apos;t only what happens when something gets heavier.
-                            </p>
-                        </Reveal>
-                    </div>
-                </div>
-            </section>
+            <PhotoHero content={hero} />
 
             {/* ============ FEATURE 1 — text left, portrait right ============ */}
             <section style={{ paddingTop: 75, paddingBottom: 75 }}>
@@ -151,31 +60,34 @@ export default function AboutPage() {
                                     color: "var(--tbm-ink)",
                                 }}
                             >
-                                It&apos;s confidence in your body - the capacity to keep doing the things you love.
+                                {strength.lede}
                             </p>
                         </Reveal>
-                        <Reveal delay={0.08} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-body)",
-                                }}
-                            >
-                                Knowing when to push and when to listen. Showing up for yourself and having people around you who notice when you do. That&apos;s the kind of strength we&apos;re interested in.
-                            </p>
-                        </Reveal>
+                        {strength.body.map((para, i) => (
+                            <Reveal key={i} delay={0.08 + i * 0.08} amount={0.3}>
+                                <p
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-text-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            </Reveal>
+                        ))}
                     </div>
                     <Reveal
+                        delay={0.08}
                         amount={0.2}
-                        delay={0.05}
-                        style={{ gridColumn: "8 / 13", position: "relative" }}
+                        className="tbm-c-r5"
+                        style={{ position: "relative" }}
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/tbm-placeholders/portrait-about.jpg"
-                            alt="A linen bolster, blanket and blocks on a mat by a sunny window"
+                            src={strength.image}
+                            alt={strength.imageAlt}
                             style={{
                                 width: "100%",
                                 aspectRatio: "4 / 5",
@@ -187,13 +99,7 @@ export default function AboutPage() {
             </section>
 
             {/* ============ FEATURE 2 — portrait left, text right ============ */}
-            <section
-                style={{
-                    background: "var(--tbm-sand)",
-                    paddingTop: 75,
-                    paddingBottom: 75,
-                }}
-            >
+            <section style={{ paddingTop: 75, paddingBottom: 75 }}>
                 <div
                     className="tbm-wrap tbm-g12"
                     style={{ rowGap: 48, alignItems: "center" }}
@@ -205,8 +111,8 @@ export default function AboutPage() {
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/tbm-placeholders/belong-tree-pose.jpg"
-                            alt="Hands at heart in tree pose on a sage mat"
+                            src={care.image}
+                            alt={care.imageAlt}
                             style={{
                                 width: "100%",
                                 aspectRatio: "4 / 5",
@@ -222,7 +128,7 @@ export default function AboutPage() {
                             gap: 24,
                         }}
                     >
-                        <Reveal amount={0.3}>
+                        <Reveal delay={0.08} amount={0.3}>
                             <h2
                                 style={{
                                     margin: 0,
@@ -232,34 +138,23 @@ export default function AboutPage() {
                                     letterSpacing: "-.01em",
                                 }}
                             >
-                                We actually genuinely care.
+                                {care.heading}
                             </h2>
                         </Reveal>
-                        <Reveal delay={0.08} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-text-body)",
-                                }}
-                            >
-                                About the quality of the teaching, about the people who walk through our doors. About remembering your name and understanding your body and about creating somewhere people feel better for having spent time.
-                            </p>
-                        </Reveal>
-                        <Reveal delay={0.16} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 24,
-                                    lineHeight: 1.4,
-                                    fontStyle: "italic",
-                                    color: "var(--tbm-green-accent)",
-                                }}
-                            >
-                                That philosophy has shaped The Body Method from the beginning.
-                            </p>
-                        </Reveal>
+                        {care.body.map((para, i) => (
+                            <Reveal key={i} delay={0.16 + i * 0.08} amount={0.3}>
+                                <p
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-text-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            </Reveal>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -277,7 +172,7 @@ export default function AboutPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            What We Believe:
+                            {beliefs.heading}
                         </h2>
                     </Reveal>
                     <Stagger
@@ -289,9 +184,9 @@ export default function AboutPage() {
                         }}
                         stagger={0.2}
                     >
-                        {beliefs.map((b) => (
+                        {beliefs.items.map((belief) => (
                             <StaggerItem
-                                key={b.title}
+                                key={belief.id}
                                 className="tbm-c-q"
                                 style={{
                                     display: "flex",
@@ -308,7 +203,7 @@ export default function AboutPage() {
                                         lineHeight: 1.3,
                                     }}
                                 >
-                                    {b.title}
+                                    {belief.title}
                                 </h3>
                                 <p
                                     style={{
@@ -318,7 +213,7 @@ export default function AboutPage() {
                                         color: "var(--tbm-text-muted)",
                                     }}
                                 >
-                                    {b.body}
+                                    {belief.body}
                                 </p>
                             </StaggerItem>
                         ))}
@@ -349,7 +244,7 @@ export default function AboutPage() {
                                 letterSpacing: "-.01em",
                             }}
                         >
-                            Built in Tugun and built around people.
+                            {closing.heading}
                         </h2>
                     </Reveal>
                     <div
@@ -360,44 +255,24 @@ export default function AboutPage() {
                             gap: 16,
                         }}
                     >
-                        <Reveal amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-on-dark-body)",
-                                }}
-                            >
-                                Today, The Body Method lives across two Tugun studios with different personalities and one shared philosophy.
-                            </p>
-                        </Reveal>
-                        <Reveal delay={0.08} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 18,
-                                    lineHeight: 1.7,
-                                    color: "var(--tbm-on-dark-body)",
-                                }}
-                            >
-                                And we&apos;re still building, not toward being the biggest.
-                            </p>
-                        </Reveal>
-                        <Reveal delay={0.16} amount={0.3}>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 24,
-                                    lineHeight: 1.4,
-                                    fontStyle: "italic",
-                                    color: "#f4f2ed",
-                                }}
-                            >
-                                Toward being one of the places that matters most to the people who choose it.
-                            </p>
-                        </Reveal>
-                        <Reveal delay={0.24} amount={0.3}>
+                        {closing.body.map((para, i) => (
+                            <Reveal key={i} delay={i * 0.08} amount={0.3}>
+                                <p
+                                    style={{
+                                        margin: 0,
+                                        fontSize: 18,
+                                        lineHeight: 1.7,
+                                        color: "var(--tbm-on-dark-body)",
+                                    }}
+                                >
+                                    {para}
+                                </p>
+                            </Reveal>
+                        ))}
+                        <Reveal
+                            delay={closing.body.length * 0.08}
+                            amount={0.3}
+                        >
                             <div
                                 className="tbm-hero-ctas"
                                 style={{
@@ -409,23 +284,23 @@ export default function AboutPage() {
                             >
                                 <Link
                                     className="tbm-btn tbm-hero-cta"
-                                    href="/our-people"
+                                    href={closing.primaryCta.href}
                                     style={{
                                         background: "var(--tbm-cream)",
                                         color: "var(--tbm-forest)",
                                     }}
                                 >
-                                    MEET OUR PEOPLE
+                                    {closing.primaryCta.label}
                                 </Link>
                                 <Link
                                     className="tbm-btn tbm-hero-cta"
-                                    href="/studios"
+                                    href={closing.secondaryCta.href}
                                     style={{
                                         color: "#f4f2ed",
                                         border: "1px solid rgba(244,242,237,.7)",
                                     }}
                                 >
-                                    EXPLORE THE STUDIOS
+                                    {closing.secondaryCta.label}
                                 </Link>
                             </div>
                         </Reveal>

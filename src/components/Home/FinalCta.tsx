@@ -33,6 +33,7 @@ export default function FinalCta({ content }: { content: FinalCtaContent }) {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: content.imageFocus,
                 }}
             />
             <div

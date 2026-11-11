@@ -49,3 +49,6 @@ Thumbs.db
 
 # bootstrap
 .bootstrap.log
+
+# local admin logins, never committed
+.admin-credentials.local

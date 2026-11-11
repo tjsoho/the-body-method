@@ -14,6 +14,7 @@
 
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { HeroContent } from "@/app/_config";
@@ -21,6 +22,19 @@ import type { HeroContent } from "@/app/_config";
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
 export default function Hero({ content }: { content: HeroContent }) {
+    const desktopVideo = content.videoDesktopUrl?.trim() || "";
+    const mobileVideo = content.videoMobileUrl?.trim() || "";
+    const hasVideo = Boolean(desktopVideo || mobileVideo);
+
+    const backdropStyle: CSSProperties = {
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: content.imageFocus,
+    };
+
     return (
         <section
             style={{
@@ -34,30 +48,65 @@ export default function Hero({ content }: { content: HeroContent }) {
                 overflow: "hidden",
             }}
         >
-            {/* Background image (placeholder — swap for <video> loop later).
-                Ambient Ken-Burns pan brings the still to life until the
-                real looped footage lands. 24s cycle, scale 1 → 1.08.    */}
-            <motion.img
-                src={content.fallbackImage}
-                alt={content.fallbackImageAlt}
-                initial={{ scale: 1.02 }}
-                animate={{ scale: 1.08 }}
-                transition={{
-                    duration: 24,
-                    ease: "linear",
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                }}
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 40%",
-                    transformOrigin: "center center",
-                }}
-            />
+            {/* Backdrop. A film plays whenever the admin panel has a URL
+                for this breakpoint, and the still stands in wherever it
+                does not. The still is never wasted: it is the poster, so
+                the frame is filled before the first video byte lands.
+
+                With no film at all the still gets an ambient Ken-Burns
+                pan instead. 24s cycle, scale 1.02 to 1.08. */}
+            {desktopVideo ? (
+                <video
+                    className="tbm-hide-sm"
+                    src={desktopVideo}
+                    poster={content.fallbackImage}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={content.fallbackImageAlt}
+                    style={backdropStyle}
+                />
+            ) : null}
+            {mobileVideo ? (
+                <video
+                    className="tbm-hide-lg"
+                    src={mobileVideo}
+                    poster={content.fallbackImage}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={content.fallbackImageAlt}
+                    style={backdropStyle}
+                />
+            ) : null}
+            {desktopVideo && mobileVideo ? null : (
+                <motion.img
+                    className={
+                        desktopVideo
+                            ? "tbm-hide-lg"
+                            : mobileVideo
+                              ? "tbm-hide-sm"
+                              : undefined
+                    }
+                    src={content.fallbackImage}
+                    alt={content.fallbackImageAlt}
+                    initial={{ scale: hasVideo ? 1 : 1.02 }}
+                    animate={{ scale: hasVideo ? 1 : 1.08 }}
+                    transition={
+                        hasVideo
+                            ? { duration: 0 }
+                            : {
+                                  duration: 24,
+                                  ease: "linear",
+                                  repeat: Infinity,
+                                  repeatType: "reverse",
+                              }
+                    }
+                    style={{ ...backdropStyle, transformOrigin: "center center" }}
+                />
+            )}
             {/* Double-gradient overlay for WCAG AA on hero text. */}
             <div
                 aria-hidden="true"

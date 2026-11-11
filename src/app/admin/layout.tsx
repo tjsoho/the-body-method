@@ -7,6 +7,7 @@
                         IMPORTS
 ************************************************************ */
 import { Toaster } from "react-hot-toast";
+import { ImageLibraryProvider } from "@/contexts/ImageLibraryContext";
 
 /* ************************************************************
                         INTERFACES
@@ -32,7 +33,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           },
         }}
       />
-      {children}
+      <ImageLibraryProvider>{children}</ImageLibraryProvider>
     </>
   );
 }

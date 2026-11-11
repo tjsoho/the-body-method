@@ -1,79 +1,60 @@
 /* ************************************************************
-   Home-page content editor — placeholder.
+                        NOTES
+   /admin/home — the home page editor route.
 
-   The TBM home page content shape (hero, belong, two studios,
-   21-day block, member stories, teaching, private pilates, life
-   at TBM, final CTA) is defined in src/app/_config.ts. The admin
-   forms for each section are built in follow-up phases; this
-   placeholder keeps the admin dashboard navigable while that work
-   is in flight.
+   Reads the two rows the home page is built from, plus the
+   stored SEO entry, and hands them to the client form. Dynamic
+   so opening the editor always shows what is live rather than a
+   build-time snapshot.
 ************************************************************ */
 
-import Link from "next/link";
+import getPage from "@/server-actions/page";
+import { fetchSeoEntry } from "@/data/seo";
+import { seoPages } from "@/config/seo-pages";
+import {
+    homePageFallbackData,
+    type HomePageProps,
+} from "@/app/_config";
+import {
+    TEACHERS_SLUG,
+    teachersPageFallbackData,
+    type TeachersContent,
+} from "@/data/teachers";
+import HomeInputs from "@/components/admin/home/HomeInputs";
 
-export default function HomeAdminPage() {
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default async function HomeAdminPage() {
+    const [homePage, teachersPage, seoEntry] = await Promise.all([
+        getPage<HomePageProps>("home", homePageFallbackData),
+        getPage<{ content: TeachersContent }>(
+            TEACHERS_SLUG,
+            teachersPageFallbackData,
+        ),
+        fetchSeoEntry("home"),
+    ]);
+
+    const seoDefaults = seoPages.find((page) => page.slug === "home");
+
     return (
-        <div className="min-h-screen bg-[color:var(--tbm-cream)] text-[color:var(--tbm-ink)] font-serif">
-            <div className="tbm-wrap" style={{ paddingTop: 96, paddingBottom: 96, maxWidth: 760 }}>
-                <span className="tbm-lbl" style={{ color: "var(--tbm-bronze-label)" }}>
-                    Home content — editor pending
-                </span>
-                <h1
-                    style={{
-                        margin: "24px 0 16px",
-                        fontWeight: 400,
-                        fontSize: "clamp(32px, 4vw, 48px)",
-                        lineHeight: 1.15,
-                        fontFamily: "var(--font-lora)",
-                    }}
-                >
-                    The admin editor for the home sections is being rebuilt.
-                </h1>
-                <p
-                    style={{
-                        margin: 0,
-                        fontSize: 17,
-                        lineHeight: 1.7,
-                        color: "var(--tbm-text-body)",
-                        fontFamily: "var(--font-lora)",
-                    }}
-                >
-                    While the section components come online, the fallback copy
-                    lives in <code>src/app/_config.ts</code>. Editing it there
-                    changes the home page content until the admin form for each
-                    section is wired in. The nav items editor and SEO editor are
-                    still available.
-                </p>
-                <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
-                    <Link
-                        href="/admin"
-                        className="tbm-btn"
-                        style={{ background: "#1b2518", color: "#f4f2ed" }}
-                    >
-                        BACK TO ADMIN
-                    </Link>
-                    <Link
-                        href="/admin/navigation"
-                        className="tbm-btn"
-                        style={{
-                            border: "1px solid var(--tbm-forest)",
-                            color: "var(--tbm-forest)",
-                        }}
-                    >
-                        EDIT NAVIGATION
-                    </Link>
-                    <Link
-                        href="/admin/seo"
-                        className="tbm-btn"
-                        style={{
-                            border: "1px solid var(--tbm-forest)",
-                            color: "var(--tbm-forest)",
-                        }}
-                    >
-                        EDIT SEO
-                    </Link>
-                </div>
-            </div>
-        </div>
+        <HomeInputs
+            initialContent={homePage.content}
+            initialTitle={homePage.title}
+            initialDescription={homePage.description}
+            initialTeachers={teachersPage.content.teachers}
+            initialMetaTitle={
+                seoEntry?.meta_title ||
+                seoDefaults?.defaultTitle ||
+                homePage.title ||
+                ""
+            }
+            initialMetaDescription={
+                seoEntry?.meta_description ||
+                seoDefaults?.defaultDescription ||
+                homePage.description ||
+                ""
+            }
+        />
     );
 }

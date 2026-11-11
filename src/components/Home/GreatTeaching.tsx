@@ -2,23 +2,17 @@
    TBM Home — Great teaching.
 
    Sand background. Split headline with italic green-accent second
-   half, side paragraph, italic closer. Underneath, a four-up row
-   of teacher cards (portrait photo + name + short intro), then a
-   "MEET OUR PEOPLE" link.
+   half, side paragraph, italic closer. Underneath, the teaching
+   roster rides a carousel — three at a time on desktop, one card
+   and a peek of the next on a phone — so the home page stays
+   curated rather than growing with every new teacher. Each card
+   links through to that teacher's profile on /our-people.
 ************************************************************ */
 
-import Link from "next/link";
 import type { GreatTeachingContent } from "@/app/_config";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import Reveal from "@/components/motion/Reveal";
-
-export type Teacher = {
-    id: string;
-    name: string;
-    intro: string;
-    image: string;
-    imageAlt: string;
-};
+import TeacherStrip from "@/components/carousel/TeacherStrip";
+import type { Teacher } from "@/data/teachers";
 
 type Props = {
     content: GreatTeachingContent;
@@ -90,66 +84,7 @@ export default function GreatTeaching({ content, teachers }: Props) {
                     </div>
                 </Reveal>
 
-                <Stagger
-                    className="tbm-c-all tbm-g12"
-                    style={{ rowGap: 48 }}
-                    stagger={0.1}
-                >
-                    {teachers.slice(0, 4).map((t) => (
-                        <StaggerItem
-                            key={t.id}
-                            className="tbm-c-q"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 16,
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={t.image}
-                                    alt={t.imageAlt}
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "4 / 5",
-                                        objectFit: "cover",
-                                    }}
-                                />
-                            </div>
-                            <h3
-                                style={{
-                                    margin: 0,
-                                    fontWeight: 400,
-                                    fontSize: 22,
-                                    lineHeight: 1.3,
-                                }}
-                            >
-                                {t.name}
-                            </h3>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    fontSize: 16,
-                                    lineHeight: 1.6,
-                                    color: "var(--tbm-text-muted)",
-                                }}
-                            >
-                                {t.intro}
-                            </p>
-                        </StaggerItem>
-                    ))}
-                </Stagger>
-
-                <div className="tbm-c-all">
-                    <Link
-                        href={content.cta.href}
-                        className="tbm-lnk"
-                        style={{ color: "var(--tbm-forest)" }}
-                    >
-                        {content.cta.label} <span aria-hidden="true">→</span>
-                    </Link>
-                </div>
+                <TeacherStrip teachers={teachers} cta={content.cta} />
             </div>
         </section>
     );

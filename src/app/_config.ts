@@ -1,5 +1,4 @@
 import type { MemberStory } from "@/components/Home/WhyPeopleStay";
-import type { Teacher } from "@/components/Home/GreatTeaching";
 import type { LifeTile } from "@/components/Home/LifeAtTbm";
 
 /**
@@ -28,6 +27,8 @@ export type HeroContent = {
     videoMobileUrl: string;
     fallbackImage: string;
     fallbackImageAlt: string;
+    /** CSS object-position for the hero still, e.g. "center 40%". */
+    imageFocus: string;
 };
 
 export type Pillar = { title: string; body: string };
@@ -38,6 +39,8 @@ export type BelongContent = {
     body: string[];
     image: string;
     imageAlt: string;
+    /** CSS object-position, so a swapped photo can be re-cropped. */
+    imageFocus: string;
     pillars: Pillar[];
 };
 
@@ -47,6 +50,8 @@ export type StudioCard = {
     body: string;
     image: string;
     imageAlt: string;
+    /** CSS object-position, so a swapped photo can be re-cropped. */
+    imageFocus: string;
     ctaLabel: string;
     ctaHref: string;
 };
@@ -75,6 +80,11 @@ export type TwentyOneDayContent = {
 export type WhyPeopleStayContent = {
     heading: string;
     italicLine: string;
+    /** Bronze label printed above every quote. */
+    cardLabel: string;
+    /** Words before the year in a caption, e.g. "Member since". */
+    memberSinceLabel: string;
+    stories: MemberStory[];
 };
 
 export type GreatTeachingContent = {
@@ -91,6 +101,8 @@ export type PrivatePilatesContent = {
     body: string[];
     image: string;
     imageAlt: string;
+    /** CSS object-position, so a swapped photo can be re-cropped. */
+    imageFocus: string;
     cta: Cta;
 };
 
@@ -99,6 +111,7 @@ export type LifeAtTbmContent = {
     headingItalic: string;
     body: string;
     cta: Cta;
+    tiles: LifeTile[];
 };
 
 export type FinalCtaContent = {
@@ -108,6 +121,8 @@ export type FinalCtaContent = {
     cta: Cta;
     backgroundImage: string;
     backgroundImageAlt: string;
+    /** CSS object-position, so a swapped photo can be re-cropped. */
+    imageFocus: string;
 };
 
 export type HomePageContent = {
@@ -150,6 +165,7 @@ export const homePageFallbackData: HomePageProps = {
             fallbackImage: ph("hero-cornerstone-group.jpg"),
             fallbackImageAlt:
                 "A group in warrior pose silhouetted against tall tree-filled windows",
+            imageFocus: "center 40%",
         },
         belong: {
             headingLead: "More than a place to move - ",
@@ -161,6 +177,7 @@ export const homePageFallbackData: HomePageProps = {
             ],
             image: ph("belong-tree-pose.jpg"),
             imageAlt: "Hands at heart in tree pose on a sage mat",
+            imageFocus: "center 35%",
             pillars: [
                 {
                     title: "Exceptional Teaching",
@@ -190,6 +207,7 @@ export const homePageFallbackData: HomePageProps = {
                 body: "Reformer Pilates with a maximum of six people, giving our teachers the space to watch, adapt, correct and teach the person in front of them.",
                 image: ph("studio-tugun-reformer.jpg"),
                 imageAlt: "Feet pressing the footbar of a timber Reformer",
+                imageFocus: "center 45%",
                 ctaLabel: "SEE TUGUN BEACH PILATES",
                 ctaHref: "/studios",
             },
@@ -200,6 +218,7 @@ export const homePageFallbackData: HomePageProps = {
                 body: "Pilates, yoga, barre, yin, meditation and movement in our beautiful Cornerstone studio - where natural light pours in and the trees feel like part of the room - with more ways to move and more people to move alongside.",
                 image: ph("studio-cornerstone-meditation.jpg"),
                 imageAlt: "Seated meditation facing windows full of trees",
+                imageFocus: "center 45%",
                 ctaLabel: "SEE CORNERSTONE",
                 ctaHref: "/studios",
             },
@@ -231,6 +250,37 @@ export const homePageFallbackData: HomePageProps = {
             heading: "Why people stay.",
             italicLine:
                 "You can tell people what makes a place special - or you can ask the people who keep coming back.",
+            cardLabel: "“Why I stay.”",
+            memberSinceLabel: "Member since",
+            stories: [
+                {
+                    id: "story-1",
+                    quote: "Short quote",
+                    name: "Member name",
+                    memberSince: "XXXX",
+                    favouriteClassTeacher: "Favourite class / teacher",
+                    image: ph("member-1-downdog.jpg"),
+                    imageAlt: "Downward facing dog on a sage mat",
+                },
+                {
+                    id: "story-2",
+                    quote: "Short quote",
+                    name: "Member name",
+                    memberSince: "XXXX",
+                    favouriteClassTeacher: "Favourite class / teacher",
+                    image: ph("member-2-reformer-arms.jpg"),
+                    imageAlt: "Kneeling arm work with straps on a Reformer",
+                },
+                {
+                    id: "story-3",
+                    quote: "Short quote",
+                    name: "Member name",
+                    memberSince: "XXXX",
+                    favouriteClassTeacher: "Favourite class / teacher",
+                    image: ph("member-3-childs-pose.jpg"),
+                    imageAlt: "Child's pose in soft window light",
+                },
+            ],
         },
         greatTeaching: {
             headingLead: "Great movement starts with ",
@@ -252,6 +302,7 @@ export const homePageFallbackData: HomePageProps = {
             ],
             image: ph("private-pilates.jpg"),
             imageAlt: "A teacher guiding a client's leg in Reformer straps",
+            imageFocus: "50% 0%",
             cta: { label: "EXPLORE PRIVATE PILATES", href: "/private-pilates" },
         },
         lifeAtTbm: {
@@ -259,6 +310,27 @@ export const homePageFallbackData: HomePageProps = {
             headingItalic: "But some of the best things happen around it.",
             body: "Events, workshops, retreats, walks, coffee, learning, conversations and time spent together - more ways to connect, grow and be part of something.",
             cta: { label: "SEE LIFE AT TBM", href: "/life-at-tbm" },
+            tiles: [
+                {
+                    id: "tile-1",
+                    image: ph("life-group.jpg"),
+                    imageAlt:
+                        "A row of members in a seated stretch facing the windows",
+                    objectPosition: "center",
+                },
+                {
+                    id: "tile-2",
+                    image: ph("life-meditation.jpg"),
+                    imageAlt: "Seated meditation in linen",
+                    objectPosition: "center",
+                },
+                {
+                    id: "tile-3",
+                    image: ph("life-beach.jpg"),
+                    imageAlt: "Yoga on the sand at sunrise",
+                    objectPosition: "center 60%",
+                },
+            ],
         },
         finalCta: {
             headingLead: "Come and see ",
@@ -267,98 +339,7 @@ export const homePageFallbackData: HomePageProps = {
             cta: { label: "START YOUR 21 DAYS", href: "/memberships" },
             backgroundImage: ph("final-cta-rest.jpg"),
             backgroundImageAlt: "Resting on a mat in late afternoon light",
+            imageFocus: "center",
         },
     },
 };
-
-/* ──────────────────────────────────────────────────────────────────────
-   Lists that grow over time.
-
-   These three arrays mirror the V3 placeholder content exactly. They
-   live separately from HomePageContent because they are destined for
-   their own Supabase tables (`member_stories`, `team`, `life_at_tbm`)
-   once the admin forms land. For now the home sections render straight
-   from these fallbacks.
-   ────────────────────────────────────────────────────────────────────── */
-
-export const memberStoriesFallback: MemberStory[] = [
-    {
-        id: "placeholder-1",
-        quote: "Short quote",
-        name: "Member name",
-        memberSince: "XXXX",
-        favouriteClassTeacher: "Favourite class / teacher",
-        image: ph("member-1-downdog.jpg"),
-        imageAlt: "Downward facing dog on a sage mat",
-    },
-    {
-        id: "placeholder-2",
-        quote: "Short quote",
-        name: "Member name",
-        memberSince: "XXXX",
-        favouriteClassTeacher: "Favourite class / teacher",
-        image: ph("member-2-reformer-arms.jpg"),
-        imageAlt: "Kneeling arm work with straps on a Reformer",
-    },
-    {
-        id: "placeholder-3",
-        quote: "Short quote",
-        name: "Member name",
-        memberSince: "XXXX",
-        favouriteClassTeacher: "Favourite class / teacher",
-        image: ph("member-3-childs-pose.jpg"),
-        imageAlt: "Child's pose in soft window light",
-    },
-];
-
-export const teachersFallback: Teacher[] = [
-    {
-        id: "placeholder-1",
-        name: "Name",
-        intro: "Short intro",
-        image: ph("teacher-1.jpg"),
-        imageAlt: "A teacher's hands guiding a student's hips",
-    },
-    {
-        id: "placeholder-2",
-        name: "Name",
-        intro: "Short intro",
-        image: ph("teacher-2.jpg"),
-        imageAlt: "Plank on the Reformer carriage",
-    },
-    {
-        id: "placeholder-3",
-        name: "Name",
-        intro: "Short intro",
-        image: ph("teacher-3.jpg"),
-        imageAlt: "Garland squat on a sage mat by the windows",
-    },
-    {
-        id: "placeholder-4",
-        name: "Name",
-        intro: "Short intro",
-        image: ph("teacher-4.jpg"),
-        imageAlt: "Legs in Reformer straps",
-    },
-];
-
-export const lifeAtTbmTilesFallback: LifeTile[] = [
-    {
-        id: "placeholder-1",
-        image: ph("life-group.jpg"),
-        imageAlt: "A row of members in a seated stretch facing the windows",
-        size: "wide-8",
-    },
-    {
-        id: "placeholder-2",
-        image: ph("life-meditation.jpg"),
-        imageAlt: "Seated meditation in linen",
-        size: "narrow-4",
-    },
-    {
-        id: "placeholder-3",
-        image: ph("life-beach.jpg"),
-        imageAlt: "Yoga on the sand at sunrise",
-        size: "wide-all",
-    },
-];

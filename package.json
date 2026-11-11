@@ -10,7 +10,9 @@
     "build": "next build",
     "start": "node scripts/start.mjs",
     "lint": "next lint",
-    "bootstrap": "node scripts/bootstrap.mjs"
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "images:manifest": "node scripts/build-image-manifest.mjs",
+    "prebuild": "node scripts/build-image-manifest.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

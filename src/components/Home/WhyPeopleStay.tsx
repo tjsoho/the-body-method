@@ -1,36 +1,31 @@
 /* ************************************************************
    TBM Home — Why people stay.
 
-   Three member story cards on cream. Each card is portrait image
+   Member story cards on cream. Each card is portrait image
    (aspect 4:5), bronze "Why I stay." label, italic quote,
    caption with name + member since + favourite class/teacher.
 
-   The prev/next arrow buttons on the right are the control slot
-   for a future carousel — the admin can add more than three
-   stories via the CMS and the carousel takes over. For now the
-   first three render inline as a 3-up editorial grid.
+   The cards ride a carousel: still a 3-up editorial row on
+   desktop, driven by the arrow pair beside the heading, and one
+   card with a peek of the next on a phone rather than three tall
+   testimonials stacked end to end. Every story the CMS holds is
+   reachable, not just the first three.
 ************************************************************ */
 
 import type { WhyPeopleStayContent } from "@/app/_config";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import Reveal from "@/components/motion/Reveal";
+import StoryCarousel from "@/components/carousel/StoryCarousel";
+import type { MemberStory } from "@/components/carousel/StoryCarousel";
 
-export type MemberStory = {
-    id: string;
-    quote: string;
-    name: string;
-    memberSince: string;
-    favouriteClassTeacher: string;
-    image: string;
-    imageAlt: string;
-};
+// Re-exported so @/app/_config keeps importing the story shape from
+// the section that renders it.
+export type { MemberStory };
 
 type Props = {
     content: WhyPeopleStayContent;
-    stories: MemberStory[];
 };
 
-export default function WhyPeopleStay({ content, stories }: Props) {
+export default function WhyPeopleStay({ content }: Props) {
     return (
         <section
             style={{
@@ -72,123 +67,11 @@ export default function WhyPeopleStay({ content, stories }: Props) {
                         </p>
                     </Reveal>
                 </div>
-                <div
-                    className="tbm-c-r tbm-hide-sm"
-                    style={{
-                        display: "flex",
-                        gap: 12,
-                        justifyContent: "flex-end",
-                        alignItems: "flex-end",
-                    }}
-                >
-                    <button
-                        type="button"
-                        aria-label="Previous member"
-                        style={{
-                            width: 52,
-                            height: 52,
-                            borderRadius: "50%",
-                            border: "1px solid var(--tbm-ink)",
-                            background: "transparent",
-                            color: "var(--tbm-ink)",
-                            cursor: "pointer",
-                            fontSize: 18,
-                        }}
-                    >
-                        ←
-                    </button>
-                    <button
-                        type="button"
-                        aria-label="Next member"
-                        style={{
-                            width: 52,
-                            height: 52,
-                            borderRadius: "50%",
-                            border: "1px solid var(--tbm-ink)",
-                            background: "var(--tbm-ink)",
-                            color: "var(--tbm-cream)",
-                            cursor: "pointer",
-                            fontSize: 18,
-                        }}
-                    >
-                        →
-                    </button>
-                </div>
-
-                <Stagger
-                    className="tbm-c-all tbm-g12"
-                    style={{ rowGap: 56 }}
-                    stagger={0.2}
-                >
-                    {stories.slice(0, 3).map((story) => (
-                        <StaggerItem
-                            key={story.id}
-                            className="tbm-c-t"
-                            style={{
-                                margin: 0,
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 20,
-                            }}
-                        >
-                            <div style={{ position: "relative" }}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={story.image}
-                                    alt={story.imageAlt}
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "4 / 5",
-                                        objectFit: "cover",
-                                    }}
-                                />
-                            </div>
-                            <div
-                                className="tbm-lbl"
-                                style={{ color: "var(--tbm-bronze-label)" }}
-                            >
-                                “Why I stay.”
-                            </div>
-                            <blockquote
-                                style={{
-                                    margin: 0,
-                                    fontSize: 22,
-                                    lineHeight: 1.4,
-                                    fontStyle: "italic",
-                                }}
-                            >
-                                {story.quote}
-                            </blockquote>
-                            <figcaption
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: 4,
-                                    borderTop: "1px solid var(--tbm-rule)",
-                                    paddingTop: 16,
-                                }}
-                            >
-                                <span style={{ fontSize: 16 }}>{story.name}</span>
-                                <span
-                                    style={{
-                                        fontSize: 14,
-                                        color: "var(--tbm-text-subtle)",
-                                    }}
-                                >
-                                    Member since {story.memberSince}
-                                </span>
-                                <span
-                                    style={{
-                                        fontSize: 14,
-                                        color: "var(--tbm-text-subtle)",
-                                    }}
-                                >
-                                    {story.favouriteClassTeacher}
-                                </span>
-                            </figcaption>
-                        </StaggerItem>
-                    ))}
-                </Stagger>
+                <StoryCarousel
+                    stories={content.stories}
+                    cardLabel={content.cardLabel}
+                    memberSinceLabel={content.memberSinceLabel}
+                />
             </div>
         </section>
     );

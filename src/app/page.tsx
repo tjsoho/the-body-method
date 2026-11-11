@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import getPage from "@/server-actions/page";
-import {
-    HomePageProps,
-    homePageFallbackData,
-    memberStoriesFallback,
-    teachersFallback,
-    lifeAtTbmTilesFallback,
-} from "./_config";
+import { HomePageProps, homePageFallbackData } from "./_config";
 import Hero from "@/components/Home/Hero";
 import Belong from "@/components/Home/Belong";
 import TwoStudios from "@/components/Home/TwoStudios";
@@ -16,6 +10,11 @@ import GreatTeaching from "@/components/Home/GreatTeaching";
 import PrivatePilates from "@/components/Home/PrivatePilates";
 import LifeAtTbm from "@/components/Home/LifeAtTbm";
 import FinalCta from "@/components/Home/FinalCta";
+import {
+    TEACHERS_SLUG,
+    teachersPageFallbackData,
+    type TeachersContent,
+} from "@/data/teachers";
 import { buildPageMetadata } from "@/utils/seo";
 
 // Force dynamic so admin edits in the CMS show on next request without
@@ -28,17 +27,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-    const homePage = await getPage<HomePageProps>(
-        "home",
-        homePageFallbackData,
-    );
+    // Two rows: this page's own content, and the teaching roster it
+    // shares with /our-people. Both are editable at /admin/home.
+    const [homePage, teachersPage] = await Promise.all([
+        getPage<HomePageProps>("home", homePageFallbackData),
+        getPage<{ content: TeachersContent }>(
+            TEACHERS_SLUG,
+            teachersPageFallbackData,
+        ),
+    ]);
     const content = homePage.content;
-
-    // Lists are still inline until their admin tables land. Shape stays
-    // the same so swapping the source for a Supabase query is one line.
-    const memberStories = memberStoriesFallback;
-    const teachers = teachersFallback;
-    const lifeAtTbmTiles = lifeAtTbmTilesFallback;
+    const teachers = teachersPage.content.teachers;
 
     return (
         <>
@@ -50,10 +49,10 @@ export default async function Home() {
             <Belong content={content.belong} />
             <TwoStudios content={content.twoStudios} />
             <TwentyOneDay content={content.twentyOneDay} />
-            <WhyPeopleStay content={content.whyPeopleStay} stories={memberStories} />
+            <WhyPeopleStay content={content.whyPeopleStay} />
             <GreatTeaching content={content.greatTeaching} teachers={teachers} />
             <PrivatePilates content={content.privatePilates} />
-            <LifeAtTbm content={content.lifeAtTbm} tiles={lifeAtTbmTiles} />
+            <LifeAtTbm content={content.lifeAtTbm} />
             <FinalCta content={content.finalCta} />
         </>
     );
