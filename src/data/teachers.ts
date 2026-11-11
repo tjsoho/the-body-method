@@ -25,6 +25,12 @@ export type TeacherField = {
     blocks?: TeacherFieldBlock[];
 };
 
+/** What a carousel card draws. The profile sections are not part of it. */
+export type TeacherCardFields = Pick<
+    Teacher,
+    "slug" | "name" | "role" | "teaser" | "image" | "imageAlt"
+>;
+
 export type Teacher = {
     name: string;
     /** Anchor id, e.g. "mel-kitchen". */

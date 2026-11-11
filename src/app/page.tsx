@@ -37,7 +37,18 @@ export default async function Home() {
         ),
     ]);
     const content = homePage.content;
-    const teachers = teachersPage.content.teachers;
+    // Only the card fields cross into the strip, so the bios stay out
+    // of this page's payload.
+    const teachers = teachersPage.content.teachers.map(
+        ({ slug, name, role, teaser, image, imageAlt }) => ({
+            slug,
+            name,
+            role,
+            teaser,
+            image,
+            imageAlt,
+        }),
+    );
 
     return (
         <>

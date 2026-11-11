@@ -12,11 +12,11 @@
 import type { GreatTeachingContent } from "@/app/_config";
 import Reveal from "@/components/motion/Reveal";
 import TeacherStrip from "@/components/carousel/TeacherStrip";
-import type { Teacher } from "@/data/teachers";
+import type { TeacherCardFields } from "@/data/teachers";
 
 type Props = {
     content: GreatTeachingContent;
-    teachers: Teacher[];
+    teachers: TeacherCardFields[];
 };
 
 export default function GreatTeaching({ content, teachers }: Props) {

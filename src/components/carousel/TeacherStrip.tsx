@@ -21,13 +21,15 @@ import {
     TbmCarouselSlide,
     TbmCarouselViewport,
 } from "@/components/carousel/TbmCarousel";
-import type { Teacher } from "@/data/teachers";
+import type { TeacherCardFields } from "@/data/teachers";
 
 /* ************************************************************
                         RENDER
 ************************************************************ */
 type Props = {
-    teachers: Teacher[];
+    /** Card fields only. The long-form profiles are not needed here,
+        and sending them would ship every bio in the home payload. */
+    teachers: TeacherCardFields[];
     /** The section's "MEET OUR PEOPLE" link, rendered beside the arrows. */
     cta: { label: string; href: string };
 };

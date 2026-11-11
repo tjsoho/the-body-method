@@ -15,23 +15,14 @@ import {
     homePageFallbackData,
     type HomePageProps,
 } from "@/app/_config";
-import {
-    TEACHERS_SLUG,
-    teachersPageFallbackData,
-    type TeachersContent,
-} from "@/data/teachers";
 import HomeInputs from "@/components/admin/home/HomeInputs";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function HomeAdminPage() {
-    const [homePage, teachersPage, seoEntry] = await Promise.all([
+    const [homePage, seoEntry] = await Promise.all([
         getPage<HomePageProps>("home", homePageFallbackData),
-        getPage<{ content: TeachersContent }>(
-            TEACHERS_SLUG,
-            teachersPageFallbackData,
-        ),
         fetchSeoEntry("home"),
     ]);
 
@@ -42,7 +33,6 @@ export default async function HomeAdminPage() {
             initialContent={homePage.content}
             initialTitle={homePage.title}
             initialDescription={homePage.description}
-            initialTeachers={teachersPage.content.teachers}
             initialMetaTitle={
                 seoEntry?.meta_title ||
                 seoDefaults?.defaultTitle ||

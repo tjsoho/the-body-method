@@ -61,7 +61,6 @@ import type {
     TwoStudiosContent,
     WhyPeopleStayContent,
 } from "@/app/_config";
-import { TEACHERS_SLUG, type Teacher } from "@/data/teachers";
 
 /* ************************************************************
                         TYPES
@@ -73,7 +72,6 @@ type SectionKey =
     | "twentyOneDay"
     | "whyPeopleStay"
     | "greatTeaching"
-    | "teachers"
     | "privatePilates"
     | "lifeAtTbm"
     | "finalCta";
@@ -85,17 +83,15 @@ const SECTIONS: { value: SectionKey; label: string }[] = [
     { value: "twentyOneDay", label: "4. First 21 days" },
     { value: "whyPeopleStay", label: "5. Why people stay" },
     { value: "greatTeaching", label: "6. Great teaching" },
-    { value: "teachers", label: "7. Teaching roster" },
-    { value: "privatePilates", label: "8. Private Pilates" },
-    { value: "lifeAtTbm", label: "9. Life at TBM" },
-    { value: "finalCta", label: "10. Closing banner" },
+    { value: "privatePilates", label: "7. Private Pilates" },
+    { value: "lifeAtTbm", label: "8. Life at TBM" },
+    { value: "finalCta", label: "9. Closing banner" },
 ];
 
 export type HomeInputsProps = {
     initialContent: HomePageContent;
     initialTitle: string;
     initialDescription: string;
-    initialTeachers: Teacher[];
     initialMetaTitle: string;
     initialMetaDescription: string;
 };
@@ -103,12 +99,6 @@ export type HomeInputsProps = {
 /* ************************************************************
                         HELPERS
 ************************************************************ */
-const slugify = (value: string) =>
-    value
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-
 /** Replace one item of a list, leaving the rest alone. */
 function replaceAt<T>(list: T[], index: number, patch: Partial<T>): T[] {
     return list.map((item, i) => (i === index ? { ...item, ...patch } : item));
@@ -929,7 +919,7 @@ function GreatTeachingForm({
 
             <FieldGroup
                 title="Link under the carousel"
-                description="The photos in this section come from the teaching roster. Edit those under Teaching roster."
+                description="The photographs and names in this section come from the teaching roster, which is edited on the Our People page."
             >
                 <CtaField
                     label="Link"
@@ -944,152 +934,6 @@ function GreatTeachingForm({
                 />
             </FieldGroup>
         </>
-    );
-}
-
-function TeachersForm({
-    teachers,
-    onChange,
-}: {
-    teachers: Teacher[];
-    onChange: (next: Teacher[]) => void;
-}) {
-    return (
-        <FieldGroup
-            title="Teaching roster"
-            description="One list, used by the home carousel and by Our People. A change here shows in both places."
-            toolbar={
-                <AddItemButton
-                    onClick={() =>
-                        onChange([
-                            ...teachers,
-                            {
-                                name: "",
-                                slug: `teacher-${Date.now()}`,
-                                role: "",
-                                teaser: "",
-                                image: "",
-                                imageAlt: "",
-                                fields: [],
-                            },
-                        ])
-                    }
-                >
-                    Add teacher
-                </AddItemButton>
-            }
-        >
-            {teachers.map((teacher, index) => (
-                <ListItemCard
-                    key={teacher.slug}
-                    title={teacher.name || `Teacher ${index + 1}`}
-                >
-                    <div className="flex justify-end">
-                        <ListControls
-                            index={index}
-                            length={teachers.length}
-                            onMove={(delta) =>
-                                onChange(moveItem(teachers, index, delta))
-                            }
-                            onRemove={() =>
-                                onChange(
-                                    teachers.filter((_, i) => i !== index),
-                                )
-                            }
-                        />
-                    </div>
-                    <TextInput
-                        label="Name"
-                        value={teacher.name}
-                        onChange={(name) =>
-                            onChange(
-                                replaceAt(teachers, index, {
-                                    name,
-                                    slug:
-                                        teacher.slug.startsWith("teacher-") &&
-                                        /^teacher-\d+$/.test(teacher.slug)
-                                            ? slugify(name) || teacher.slug
-                                            : teacher.slug,
-                                }),
-                            )
-                        }
-                    />
-                    <TextInput
-                        label="Profile anchor"
-                        value={teacher.slug}
-                        onChange={(slug) =>
-                            onChange(
-                                replaceAt(teachers, index, {
-                                    slug: slugify(slug),
-                                }),
-                            )
-                        }
-                        hint="Used in the link /our-people#this-value"
-                    />
-                    <TextInput
-                        label="Discipline line"
-                        value={teacher.role ?? ""}
-                        onChange={(role) =>
-                            onChange(replaceAt(teachers, index, { role }))
-                        }
-                        placeholder="Reformer Pilates"
-                    />
-                    <TextAreaInput
-                        label="Card sentence"
-                        value={teacher.teaser ?? ""}
-                        onChange={(teaser) =>
-                            onChange(replaceAt(teachers, index, { teaser }))
-                        }
-                        rows={3}
-                        hint="One sentence, shown on the carousel card"
-                    />
-                    <PhotoFields
-                        label="Portrait"
-                        image={teacher.image}
-                        imageAlt={teacher.imageAlt}
-                        usage={`Teacher ${teacher.name || index + 1}`}
-                        onImageChange={(image) =>
-                            onChange(replaceAt(teachers, index, { image }))
-                        }
-                        onAltChange={(imageAlt) =>
-                            onChange(replaceAt(teachers, index, { imageAlt }))
-                        }
-                    />
-                    <CtaField
-                        label="Button on the profile"
-                        text={teacher.cta?.label ?? ""}
-                        action={teacher.cta?.href ?? ""}
-                        onTextChange={(label) =>
-                            onChange(
-                                replaceAt(teachers, index, {
-                                    cta: {
-                                        href: teacher.cta?.href ?? "",
-                                        label,
-                                    },
-                                }),
-                            )
-                        }
-                        onActionChange={(href) =>
-                            onChange(
-                                replaceAt(teachers, index, {
-                                    cta: {
-                                        label: teacher.cta?.label ?? "",
-                                        href,
-                                    },
-                                }),
-                            )
-                        }
-                    />
-                    <p className="text-[11px] text-brand-black/45">
-                        This teacher&rsquo;s long-form profile has{" "}
-                        {teacher.fields?.length ?? 0} section
-                        {(teacher.fields?.length ?? 0) === 1 ? "" : "s"}. Those
-                        are kept exactly as they are when you save, and get
-                        their own inputs once the Our People editor is built.
-                    </p>
-                </ListItemCard>
-            ))}
-        </FieldGroup>
     );
 }
 
@@ -1338,13 +1182,11 @@ export default function HomeInputs({
     initialContent,
     initialTitle,
     initialDescription,
-    initialTeachers,
     initialMetaTitle,
     initialMetaDescription,
 }: HomeInputsProps) {
     const [section, setSection] = useState<SectionKey>("hero");
     const [content, setContent] = useState<HomePageContent>(initialContent);
-    const [teachers, setTeachers] = useState<Teacher[]>(initialTeachers);
     const [metaTitle, setMetaTitle] = useState(initialMetaTitle);
     const [metaDescription, setMetaDescription] = useState(
         initialMetaDescription,
@@ -1354,7 +1196,6 @@ export default function HomeInputs({
     );
 
     const home = useUpdatePage<HomePageContent>("home");
-    const roster = useUpdatePage<{ teachers: Teacher[] }>(TEACHERS_SLUG);
 
     /** One patch helper per section keeps the call sites short. */
     const patch =
@@ -1373,13 +1214,6 @@ export default function HomeInputs({
                 title: initialTitle,
                 description: initialDescription,
                 content,
-            });
-            await roster.updatePage({
-                slug: TEACHERS_SLUG,
-                title: "Our teachers",
-                description:
-                    "The teaching roster, shared by the home page and /our-people.",
-                content: { teachers },
             });
 
             const seo = await upsertSeoEntryAction({
@@ -1404,7 +1238,7 @@ export default function HomeInputs({
         }
     };
 
-    const isSaving = home.isSaving || roster.isSaving;
+    const isSaving = home.isSaving;
 
     return (
         <>
@@ -1464,12 +1298,6 @@ export default function HomeInputs({
                     <GreatTeachingForm
                         value={content.greatTeaching}
                         onChange={patch("greatTeaching")}
-                    />
-                )}
-                {section === "teachers" && (
-                    <TeachersForm
-                        teachers={teachers}
-                        onChange={setTeachers}
                     />
                 )}
                 {section === "privatePilates" && (
