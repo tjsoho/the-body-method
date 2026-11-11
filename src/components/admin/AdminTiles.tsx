@@ -45,7 +45,7 @@ const sections: AdminTileSection[] = [
                 icon: Home,
                 title: "Home",
                 description:
-                    "Every section: copy, photos, buttons and the teaching roster.",
+                    "Every section: copy, photographs, buttons and links.",
             },
             {
                 href: "/admin/new-here",
@@ -93,7 +93,8 @@ const sections: AdminTileSection[] = [
                 href: "/admin/our-people",
                 icon: Users,
                 title: "Our People",
-                description: "The hero and Sarah's story. Teachers live under Home.",
+                description:
+                    "Sarah's story, and every teacher's photo and profile.",
             },
             {
                 href: "/admin/life-at-tbm",
