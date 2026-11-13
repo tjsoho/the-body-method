@@ -21,6 +21,7 @@ import {
     type PriceColumn,
     type PrivatePilatesPageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -458,6 +459,7 @@ export default async function PrivatePilatesPage() {
                             <a
                                 className="tbm-btn"
                                 href={pricing.cta.href}
+                                {...externalLinkProps(pricing.cta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -468,6 +470,7 @@ export default async function PrivatePilatesPage() {
                             <Link
                                 className="tbm-lnk"
                                 href={pricing.link.href}
+                                {...externalLinkProps(pricing.link.href)}
                                 style={{ color: "var(--tbm-forest)" }}
                             >
                                 {pricing.link.label}{" "}

@@ -31,6 +31,7 @@ import {
     type MembershipsPageProps,
     type PriceColumn,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -189,6 +190,7 @@ function TierCard({ tier }: { tier: MembershipTier }) {
                 <a
                     className="tbm-btn"
                     href={tier.ctaHref}
+                    {...externalLinkProps(tier.ctaHref)}
                     style={{
                         background: isForest
                             ? "var(--tbm-cream)"
@@ -327,6 +329,7 @@ export default async function MembershipsPage() {
                             <a
                                 className="tbm-btn"
                                 href={privatePilates.ctaHref}
+                                {...externalLinkProps(privatePilates.ctaHref)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -408,6 +411,7 @@ export default async function MembershipsPage() {
                             <a
                                 className="tbm-btn"
                                 href={classPacks.ctaHref}
+                                {...externalLinkProps(classPacks.ctaHref)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -498,6 +502,7 @@ export default async function MembershipsPage() {
                             <Link
                                 className="tbm-btn"
                                 href={casual.ctaHref}
+                                {...externalLinkProps(casual.ctaHref)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",

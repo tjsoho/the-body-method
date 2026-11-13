@@ -8,6 +8,7 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import { BOOKING_URL } from "@/config/booking";
 
 export type StudioInfoBlock = {
     id: string;
@@ -151,7 +152,7 @@ export const contactFallbackData: ContactPageProps = {
                         label: "Opening + bookings",
                         body: "Classes run throughout the week. Check the live timetable and book your spot before you arrive. If it’s your first visit, come 10 minutes early so you have plenty of time to settle in before class.",
                         ctaLabel: "VIEW CORNERSTONE TIMETABLE",
-                        ctaHref: "#momence-timetable-cornerstone",
+                        ctaHref: BOOKING_URL,
                         ctaTheme: "solid",
                     },
                     {

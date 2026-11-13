@@ -4,6 +4,7 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
+import { BOOKING_URL } from "@/config/booking";
 
 export type Cta = { label: string; href: string };
 export type Tile = { id: string; image: string; imageAlt: string };
@@ -185,7 +186,7 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             primaryCta: { label: "START WITH 21 DAYS", href: "/new-here" },
             secondaryCta: {
                 label: "BOOK A REFORMER CLASS",
-                href: "#momence-reformer",
+                href: BOOKING_URL,
             },
         },
     },

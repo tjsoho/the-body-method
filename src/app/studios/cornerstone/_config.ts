@@ -4,6 +4,7 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
+import { BOOKING_URL } from "@/config/booking";
 
 export type Cta = { label: string; href: string };
 export type Tile = { id: string; image: string; imageAlt: string };
@@ -168,7 +169,7 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 body: "Classes run throughout the week. Check the live timetable and book your spot before you arrive.",
                 cta: {
                     label: "VIEW CORNERSTONE TIMETABLE",
-                    href: "#momence-timetable-cornerstone",
+                    href: BOOKING_URL,
                 },
                 image: ph("landscape-yoga.jpg"),
                 imageAlt:
@@ -202,7 +203,7 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 },
                 {
                     question: "Can I come casually without becoming a member?",
-                    answer: "Yes you can! Welcome! [PRICING IS HERE ↗](#momence-pricing) If you’re completely new to TBM, however, we’d recommend looking at the 21-Day Immersion first - it gives you the opportunity to experience both studios rather than judging us on one class.",
+                    answer: "Yes you can! Welcome! [PRICING IS HERE ↗](https://momence.com/u/the-body-method-QJrwuU) If you’re completely new to TBM, however, we’d recommend looking at the 21-Day Immersion first - it gives you the opportunity to experience both studios rather than judging us on one class.",
                 },
                 {
                     question:

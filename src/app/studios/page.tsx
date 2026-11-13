@@ -29,6 +29,7 @@ import {
     type StudioSummary,
     type StudiosPageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -41,6 +42,7 @@ function StudioCard({ studio }: { studio: StudioSummary }) {
     return (
         <Link
             href={studio.href}
+            {...externalLinkProps(studio.href)}
             style={{
                 background: "#ebe8e0",
                 display: "flex",
@@ -234,6 +236,7 @@ export default async function StudiosPage() {
                         <Link
                             className="tbm-btn"
                             href={wantBoth.cta.href}
+                            {...externalLinkProps(wantBoth.cta.href)}
                             style={{
                                 background: "var(--tbm-cream)",
                                 color: "var(--tbm-forest)",

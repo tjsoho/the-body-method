@@ -16,6 +16,7 @@
 
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import { externalLinkProps } from "@/utils/links";
 import { motion } from "framer-motion";
 import type { HeroContent } from "@/app/_config";
 
@@ -198,6 +199,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                     >
                         <Link
                             href={content.primaryCta.href}
+                            {...externalLinkProps(content.primaryCta.href)}
                             className="tbm-btn tbm-hero-cta"
                             style={{ background: "#f4f2ed", color: "#1b2518" }}
                         >
@@ -205,6 +207,7 @@ export default function Hero({ content }: { content: HeroContent }) {
                         </Link>
                         <Link
                             href={content.secondaryCta.href}
+                            {...externalLinkProps(content.secondaryCta.href)}
                             className="tbm-btn tbm-hero-cta"
                             style={{
                                 color: "#f4f2ed",

@@ -13,6 +13,9 @@
    that teacher's own words in `fields` below.
 ************************************************************ */
 
+import { BOOKING_URL } from "@/config/booking";
+
+
 /* ************************************************************
                         TYPES
 ************************************************************ */
@@ -59,7 +62,7 @@ export const teachers: Teacher[] = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
         image: "/images/tbm-placeholders/teacher-1.jpg",
         imageAlt: "A teacher's hands guiding a student's hips",
-        cta: { href: "#momence-teacher", label: "FIND A CLASS WITH MEL" },
+        cta: { href: BOOKING_URL, label: "FIND A CLASS WITH MEL" },
         fields: [
             {
                 label: "Discipline / qualifications",

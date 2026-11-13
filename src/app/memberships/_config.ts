@@ -11,6 +11,7 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import { BOOKING_URL } from "@/config/booking";
 
 export type MembershipTier = {
     id: string;
@@ -108,7 +109,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
                     detail: "Enjoy **unlimited access** to our Cornerstone group timetable, including Mat Pilates, Barre, Yoga, Yin, Power Pilates, Stretch + Release, Meditation and more.\n\n**12-week minimum commitment.**",
                     disclosureLabel: "WHAT'S INCLUDED",
                     ctaLabel: "CHOOSE CORNERSTONE",
-                    ctaHref: "#momence-membership",
+                    ctaHref: BOOKING_URL,
                     theme: "light",
                 },
                 {
@@ -121,7 +122,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
                     detail: "Enjoy **unlimited Reformer** at Tugun Beach, with classes capped at just six people so there's more space for individual attention, guidance and connection.\n\n**12-week minimum commitment and booking window is 21 days in advance.**",
                     disclosureLabel: "WHAT'S INCLUDED",
                     ctaLabel: "CHOOSE TUGUN BEACH",
-                    ctaHref: "#momence-membership",
+                    ctaHref: BOOKING_URL,
                     theme: "light",
                 },
                 {
@@ -134,7 +135,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
                     detail: "Enjoy **5 classes a week at Cornerstone + 2 classes a week at Tugun Beach** - giving you the personalised Reformer experience of our smaller studio alongside the variety of Pilates, Yoga, Barre, Meditation and more at Cornerstone.\n\nMore classes, more variety and more ways to build a movement routine that works for you.\n\n**12-week minimum commitment and booking window is 21 days in advance.**",
                     disclosureLabel: "WHAT'S INCLUDED",
                     ctaLabel: "CHOOSE DUAL",
-                    ctaHref: "#momence-membership",
+                    ctaHref: BOOKING_URL,
                     theme: "forest",
                 },
             ],
@@ -168,7 +169,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
                 },
             ],
             ctaLabel: "BOOK A PRIVATE",
-            ctaHref: "#momence-private",
+            ctaHref: BOOKING_URL,
         },
         classPacks: {
             heading: "CLASS PACKS",
@@ -197,7 +198,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
                 },
             ],
             ctaLabel: "CHOOSE A CLASS PACK",
-            ctaHref: "#momence-packs",
+            ctaHref: BOOKING_URL,
         },
         casual: {
             heading: "CASUAL OPTIONS",

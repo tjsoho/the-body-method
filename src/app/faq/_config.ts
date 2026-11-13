@@ -125,7 +125,7 @@ export const faqFallbackData: FaqPageProps = {
                     },
                     {
                         question: "What if I'm not ready for a membership?",
-                        answer: "That's absolutely okay. We have drop in class passes or packs of 5, 10, and 20 at CS, and 5, 10, 20, and 50 packs at Tugun Beach. You can find all the options [HERE](#momence-pricing). We'd rather help you find an option that works for your life than into a membership you won't use.",
+                        answer: "That's absolutely okay. We have drop in class passes or packs of 5, 10, and 20 at CS, and 5, 10, 20, and 50 packs at Tugun Beach. You can find all the options [HERE](https://momence.com/u/the-body-method-QJrwuU). We'd rather help you find an option that works for your life than into a membership you won't use.",
                     },
                     {
                         question: "Can I move between Tugun Beach and Cornerstone?",
@@ -229,7 +229,7 @@ export const faqFallbackData: FaqPageProps = {
                 items: [
                     {
                         question: "How do I book a class?",
-                        answer: "You can view the live timetable [HERE](#momence-timetable) and book online through our booking system. Once you've created your account, you'll also be able to manage your upcoming classes from there.",
+                        answer: "You can view the live timetable [HERE](https://momence.com/u/the-body-method-QJrwuU) and book online through our booking system. Once you've created your account, you'll also be able to manage your upcoming classes from there.",
                     },
                     {
                         question: "What if I need to cancel a class?",

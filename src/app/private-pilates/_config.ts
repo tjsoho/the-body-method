@@ -7,6 +7,7 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import { BOOKING_URL } from "@/config/booking";
 
 export type Cta = { label: string; href: string };
 
@@ -141,7 +142,7 @@ export const privatePilatesFallbackData: PrivatePilatesPageProps = {
                     ],
                 },
             ],
-            cta: { label: "BOOK A PRIVATE", href: "#momence-private" },
+            cta: { label: "BOOK A PRIVATE", href: BOOKING_URL },
             link: {
                 label: "TALK TO US ABOUT PRIVATE PILATES",
                 href: "/contact",

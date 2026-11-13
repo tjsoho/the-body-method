@@ -25,6 +25,7 @@ import {
     tugunBeachFallbackData,
     type TugunBeachPageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -242,6 +243,7 @@ export default async function TugunBeachPage() {
                                 <Link
                                     className="tbm-btn"
                                     href={reformer.cta.href}
+                                    {...externalLinkProps(reformer.cta.href)}
                                     style={{
                                         background: "var(--tbm-ink)",
                                         color: "var(--tbm-cream)",
@@ -344,6 +346,7 @@ export default async function TugunBeachPage() {
                                 <Link
                                     className="tbm-btn"
                                     href={privateBand.cta.href}
+                                    {...externalLinkProps(privateBand.cta.href)}
                                     style={{
                                         background: "var(--tbm-cream)",
                                         color: "var(--tbm-forest)",
@@ -460,6 +463,7 @@ export default async function TugunBeachPage() {
                         <Link
                             className="tbm-btn"
                             href={closing.primaryCta.href}
+                            {...externalLinkProps(closing.primaryCta.href)}
                             style={{
                                 background: "var(--tbm-cream)",
                                 color: "var(--tbm-forest)",
@@ -472,6 +476,7 @@ export default async function TugunBeachPage() {
                         <a
                             className="tbm-btn"
                             href={closing.secondaryCta.href}
+                            {...externalLinkProps(closing.secondaryCta.href)}
                             style={{
                                 color: "var(--tbm-cream)",
                                 border: "1px solid rgba(244,242,237,.7)",

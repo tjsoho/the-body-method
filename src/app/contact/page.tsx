@@ -28,6 +28,7 @@ import {
     type ContactPageProps,
     type StudioCard,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -129,6 +130,7 @@ function StudioColumn({
                 still opens Google Maps. */}
             <a
                 href={studio.mapHref}
+                {...externalLinkProps(studio.mapHref)}
                 aria-label={`Open ${studio.address} in Google Maps`}
                 style={{
                     position: "relative",
@@ -178,6 +180,7 @@ function StudioColumn({
                             <a
                                 className="tbm-btn"
                                 href={block.ctaHref}
+                                {...externalLinkProps(block.ctaHref)}
                                 style={
                                     block.ctaTheme === "solid"
                                         ? {

@@ -7,6 +7,7 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
+import { BOOKING_URL } from "@/config/booking";
 
 export type Cta = { label: string; href: string };
 
@@ -98,7 +99,7 @@ export const newHereFallbackData: NewHerePageProps = {
             image: ph("hero-new-here.jpg"),
             imageAlt: "A woman carrying a rolled mat into a light-filled studio",
             imageFocus: "center 45%",
-            cta: { label: "START MY 21 DAYS - $99", href: "#momence-21-days" },
+            cta: { label: "START MY 21 DAYS - $99", href: BOOKING_URL },
         },
         purpose: {
             heading: "What are the 21 days for?",
@@ -189,7 +190,7 @@ export const newHereFallbackData: NewHerePageProps = {
             italicLine: "Then let us take care of the rest.",
             image: ph("landscape-first-class-door.jpg"),
             imageAlt: "Shoes lined up on a timber bench at the studio door",
-            cta: { label: "START MY 21 DAYS", href: "#momence-sign-up" },
+            cta: { label: "START MY 21 DAYS", href: BOOKING_URL },
         },
         faq: {
             heading: "FAQ",
@@ -215,7 +216,7 @@ export const newHereFallbackData: NewHerePageProps = {
                     answer: "In many cases, yes - but please have a chat with us before you book your first class. Every body, injury and pregnancy is different, so we want to understand where you’re at and make sure we’re recommending the right class and level of support for you. Depending on your circumstances, we may suggest starting with a Private Pilates session or checking in with your healthcare professional first.",
                 },
             ],
-            cta: { label: "START MY 21 DAYS - $99", href: "#momence-pricing" },
+            cta: { label: "START MY 21 DAYS - $99", href: BOOKING_URL },
         },
     },
 };

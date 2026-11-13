@@ -13,6 +13,7 @@ import Link from "next/link";
 import type { TwentyOneDayContent } from "@/app/_config";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import Reveal from "@/components/motion/Reveal";
+import { externalLinkProps } from "@/utils/links";
 
 export default function TwentyOneDay({ content }: { content: TwentyOneDayContent }) {
     return (
@@ -182,6 +183,7 @@ export default function TwentyOneDay({ content }: { content: TwentyOneDayContent
                 <div className="tbm-c-all">
                     <Link
                         href={content.cta.href}
+                        {...externalLinkProps(content.cta.href)}
                         className="tbm-btn"
                         style={{
                             background: "var(--tbm-cream)",

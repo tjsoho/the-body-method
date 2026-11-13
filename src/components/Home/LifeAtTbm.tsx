@@ -16,6 +16,7 @@ import Link from "next/link";
 import type { LifeAtTbmContent } from "@/app/_config";
 import GalleryCarousel from "@/components/carousel/GalleryCarousel";
 import Reveal from "@/components/motion/Reveal";
+import { externalLinkProps } from "@/utils/links";
 
 export type LifeTile = {
     id: string;
@@ -84,6 +85,7 @@ export default function LifeAtTbm({ content }: Props) {
                 <div className="tbm-c-all">
                     <Link
                         href={content.cta.href}
+                        {...externalLinkProps(content.cta.href)}
                         className="tbm-lnk"
                         style={{ color: "var(--tbm-cream)" }}
                     >

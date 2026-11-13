@@ -25,6 +25,7 @@ import {
     type EventCard,
     type LifeAtTbmPageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -154,6 +155,7 @@ function EventTile({ card, side }: { card: EventCard; side: "l" | "r" }) {
                     <a
                         className="tbm-lnk"
                         href={card.linkHref}
+                        {...externalLinkProps(card.linkHref)}
                         style={{ color: "var(--tbm-forest)" }}
                     >
                         {card.linkLabel} <span aria-hidden="true">&rarr;</span>
@@ -297,6 +299,7 @@ export default async function LifeAtTbmPage() {
                             <a
                                 className="tbm-btn"
                                 href={workshops.cta.href}
+                                {...externalLinkProps(workshops.cta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",

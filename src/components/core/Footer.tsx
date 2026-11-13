@@ -16,6 +16,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CareersPopup from "./CareersPopup";
+import { BOOKING_URL } from "@/config/booking";
 
 export default function Footer() {
     const pathname = usePathname();
@@ -100,7 +101,16 @@ export default function Footer() {
                     <Link href="/about" style={{ color: "#dfdede" }}>Our Story</Link>
                     <Link href="/faq" style={{ color: "#dfdede" }}>FAQ</Link>
                     <Link href="/contact" style={{ color: "#dfdede" }}>Contact + Locations</Link>
-                    <Link href="/member-login" style={{ color: "#dfdede" }}>Member Login</Link>
+                    {/* Members sign in through Momence; there is no
+                        member area on this site. */}
+                    <a
+                        href={BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#dfdede" }}
+                    >
+                        Member Login
+                    </a>
                     <Link href="/terms" style={{ color: "#dfdede" }}>Terms</Link>
                     <Link href="/accessibility" style={{ color: "#dfdede" }}>Accessibility</Link>
                     <CareersPopup>Careers / Teach With Us</CareersPopup>

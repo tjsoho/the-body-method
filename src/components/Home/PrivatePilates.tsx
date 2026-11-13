@@ -8,6 +8,7 @@
 ************************************************************ */
 
 import Link from "next/link";
+import { externalLinkProps } from "@/utils/links";
 import type { PrivatePilatesContent } from "@/app/_config";
 
 export default function PrivatePilates({ content }: { content: PrivatePilatesContent }) {
@@ -71,6 +72,7 @@ export default function PrivatePilates({ content }: { content: PrivatePilatesCon
                     <div style={{ paddingTop: 8 }}>
                         <Link
                             href={content.cta.href}
+                            {...externalLinkProps(content.cta.href)}
                             className="tbm-lnk"
                             style={{ color: "var(--tbm-forest)" }}
                         >

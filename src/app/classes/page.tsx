@@ -23,6 +23,7 @@ import {
     classesFallbackData,
     type ClassesPageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -114,6 +115,7 @@ export default async function ClassesPage() {
                                     <a
                                         className="tbm-lnk"
                                         href={cards.linkHref}
+                                        {...externalLinkProps(cards.linkHref)}
                                         style={{ color: "var(--tbm-forest)" }}
                                     >
                                         {cards.linkLabel}{" "}
@@ -152,6 +154,7 @@ export default async function ClassesPage() {
                             <a
                                 className="tbm-btn"
                                 href={ctaCard.primaryCta.href}
+                                {...externalLinkProps(ctaCard.primaryCta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -162,6 +165,7 @@ export default async function ClassesPage() {
                             <a
                                 className="tbm-btn"
                                 href={ctaCard.secondaryCta.href}
+                                {...externalLinkProps(ctaCard.secondaryCta.href)}
                                 style={{
                                     color: "var(--tbm-ink)",
                                     border: "1px solid var(--tbm-ink)",

@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { BandHero } from "@/components/core/PageHero";
 import getPage from "@/server-actions/page";
+import { externalLinkProps } from "@/utils/links";
 import { buildPageMetadata } from "@/utils/seo";
 import { BOOK_SLUG, bookFallbackData, type BookPageProps } from "./_config";
 
@@ -93,6 +94,7 @@ export default async function BookPage() {
                                 <a
                                     className="tbm-btn"
                                     href={row.ctaHref}
+                                    {...externalLinkProps(row.ctaHref)}
                                     style={
                                         row.primary
                                             ? {

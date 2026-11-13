@@ -25,6 +25,7 @@ import {
     cornerstoneFallbackData,
     type CornerstonePageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -235,6 +236,7 @@ export default async function CornerstonePage() {
                             <Link
                                 className="tbm-btn"
                                 href={moveDifferently.cta.href}
+                                {...externalLinkProps(moveDifferently.cta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -314,6 +316,7 @@ export default async function CornerstonePage() {
                                 <Link
                                     className="tbm-lnk"
                                     href={community.link.href}
+                                    {...externalLinkProps(community.link.href)}
                                     style={{ color: "var(--tbm-forest)" }}
                                 >
                                     {community.link.label}{" "}
@@ -369,6 +372,7 @@ export default async function CornerstonePage() {
                         >
                             <Link
                                 href={grid.teacher.href}
+                                {...externalLinkProps(grid.teacher.href)}
                                 style={{
                                     color: "var(--tbm-ink)",
                                     textDecoration: "none",
@@ -489,6 +493,7 @@ export default async function CornerstonePage() {
                             <a
                                 className="tbm-btn"
                                 href={grid.timetable.cta.href}
+                                {...externalLinkProps(grid.timetable.cta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",
@@ -533,6 +538,7 @@ export default async function CornerstonePage() {
                             <a
                                 className="tbm-btn"
                                 href={grid.location.cta.href}
+                                {...externalLinkProps(grid.location.cta.href)}
                                 style={{
                                     color: "var(--tbm-ink)",
                                     border: "1px solid var(--tbm-ink)",
@@ -551,6 +557,7 @@ export default async function CornerstonePage() {
                             <Link
                                 className="tbm-btn"
                                 href={grid.cta.href}
+                                {...externalLinkProps(grid.cta.href)}
                                 style={{
                                     background: "var(--tbm-ink)",
                                     color: "var(--tbm-cream)",

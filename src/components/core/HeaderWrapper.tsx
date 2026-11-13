@@ -1,18 +1,19 @@
 /* ************************************************************
    Server component wrapper for the TBM Header.
 
-   Fetches the admin-managed navigation tree. The BOOK button is a fixed
-   Momence booking link so it is NOT driven by nav items — it sits in
-   its own slot on the right of the bar.
+   Fetches the admin-managed navigation tree. The BOOK button goes
+   straight to Momence rather than being driven by a nav item, so it
+   keeps its own slot on the right of the bar.
 ************************************************************ */
 import { getNavigation } from "@/server-actions/navigation";
 import Header from "./Header";
+import { BOOKING_URL } from "@/config/booking";
 
-/** TODO Toby/Sarah: swap for the real Momence URL when it is confirmed. */
-const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || "/book";
+/* The Momence page, unless an environment override says otherwise. */
+const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || BOOKING_URL;
 
 export default async function HeaderWrapper() {
     const navItems = await getNavigation();
 
-    return <Header navItems={navItems} bookingUrl={BOOKING_URL} />;
+    return <Header navItems={navItems} bookingUrl={bookingUrl} />;
 }

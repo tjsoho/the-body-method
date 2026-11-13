@@ -21,6 +21,7 @@ import {
     TbmCarouselSlide,
     TbmCarouselViewport,
 } from "@/components/carousel/TbmCarousel";
+import { externalLinkProps } from "@/utils/links";
 import type { TeacherCardFields } from "@/data/teachers";
 
 /* ************************************************************
@@ -123,6 +124,7 @@ export default function TeacherStrip({ teachers, cta }: Props) {
             <div className="tbm-c-all">
                 <Link
                     href={cta.href}
+                    {...externalLinkProps(cta.href)}
                     className="tbm-lnk"
                     style={{ color: "var(--tbm-forest)" }}
                 >

@@ -13,6 +13,7 @@ import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { PhotoHero } from "@/components/core/PageHero";
 import getPage from "@/server-actions/page";
+import { externalLinkProps } from "@/utils/links";
 import { buildPageMetadata } from "@/utils/seo";
 import { ABOUT_SLUG, aboutFallbackData, type AboutPageProps } from "./_config";
 
@@ -285,6 +286,7 @@ export default async function AboutPage() {
                                 <Link
                                     className="tbm-btn tbm-hero-cta"
                                     href={closing.primaryCta.href}
+                                    {...externalLinkProps(closing.primaryCta.href)}
                                     style={{
                                         background: "var(--tbm-cream)",
                                         color: "var(--tbm-forest)",
@@ -295,6 +297,7 @@ export default async function AboutPage() {
                                 <Link
                                     className="tbm-btn tbm-hero-cta"
                                     href={closing.secondaryCta.href}
+                                    {...externalLinkProps(closing.secondaryCta.href)}
                                     style={{
                                         color: "#f4f2ed",
                                         border: "1px solid rgba(244,242,237,.7)",

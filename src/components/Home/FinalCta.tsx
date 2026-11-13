@@ -8,6 +8,7 @@
 ************************************************************ */
 
 import Link from "next/link";
+import { externalLinkProps } from "@/utils/links";
 import type { FinalCtaContent } from "@/app/_config";
 
 export default function FinalCta({ content }: { content: FinalCtaContent }) {
@@ -81,6 +82,7 @@ export default function FinalCta({ content }: { content: FinalCtaContent }) {
                 </p>
                 <Link
                     href={content.cta.href}
+                    {...externalLinkProps(content.cta.href)}
                     className="tbm-btn"
                     style={{
                         background: "var(--tbm-cream)",

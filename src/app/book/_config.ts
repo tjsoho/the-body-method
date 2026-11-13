@@ -3,6 +3,7 @@
 ************************************************************ */
 
 import type { BandHeroContent } from "@/components/core/PageHero";
+import { BOOKING_URL } from "@/config/booking";
 
 export type BookRow = {
     id: string;
@@ -46,7 +47,7 @@ export const bookFallbackData: BookPageProps = {
                 heading: "I'M NEW",
                 body: "Start with 21 days across both studios for $99.",
                 ctaLabel: "START MY 21 DAYS",
-                ctaHref: "#momence-21-days",
+                ctaHref: BOOKING_URL,
                 primary: true,
             },
             {
@@ -54,7 +55,7 @@ export const bookFallbackData: BookPageProps = {
                 heading: "I WANT TO BOOK A CLASS",
                 body: "See what's on and find a time that works.",
                 ctaLabel: "VIEW TIMETABLE",
-                ctaHref: "#momence-timetable",
+                ctaHref: BOOKING_URL,
                 primary: false,
             },
             {
@@ -62,7 +63,7 @@ export const bookFallbackData: BookPageProps = {
                 heading: "I WANT PRIVATE PILATES",
                 body: "One-to-one movement built around you.",
                 ctaLabel: "EXPLORE PRIVATE PILATES",
-                ctaHref: "#momence-private",
+                ctaHref: BOOKING_URL,
                 primary: false,
             },
             {
@@ -70,7 +71,7 @@ export const bookFallbackData: BookPageProps = {
                 heading: "I WANT SEMI-PRIVATE PILATES",
                 body: "",
                 ctaLabel: "ENQUIRE",
-                ctaHref: "#momence-semi-private",
+                ctaHref: BOOKING_URL,
                 primary: false,
             },
             {
@@ -78,7 +79,7 @@ export const bookFallbackData: BookPageProps = {
                 heading: "I'M ALREADY A MEMBER",
                 body: "Hello again.",
                 ctaLabel: "BOOK / MEMBER LOGIN",
-                ctaHref: "#momence-login",
+                ctaHref: BOOKING_URL,
                 primary: false,
             },
         ],

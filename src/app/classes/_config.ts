@@ -3,6 +3,7 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import { BOOKING_URL } from "@/config/booking";
 
 export type Cta = { label: string; href: string };
 
@@ -61,7 +62,7 @@ export const classesFallbackData: ClassesPageProps = {
         },
         cards: {
             linkLabel: "VIEW TIMES",
-            linkHref: "#momence-timetable",
+            linkHref: BOOKING_URL,
             items: [
                 {
                     id: "reformer",
@@ -128,7 +129,7 @@ export const classesFallbackData: ClassesPageProps = {
             imageFocus: "center",
             primaryCta: {
                 label: "VIEW FULL TIMETABLE",
-                href: "#momence-timetable",
+                href: BOOKING_URL,
             },
             secondaryCta: { label: "BOOK A CLASS", href: "/book" },
         },

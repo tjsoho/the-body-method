@@ -21,6 +21,7 @@ import {
     newHereFallbackData,
     type NewHerePageProps,
 } from "./_config";
+import { externalLinkProps } from "@/utils/links";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -45,6 +46,7 @@ export default async function NewHerePage() {
                         <a
                             className="tbm-btn"
                             href={hero.cta.href}
+                            {...externalLinkProps(hero.cta.href)}
                             style={{ background: "#f4f2ed", color: "#1b2518" }}
                         >
                             {hero.cta.label}
@@ -365,6 +367,7 @@ export default async function NewHerePage() {
                         <Link
                             className="tbm-btn"
                             href={studios.cta.href}
+                            {...externalLinkProps(studios.cta.href)}
                             style={{
                                 color: "var(--tbm-ink)",
                                 border: "1px solid var(--tbm-ink)",
@@ -612,6 +615,7 @@ export default async function NewHerePage() {
                                 <a
                                     className="tbm-btn"
                                     href={firstClass.cta.href}
+                                    {...externalLinkProps(firstClass.cta.href)}
                                     style={{
                                         background: "var(--tbm-ink)",
                                         color: "#f4f2ed",
@@ -660,6 +664,7 @@ export default async function NewHerePage() {
                                 <a
                                     className="tbm-btn"
                                     href={faq.cta.href}
+                                    {...externalLinkProps(faq.cta.href)}
                                     style={{
                                         background: "var(--tbm-ink)",
                                         color: "#f4f2ed",

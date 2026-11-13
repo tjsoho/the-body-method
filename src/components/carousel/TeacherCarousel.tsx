@@ -31,6 +31,7 @@ import {
     TbmCarouselSlide,
     TbmCarouselViewport,
 } from "@/components/carousel/TbmCarousel";
+import { externalLinkProps } from "@/utils/links";
 import type { Teacher, TeacherFieldBlock } from "@/data/teachers";
 
 /* How long each card holds before the track steps on. */
@@ -168,6 +169,7 @@ function TeacherProfile({ teacher }: { teacher: Teacher }) {
                         <a
                             className="tbm-btn"
                             href={teacher.cta.href}
+                            {...externalLinkProps(teacher.cta.href)}
                             style={{
                                 background: "var(--tbm-ink)",
                                 color: "var(--tbm-cream)",

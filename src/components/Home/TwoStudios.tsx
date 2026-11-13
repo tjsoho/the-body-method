@@ -14,6 +14,7 @@
 import Link from "next/link";
 import type { TwoStudiosContent, StudioCard } from "@/app/_config";
 import Reveal from "@/components/motion/Reveal";
+import { externalLinkProps } from "@/utils/links";
 
 function StudioArticle({
     card,
@@ -103,6 +104,7 @@ function StudioArticle({
                     <Link
                         className="tbm-lnk"
                         href={card.ctaHref}
+                        {...externalLinkProps(card.ctaHref)}
                         style={{ color: linkColor }}
                     >
                         {card.ctaLabel} <span aria-hidden="true">→</span>
@@ -205,6 +207,7 @@ export default function TwoStudios({ content }: { content: TwoStudiosContent }) 
                     </p>
                     <Link
                         href={content.dualCta.href}
+                        {...externalLinkProps(content.dualCta.href)}
                         className="tbm-btn"
                         style={{
                             background: "var(--tbm-ink)",
