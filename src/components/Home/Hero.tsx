@@ -38,13 +38,12 @@ export default function Hero({ content }: { content: HeroContent }) {
 
     return (
         <section
+            className="tbm-hero-full"
             style={{
                 position: "relative",
-                /* Full screen, so the film or still fills the first view.
-                   svh rather than vh: on a phone vh is the height with the
-                   browser chrome hidden, which crops the photo until the
-                   user scrolls. */
-                minHeight: "100svh",
+                /* Height comes from .tbm-hero-full in globals.css, which
+                   needs two declarations for the fallback and so cannot be
+                   written inline. */
                 marginTop: -85,
                 paddingTop: 85,
                 color: "#f4f2ed",

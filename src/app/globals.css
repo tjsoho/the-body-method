@@ -259,6 +259,21 @@ a:hover {
     .tbm-btn-menu { gap: 0 !important; padding: 0 10px; min-width: 40px; }
 }
 
+/* ---- Home hero height ----------------------------------------------
+ * The hero fills the screen the viewer can actually see.
+ *
+ * dvh, not svh or vh. svh is the viewport with every bit of browser
+ * chrome showing, and on an iPhone the bottom bar floats over the page
+ * rather than taking space from it, so an svh hero stops short and the
+ * next section shows through under it. vh has the opposite fault: it is
+ * the chrome-hidden height, so the photo is cropped until you scroll.
+ * dvh tracks what is on screen now and fills it in both states.
+ *
+ * The vh line is the fallback for anything that does not know dvh; a
+ * browser that does reads the second line and overrides it.           */
+.tbm-hero-full { min-height: 100vh; }
+.tbm-hero-full { min-height: 100dvh; }
+
 /* ---- Motion primitives --------------------------------------------- */
 
 /* Menu overlay links — a sage underline draws from left on hover.
