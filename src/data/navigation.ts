@@ -29,9 +29,9 @@ export type AvailablePage = {
 };
 
 /**
- * Default header nav. The seven items from the approved V3 design, plus
- * the booking page, which nothing else links to now that every call to
- * action goes straight to Momence.
+ * Default header nav. Exactly the seven items on the approved V3 design.
+ * /book is deliberately not here: the BOOK button in the bar goes straight
+ * to Momence, and a second booking item in the menu was not wanted.
  * "NEW HERE?" anchors to the 21-day block on the home page; everything
  * else is its own folder route under src/app/.
  */
@@ -51,11 +51,6 @@ export const defaultNavLinks: NavLink[] = [
     { id: 5, label: "PRIVATE PILATES", pageSlug: "/private-pilates", children: [] },
     { id: 6, label: "LIFE AT TBM", pageSlug: "/life-at-tbm", children: [] },
     { id: 7, label: "OUR PEOPLE", pageSlug: "/our-people", children: [] },
-    /* The BOOK button in the bar goes straight to Momence, so this one is
-       labelled for what the page actually is: the short list of routes in
-       ("I'm new", "I want a class", "I'm already a member"). Two items both
-       called BOOK, pointing at different places, would only confuse. */
-    { id: 8, label: "WAYS TO BOOK", pageSlug: "/book", children: [] },
 ];
 
 /**
