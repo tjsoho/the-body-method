@@ -209,7 +209,7 @@ export const membershipsFallbackData: MembershipsPageProps = {
             ],
             body: "Choose your class, book your spot and come move with us.",
             ctaLabel: "BOOK A CLASS",
-            ctaHref: "/book",
+            ctaHref: BOOKING_URL,
         },
     },
 };

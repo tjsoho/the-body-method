@@ -1,5 +1,6 @@
 import type { MemberStory } from "@/components/Home/WhyPeopleStay";
 import type { LifeTile } from "@/components/Home/LifeAtTbm";
+import { BOOKING_URL } from "@/config/booking";
 
 /**
  * The Body Method — Home page content shape and fallback copy.
@@ -158,7 +159,10 @@ export const homePageFallbackData: HomePageProps = {
             italicSubheading:
                 "Building strength, confidence and capacity for everything life asks of you.",
             body: "Two beautiful Tugun studios with exceptional teachers, personalised movement and a community that genuinely knows your name.",
-            primaryCta: { label: "START WITH 21 DAYS FOR $99", href: "/memberships" },
+            primaryCta: {
+                label: "START WITH 21 DAYS FOR $99",
+                href: BOOKING_URL,
+            },
             secondaryCta: { label: "EXPLORE BOTH STUDIOS", href: "/studios" },
             videoDesktopUrl: "",
             videoMobileUrl: "",
@@ -244,7 +248,7 @@ export const homePageFallbackData: HomePageProps = {
                 { week: "WEEK 3 -", title: "Build Your Routine", body: "Turn what feels good into something you can keep doing." },
                 { week: "THEN -", title: "Choose What’s Next", body: "Find the membership that fits the way you want to move.", italic: true },
             ],
-            cta: { label: "START YOUR 21 DAYS", href: "/memberships" },
+            cta: { label: "START YOUR 21 DAYS", href: BOOKING_URL },
         },
         whyPeopleStay: {
             heading: "Why people stay.",
@@ -336,7 +340,7 @@ export const homePageFallbackData: HomePageProps = {
             headingLead: "Come and see ",
             headingItalic: "how it feels.",
             body: "21 days + 2 studios and unlimited classes = $99.",
-            cta: { label: "START YOUR 21 DAYS", href: "/memberships" },
+            cta: { label: "START YOUR 21 DAYS", href: BOOKING_URL },
             backgroundImage: ph("final-cta-rest.jpg"),
             backgroundImageAlt: "Resting on a mat in late afternoon light",
             imageFocus: "center",

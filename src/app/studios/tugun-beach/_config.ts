@@ -100,7 +100,7 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             bestForLabel: "Best for:",
             bestFor:
                 "All ages and fitness levels, including pregnancy and postpartum, those returning from injury, or anyone looking for a strong, effective workout that builds core strength and stability.",
-            cta: { label: "VIEW REFORMER TIMES", href: "/classes" },
+            cta: { label: "VIEW REFORMER TIMES", href: BOOKING_URL },
             image: ph("portrait-tugun-socks.jpg"),
             imageAlt:
                 "Feet in grip socks on the carriage of a timber Reformer",

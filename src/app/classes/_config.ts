@@ -131,7 +131,7 @@ export const classesFallbackData: ClassesPageProps = {
                 label: "VIEW FULL TIMETABLE",
                 href: BOOKING_URL,
             },
-            secondaryCta: { label: "BOOK A CLASS", href: "/book" },
+            secondaryCta: { label: "BOOK A CLASS", href: BOOKING_URL },
         },
     },
 };
