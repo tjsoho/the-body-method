@@ -40,7 +40,11 @@ export default function Hero({ content }: { content: HeroContent }) {
         <section
             style={{
                 position: "relative",
-                minHeight: 880,
+                /* Full screen, so the film or still fills the first view.
+                   svh rather than vh: on a phone vh is the height with the
+                   browser chrome hidden, which crops the photo until the
+                   user scrolls. */
+                minHeight: "100svh",
                 marginTop: -85,
                 paddingTop: 85,
                 color: "#f4f2ed",
@@ -123,9 +127,21 @@ export default function Hero({ content }: { content: HeroContent }) {
                 className="tbm-wrap tbm-g12"
                 style={{
                     position: "relative",
-                    marginTop: "auto",
+                    /* Fill what the backdrop leaves and centre the copy in
+                       it, so the block sits mid-left rather than on the
+                       floor.
+
+                       The section pads 85px off the top to clear the fixed
+                       header. Centring inside that padding would leave 85px
+                       more air above the copy than below it, so the margin
+                       gives those 85px back and the copy centres on the
+                       photo itself. The header still floats clear: the copy
+                       is far shorter than the hero. */
+                    flex: 1,
+                    marginTop: -85,
+                    paddingTop: 64,
                     paddingBottom: 64,
-                    alignItems: "end",
+                    alignItems: "center",
                     rowGap: 32,
                 }}
             >
@@ -224,6 +240,9 @@ export default function Hero({ content }: { content: HeroContent }) {
                     className="tbm-hide-sm"
                     style={{
                         gridColumn: "10 / 13",
+                        /* Stays on the floor of the hero even though the
+                           copy beside it is centred. */
+                        alignSelf: "end",
                         display: "flex",
                         alignItems: "center",
                         gap: 16,
