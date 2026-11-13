@@ -162,7 +162,8 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                                 background: "transparent",
                                 color: "#f4f2ed",
                                 border: "1px solid rgba(244,242,237,.85)",
-                                minHeight: 44,
+                                /* Trimmed from 44. Sits tighter in the bar. */
+                                minHeight: 38,
                                 cursor: "pointer",
                                 gap: 10,
                                 fontFamily: "var(--font-hanken)",
@@ -200,7 +201,8 @@ export default function Header({ navItems, bookingUrl }: HeaderProps) {
                             style={{
                                 background: "#f4f2ed",
                                 color: "#1b2518",
-                                minHeight: 44,
+                                /* Matches MENU, trimmed from 44. */
+                                minHeight: 38,
                             }}
                             {...(bookingUrl.startsWith("http")
                                 ? { target: "_blank", rel: "noopener noreferrer" }
