@@ -123,23 +123,15 @@ export default function Hero({ content }: { content: HeroContent }) {
             />
 
             <div
-                className="tbm-wrap tbm-g12"
+                className="tbm-wrap tbm-g12 tbm-hero-copy"
                 style={{
                     position: "relative",
-                    /* Fill what the backdrop leaves and centre the copy in
-                       it, so the block sits mid-left rather than on the
-                       floor.
-
-                       The section pads 85px off the top to clear the fixed
-                       header. Centring inside that padding would leave 85px
-                       more air above the copy than below it, so the margin
-                       gives those 85px back and the copy centres on the
-                       photo itself. The header still floats clear: the copy
-                       is far shorter than the hero. */
+                    /* Fill what the backdrop leaves and centre the copy
+                       in it, so the block sits mid-left rather than on
+                       the floor. The margin and padding that decide where
+                       the centre falls live in .tbm-hero-copy, since they
+                       change below 900px. */
                     flex: 1,
-                    marginTop: -85,
-                    paddingTop: 64,
-                    paddingBottom: 64,
                     alignItems: "center",
                     rowGap: 32,
                 }}

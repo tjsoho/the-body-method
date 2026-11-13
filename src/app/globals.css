@@ -274,6 +274,29 @@ a:hover {
 .tbm-hero-full { min-height: 100vh; }
 .tbm-hero-full { min-height: 100dvh; }
 
+/* Where the hero copy centres.
+ *
+ * On a wide screen the sticky bar is 85px of the hero's top padding, so
+ * the copy pulls those 85px back and centres on the photo itself. There
+ * is a lot of room, and the headline stays well clear of the bar.
+ *
+ * On a phone the copy is nearly as tall as the hero, so centring it on
+ * the whole section puts the headline right under the bar, and any small
+ * scroll tucks it behind. Below 900px it centres in the space under the
+ * bar instead, and the padding comes in so it still has room to breathe. */
+.tbm-hero-copy {
+    margin-top: -85px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+@media (max-width: 900px) {
+    .tbm-hero-copy {
+        margin-top: 0;
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+}
+
 /* ---- Motion primitives --------------------------------------------- */
 
 /* Menu overlay links — a sage underline draws from left on hover.
