@@ -301,6 +301,34 @@ a:hover {
         0 2px 22px rgba(0, 0, 0, 0.5);
 }
 
+/* Page hero pool. Same idea as .tbm-hero-pool on the home page, but
+ * these heroes sit their copy at the bottom of the left seven columns
+ * rather than centring it, so the ellipse drops to match. Measured
+ * over the loop: copy band 6.1:1 with the frame at 84% of bare, and
+ * 4.9:1 over the still posters, which are brighter than the film.
+ *
+ * Below 900px the copy goes full width, so it spreads.               */
+.tbm-page-hero-pool {
+    background: radial-gradient(
+        ellipse 60% 54% at 28% 78%,
+        rgba(0, 0, 0, 0.68) 0%,
+        rgba(0, 0, 0, 0.52) 45%,
+        rgba(0, 0, 0, 0.18) 75%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+@media (max-width: 900px) {
+    .tbm-page-hero-pool {
+        background: radial-gradient(
+            ellipse 100% 54% at 50% 78%,
+            rgba(0, 0, 0, 0.74) 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            rgba(0, 0, 0, 0.24) 75%,
+            rgba(0, 0, 0, 0) 100%
+        );
+    }
+}
+
 /* Home hero pool. The full-width wash was dimming footage nobody was
  * reading over, so this is a soft pool of shade behind the copy block
  * and nothing anywhere else. Measured over eight frames across the
@@ -330,49 +358,6 @@ a:hover {
     }
 }
 
-/* Hero scrim. Measured, not eyeballed: the copy band has to clear
-   4.5:1 against cream on every hero photo we ship, and the rest of
-   the frame should stay as bright as that allows.
-
-   Desktop leans the darkness left, because the copy sits in the
-   first seven columns and the right of the photo carries nothing.
-   Below 900px .tbm-c-l7 goes full width, so the lean is wrong there
-   and the scrim has to cover the whole frame instead. That case used
-   to fall to 2.2:1 on the brighter photos.                          */
-.tbm-hero-scrim {
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.48) 0%,
-            rgba(0, 0, 0, 0.28) 45%,
-            rgba(0, 0, 0, 0) 74%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.14) 0%,
-            rgba(0, 0, 0, 0.04) 30%,
-            rgba(0, 0, 0, 0.2) 62%,
-            rgba(0, 0, 0, 0.46) 100%
-        );
-}
-@media (max-width: 900px) {
-    .tbm-hero-scrim {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(0, 0, 0, 0.44) 0%,
-                rgba(0, 0, 0, 0.36) 60%,
-                rgba(0, 0, 0, 0.3) 100%
-            ),
-            linear-gradient(
-                180deg,
-                rgba(0, 0, 0, 0.14) 0%,
-                rgba(0, 0, 0, 0.06) 30%,
-                rgba(0, 0, 0, 0.22) 62%,
-                rgba(0, 0, 0, 0.48) 100%
-            );
-    }
-}
 @media (max-width: 900px) {
     .tbm-hero-copy {
         margin-top: 0;

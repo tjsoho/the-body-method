@@ -94,7 +94,7 @@ export function PhotoHero({
             />
             <div
                 aria-hidden="true"
-                className="tbm-hero-scrim"
+                className="tbm-page-hero-pool"
                 style={{ position: "absolute", inset: 0 }}
             />
             <div
