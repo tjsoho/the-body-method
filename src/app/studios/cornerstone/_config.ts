@@ -5,6 +5,10 @@
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 export type Tile = { id: string; image: string; imageAlt: string };
@@ -93,6 +97,8 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 "Light pouring through the windows, trees outside through the windows, and people you know inside.",
             ],
             image: tbm("hero-cornerstone.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "The entrance to the Cornerstone building through the gardens",
             imageFocus: "center 50%",

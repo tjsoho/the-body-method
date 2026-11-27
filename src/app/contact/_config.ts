@@ -9,6 +9,10 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type StudioInfoBlock = {
     id: string;
@@ -71,6 +75,8 @@ export const contactFallbackData: ContactPageProps = {
             heading: "Contact + Locations",
             lines: [],
             image: "/images/tbm/contact-hero.jpg",
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "The beachfront path and palms a few minutes from the studio",
             imageFocus: "center 55%",

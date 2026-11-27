@@ -64,7 +64,8 @@ export default function FinalCta({ content }: { content: FinalCtaContent }) {
                         fontSize: "clamp(44px, 6vw, 96px)",
                         lineHeight: 1.02,
                         letterSpacing: "-.015em",
-                        textShadow: "0 1px 24px rgba(0,0,0,.25)",
+                        textShadow:
+                            "0 1px 2px rgba(0,0,0,.4), 0 2px 20px rgba(0,0,0,.45)",
                     }}
                 >
                     {content.headingLead}

@@ -3,6 +3,10 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 
@@ -59,6 +63,8 @@ export const aboutFallbackData: AboutPageProps = {
                 "Strength isn't only what happens when something gets heavier.",
             ],
             image: tbm("hero-about.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "A member standing at the barre looking out to the greenery",
             imageFocus: "center 45%",

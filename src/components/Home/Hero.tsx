@@ -19,6 +19,7 @@ import Link from "next/link";
 import { externalLinkProps } from "@/utils/links";
 import { motion } from "framer-motion";
 import type { HeroContent } from "@/app/_config";
+import HeroBackdrop from "@/components/core/HeroBackdrop";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -52,65 +53,38 @@ export default function Hero({ content }: { content: HeroContent }) {
                 overflow: "hidden",
             }}
         >
-            {/* Backdrop. A film plays whenever the admin panel has a URL
-                for this breakpoint, and the still stands in wherever it
-                does not. The still is never wasted: it is the poster, so
-                the frame is filled before the first video byte lands.
+            {/* Backdrop. The film plays where the client has supplied
+                one for this breakpoint, and the still stands in where
+                they have not. The still is never wasted: it is the
+                poster, so the frame is filled before the first video
+                byte lands.
 
                 With no film at all the still gets an ambient Ken-Burns
                 pan instead. 24s cycle, scale 1.02 to 1.08. */}
-            {desktopVideo ? (
-                <video
-                    className="tbm-hide-sm"
-                    src={desktopVideo}
+            {hasVideo ? (
+                <HeroBackdrop
+                    desktopVideo={desktopVideo}
+                    mobileVideo={mobileVideo}
                     poster={content.fallbackImage}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    aria-label={content.fallbackImageAlt}
+                    alt={content.fallbackImageAlt}
                     style={backdropStyle}
                 />
-            ) : null}
-            {mobileVideo ? (
-                <video
-                    className="tbm-hide-lg"
-                    src={mobileVideo}
-                    poster={content.fallbackImage}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    aria-label={content.fallbackImageAlt}
-                    style={backdropStyle}
-                />
-            ) : null}
-            {desktopVideo && mobileVideo ? null : (
+            ) : (
                 <motion.img
-                    className={
-                        desktopVideo
-                            ? "tbm-hide-lg"
-                            : mobileVideo
-                              ? "tbm-hide-sm"
-                              : undefined
-                    }
                     src={content.fallbackImage}
                     alt={content.fallbackImageAlt}
-                    initial={{ scale: hasVideo ? 1 : 1.02 }}
-                    animate={{ scale: hasVideo ? 1 : 1.08 }}
-                    transition={
-                        hasVideo
-                            ? { duration: 0 }
-                            : {
-                                  duration: 24,
-                                  ease: "linear",
-                                  repeat: Infinity,
-                                  repeatType: "reverse",
-                              }
-                    }
+                    initial={{ scale: 1.02 }}
+                    animate={{ scale: 1.08 }}
+                    transition={{
+                        duration: 24,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
                     style={{ ...backdropStyle, transformOrigin: "center center" }}
                 />
             )}
+
             {/* Scrim for WCAG AA on hero text. Shape and strength live
                 in .tbm-hero-scrim, because the copy goes full width on a
                 phone and the scrim has to follow it. */}
@@ -121,7 +95,7 @@ export default function Hero({ content }: { content: HeroContent }) {
             />
 
             <div
-                className="tbm-wrap tbm-g12 tbm-hero-copy"
+                className="tbm-wrap tbm-g12 tbm-hero-copy tbm-hero-ink"
                 style={{
                     position: "relative",
                     /* Fill what the backdrop leaves and centre the copy
@@ -147,7 +121,6 @@ export default function Hero({ content }: { content: HeroContent }) {
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
                         style={{
-                            textShadow: "0 1px 24px rgba(0,0,0,.25)",
                             margin: 0,
                             fontWeight: 400,
                             fontSize: "clamp(42px, 5.4vw, 80px)",

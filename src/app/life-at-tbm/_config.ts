@@ -8,6 +8,10 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { MemberStory } from "@/components/carousel/StoryCarousel";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 
@@ -87,6 +91,8 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                 "Movement brings us together, but some of the best things happen around it.",
             ],
             image: tbm("life-hero.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "Two members lying on their mats, talking before class",
             imageFocus: "center 50%",

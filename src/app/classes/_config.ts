@@ -4,6 +4,10 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 
@@ -58,6 +62,8 @@ export const classesFallbackData: ClassesPageProps = {
                 "Explore the ways you can move across The Body Method.",
             ],
             image: tbm("hero-classes.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt: "Two members hugging at the end of a class",
             imageFocus: "center 50%",
         },

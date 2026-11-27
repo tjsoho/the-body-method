@@ -5,6 +5,10 @@
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 export type Tile = { id: string; image: string; imageAlt: string };
@@ -75,6 +79,8 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
                 "With just six Reformers, Tugun Beach gives our teachers something valuable: the space to really teach.",
             ],
             image: tbm("hero-tugun.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "The Body Method shopfront at Tugun Beach",
             imageFocus: "center 40%",

@@ -16,9 +16,10 @@
    only has to offer the same handful of fields.
 ************************************************************ */
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import Reveal from "@/components/motion/Reveal";
 import RichText from "@/components/core/RichText";
+import HeroBackdrop from "@/components/core/HeroBackdrop";
 
 /* ************************************************************
                         TYPES
@@ -30,6 +31,10 @@ export type PhotoHeroContent = {
     image: string;
     imageAlt: string;
     imageFocus: string;
+    /** 16:9 film for the backdrop above 900px. Falls back to the photo. */
+    videoDesktopUrl?: string;
+    /** 9:16 film for the backdrop below 900px. Falls back to the photo. */
+    videoMobileUrl?: string;
 };
 
 export type BandHeroContent = {
@@ -52,6 +57,18 @@ export function PhotoHero({
     /** Buttons or anything else under the copy. */
     children?: ReactNode;
 }) {
+    const desktopVideo = content.videoDesktopUrl?.trim() || "";
+    const mobileVideo = content.videoMobileUrl?.trim() || "";
+
+    const backdropStyle: CSSProperties = {
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: content.imageFocus,
+    };
+
     return (
         <section
             style={{
@@ -65,18 +82,15 @@ export function PhotoHero({
                 overflow: "hidden",
             }}
         >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-                src={content.image}
+            {/* Backdrop: the client's film where there is one, the
+                photograph where there is not. HeroBackdrop reads the
+                breakpoint so only the cut that will be seen is fetched. */}
+            <HeroBackdrop
+                desktopVideo={desktopVideo}
+                mobileVideo={mobileVideo}
+                poster={content.image}
                 alt={content.imageAlt}
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: content.imageFocus,
-                }}
+                style={backdropStyle}
             />
             <div
                 aria-hidden="true"
@@ -84,7 +98,7 @@ export function PhotoHero({
                 style={{ position: "absolute", inset: 0 }}
             />
             <div
-                className="tbm-wrap tbm-g12"
+                className="tbm-wrap tbm-g12 tbm-hero-ink"
                 style={{
                     position: "relative",
                     marginTop: "auto",
@@ -98,7 +112,6 @@ export function PhotoHero({
                     <Reveal amount={0.3}>
                         <h1
                             style={{
-                                textShadow: "0 1px 24px rgba(0,0,0,.25)",
                                 margin: 0,
                                 fontWeight: 400,
                                 fontSize: "clamp(42px, 5.4vw, 80px)",

@@ -8,6 +8,10 @@
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import type { FaqEntry } from "@/components/admin/_shared/form-primitives";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 
@@ -98,6 +102,8 @@ export const newHereFallbackData: NewHerePageProps = {
                 "For $99, spend 21 days exploring The Body Method across both of our Tugun studios.",
             ],
             image: tbm("hero-new-here.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt: "The studio in warm light with the windows onto the trees",
             imageFocus: "center 45%",
             cta: { label: "START MY 21 DAYS - $99", href: BOOKING_URL },

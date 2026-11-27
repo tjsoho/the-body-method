@@ -12,6 +12,10 @@
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type MembershipTier = {
     id: string;
@@ -91,9 +95,10 @@ export const membershipsFallbackData: MembershipsPageProps = {
                 "The best membership isn't the one with the most classes.",
                 "It's the one that helps movement become part of your life.",
             ],
-            image: "/images/tbm-placeholders/hero-members.jpg",
-            imageAlt:
-                "A rolled mat, linen towel and water bottle on a sunny bench",
+            image: "/images/tbm/hero-memberships.jpg",
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
+            imageAlt: "Two members in the studio at the end of a class",
             imageFocus: "center 55%",
         },
         tiers: {
