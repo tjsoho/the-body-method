@@ -70,17 +70,17 @@ export const contactFallbackData: ContactPageProps = {
         hero: {
             heading: "Contact + Locations",
             lines: [],
-            image: "/images/tbm-placeholders/landscape-life-walk.jpg",
+            image: "/images/tbm/contact-hero.jpg",
             imageAlt:
-                "Women walking along the water at sunrise on a wide quiet beach",
+                "The beachfront path and palms a few minutes from the studio",
             imageFocus: "center 55%",
         },
         studios: [
             {
                 id: "tugun-beach",
                 name: "TUGUN BEACH",
-                image: "/images/tbm-placeholders/studio-tugun-reformer.jpg",
-                imageAlt: "Feet pressing the footbar of a timber Reformer",
+                image: "/images/tbm/studios-tugun.jpg",
+                imageAlt: "The Body Method shopfront at Tugun Beach",
                 imageFocus: "center 45%",
                 address: "3/5 Toolona Street, Tugun QLD 4224",
                 intro: "Our Reformer Pilates studio, just moments from the beach.",
@@ -123,8 +123,8 @@ export const contactFallbackData: ContactPageProps = {
             {
                 id: "cornerstone",
                 name: "CORNERSTONE",
-                image: "/images/tbm-placeholders/studio-cornerstone-meditation.jpg",
-                imageAlt: "Seated meditation facing windows full of trees",
+                image: "/images/tbm/studios-cornerstone.jpg",
+                imageAlt: "The entrance to the Cornerstone building through the gardens",
                 imageFocus: "center",
                 address:
                     "Upstairs, Level 1, Cornerstone Stores, Shop 8, 570 Gold Coast Highway, Tugun QLD 4224",

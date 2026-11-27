@@ -82,7 +82,6 @@ export type NewHerePageProps = {
 
 export const NEW_HERE_SLUG = "new-here";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -98,8 +97,8 @@ export const newHereFallbackData: NewHerePageProps = {
                 "Come as you are and find the movement that fits your life.",
                 "For $99, spend 21 days exploring The Body Method across both of our Tugun studios.",
             ],
-            image: ph("hero-new-here.jpg"),
-            imageAlt: "A woman carrying a rolled mat into a light-filled studio",
+            image: tbm("hero-new-here.jpg"),
+            imageAlt: "The studio in warm light with the windows onto the trees",
             imageFocus: "center 45%",
             cta: { label: "START MY 21 DAYS - $99", href: BOOKING_URL },
         },
@@ -124,8 +123,8 @@ export const newHereFallbackData: NewHerePageProps = {
                 "You don't need to be flexible, coordinated or “fit enough” before you arrive.",
             ],
             closer: "You start where you are - we teach from there.",
-            image: ph("portrait-new-here-guide.jpg"),
-            imageAlt: "A teacher's hand gently guiding a kneeling beginner",
+            image: tbm("new-here-ready.jpg"),
+            imageAlt: "A teacher guiding a client through a stretch",
         },
         studios: {
             headingLead: "Two studios - ",
@@ -151,8 +150,8 @@ export const newHereFallbackData: NewHerePageProps = {
             cta: { label: "COMPARE THE STUDIOS", href: "/studios" },
         },
         weeks: {
-            bandImage: ph("landscape-tugun-studio-morning.jpg"),
-            bandImageAlt: "An empty Reformer studio in early morning light",
+            bandImage: tbm("new-here-band.jpg"),
+            bandImageAlt: "A hand drawing back the studio curtain to the garden",
             bandImageFocus: "center 55%",
             heading: "Your three weeks:",
             steps: [

@@ -50,7 +50,6 @@ export type StudiosPageProps = {
 
 export const STUDIOS_SLUG = "studios";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -63,8 +62,8 @@ export const studiosFallbackData: StudiosPageProps = {
         hero: {
             heading: "Two studios - One Body Method.",
             lines: [],
-            image: ph("hero-studios.jpg"),
-            imageAlt: "A calm studio room with tall windows onto trees",
+            image: tbm("hero-studios.jpg"),
+            imageAlt: "The studio barre and mirrors with trees through the glass",
             imageFocus: "center 45%",
         },
         difference: {

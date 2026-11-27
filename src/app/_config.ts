@@ -146,7 +146,6 @@ export type HomePageProps = {
 };
 
 /** Placeholder image path shortcut. */
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -168,10 +167,10 @@ export const homePageFallbackData: HomePageProps = {
             secondaryCta: { label: "EXPLORE BOTH STUDIOS", href: "/studios" },
             videoDesktopUrl: "",
             videoMobileUrl: "",
-            fallbackImage: ph("hero-cornerstone-group.jpg"),
+            fallbackImage: tbm("hero-home.jpg"),
             fallbackImageAlt:
-                "A group in warrior pose silhouetted against tall tree-filled windows",
-            imageFocus: "center 40%",
+                "A full class resting on their mats while the teacher stands at the window",
+            imageFocus: "center 45%",
         },
         belong: {
             headingLead: "More than a place to move - ",
@@ -319,21 +318,21 @@ export const homePageFallbackData: HomePageProps = {
             tiles: [
                 {
                     id: "tile-1",
-                    image: ph("life-group.jpg"),
+                    image: tbm("life-tile-group.jpg"),
                     imageAlt:
-                        "A row of members in a seated stretch facing the windows",
+                        "Members resting on their mats after class",
                     objectPosition: "center",
                 },
                 {
                     id: "tile-2",
-                    image: ph("life-meditation.jpg"),
-                    imageAlt: "Seated meditation in linen",
+                    image: tbm("life-tile-meditation.jpg"),
+                    imageAlt: "A teacher sitting with the class while they rest",
                     objectPosition: "center",
                 },
                 {
                     id: "tile-3",
-                    image: ph("life-beach.jpg"),
-                    imageAlt: "Yoga on the sand at sunrise",
+                    image: tbm("life-tile-beach.jpg"),
+                    imageAlt: "The beach through the palms at Tugun",
                     objectPosition: "center 60%",
                 },
             ],
@@ -343,8 +342,8 @@ export const homePageFallbackData: HomePageProps = {
             headingItalic: "how it feels.",
             body: "21 days + 2 studios and unlimited classes = $99.",
             cta: { label: "START YOUR 21 DAYS", href: BOOKING_URL },
-            backgroundImage: ph("final-cta-rest.jpg"),
-            backgroundImageAlt: "Resting on a mat in late afternoon light",
+            backgroundImage: tbm("home-final-cta.jpg"),
+            backgroundImageAlt: "A class lying back on their mats at the end of a session",
             imageFocus: "center",
         },
     },

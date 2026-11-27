@@ -58,7 +58,6 @@ export type PrivatePilatesPageProps = {
 
 export const PRIVATE_PILATES_SLUG = "private-pilates";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -74,9 +73,9 @@ export const privatePilatesFallbackData: PrivatePilatesPageProps = {
                 "Sometimes a group class is exactly what you need.",
                 "Sometimes it isn't.",
             ],
-            image: ph("hero-private.jpg"),
+            image: tbm("private-pilates-wide.jpg"),
             imageAlt:
-                "A teacher's hands supporting a client's leg in a Reformer strap",
+                "A teacher adjusting a client at the tower",
             imageFocus: "center 45%",
         },
         intro: {
