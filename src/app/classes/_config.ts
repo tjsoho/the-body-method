@@ -43,6 +43,8 @@ export type ClassesPageProps = {
 export const CLASSES_SLUG = "classes";
 
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const classesFallbackData: ClassesPageProps = {
     slug: CLASSES_SLUG,
@@ -66,57 +68,57 @@ export const classesFallbackData: ClassesPageProps = {
             items: [
                 {
                     id: "reformer",
-                    image: ph("studio-tugun-reformer.jpg"),
-                    imageAlt: "Feet pressing the footbar of a timber Reformer",
+                    image: tbm("classes-reformer.jpg"),
+                    imageAlt: "A teacher watching a client work through footwork on the Reformer",
                     imageFocus: "center 45%",
                     title: "Reformer Pilates",
                     body: "Small-group Reformer at Tugun Beach with a maximum of six in a class, and personalised teacher attention.",
                 },
                 {
                     id: "mat-pilates",
-                    image: ph("landscape-mat.jpg"),
-                    imageAlt: "A row of people in a hundred pose on sage mats",
+                    image: tbm("classes-mat.jpg"),
+                    imageAlt: "A mat class stretching in low light beside the studio windows",
                     imageFocus: "center 45%",
                     title: "Mat Pilates",
                     body: "Strength, control and intelligent movement using your own body and props.",
                 },
                 {
                     id: "yoga",
-                    image: ph("landscape-yoga.jpg"),
+                    image: tbm("classes-yoga.jpg"),
                     imageAlt:
-                        "People in warrior two facing tall windows full of trees",
+                        "A yoga class reaching both arms overhead",
                     imageFocus: "center 45%",
                     title: "Yoga",
                     body: "Move, breathe and reconnect. Our yoga classes combine mindful movement, mobility, strength and breathwork to help you feel more grounded, open and connected to your body.",
                 },
                 {
                     id: "barre",
-                    image: ph("landscape-barre.jpg"),
-                    imageAlt: "Legs in grip socks in a plie at a timber barre",
+                    image: tbm("classes-barre.jpg"),
+                    imageAlt: "A barre class holding a lunge at the timber barre",
                     imageFocus: "center 45%",
                     title: "Barre Pilates",
                     body: "A dynamic, low-impact workout blending Pilates principles with barre-inspired movement. Expect controlled, targeted sequences designed to build strength, stability and that satisfying full-body burn.",
                 },
                 {
                     id: "yin",
-                    image: ph("landscape-yin.jpg"),
-                    imageAlt: "Supported butterfly pose over a bolster",
+                    image: tbm("classes-yin.jpg"),
+                    imageAlt: "Two people resting on their backs on mats in a yin class",
                     imageFocus: "center 45%",
                     title: "Yin Yoga",
                     body: "Slow down and find space. Yin uses longer-held, mostly floor-based poses to gently work into the deeper connective tissues, improve flexibility and mobility, and give your body and mind time to unwind.",
                 },
                 {
                     id: "restorative",
-                    image: ph("landscape-restore.jpg"),
-                    imageAlt: "Legs up the wall with bolsters and a linen blanket",
+                    image: tbm("classes-restorative.jpg"),
+                    imageAlt: "A class folded forward over their mats beside the windows",
                     imageFocus: "center 45%",
                     title: "Restorative Yoga",
                     body: "Rest, reset and recharge. Restorative Yoga uses gentle, fully supported poses, props and stillness to encourage deep relaxation, release tension and help your nervous system settle. Less about stretching, more about giving your body permission to truly rest.",
                 },
                 {
                     id: "meditation",
-                    image: ph("landscape-med.jpg"),
-                    imageAlt: "Rolling a massage ball under a foot on a sage mat",
+                    image: tbm("classes-meditation.jpg"),
+                    imageAlt: "A hand resting in a mudra during meditation",
                     imageFocus: "center 45%",
                     title: "Meditation / Roll and Release + other movement",
                     body: "Movement isn’t always about working harder. From guided meditation to Roll & Release and specialty movement sessions, these classes give you space to restore, release tension, explore your body differently and support your overall wellbeing.",
@@ -124,8 +126,8 @@ export const classesFallbackData: ClassesPageProps = {
             ],
         },
         ctaCard: {
-            image: ph("landscape-tugun-studio-morning.jpg"),
-            imageAlt: "An empty Reformer studio in early morning light",
+            image: tbm("classes-closing.jpg"),
+            imageAlt: "Two clients reaching overhead at the end of a Reformer class",
             imageFocus: "center",
             primaryCta: {
                 label: "VIEW FULL TIMETABLE",

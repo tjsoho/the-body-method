@@ -147,6 +147,8 @@ export type HomePageProps = {
 
 /** Placeholder image path shortcut. */
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const homePageFallbackData: HomePageProps = {
     slug: "home",
@@ -179,9 +181,9 @@ export const homePageFallbackData: HomePageProps = {
                 "We think it’s great teaching. Being noticed and finding movement that works for your body and people you genuinely look forward to seeing.",
                 "That’s what we’ve built The Body Method around.",
             ],
-            image: ph("belong-tree-pose.jpg"),
-            imageAlt: "Hands at heart in tree pose on a sage mat",
-            imageFocus: "center 35%",
+            image: tbm("home-belong.jpg"),
+            imageAlt: "A hand resting on the carriage of a Reformer mid-exercise",
+            imageFocus: "center 50%",
             pillars: [
                 {
                     title: "Exceptional Teaching",
@@ -209,8 +211,8 @@ export const homePageFallbackData: HomePageProps = {
                 italicLine:
                     "Reformer Pilates that is personal, precise and intimate.",
                 body: "Reformer Pilates with a maximum of six people, giving our teachers the space to watch, adapt, correct and teach the person in front of them.",
-                image: ph("studio-tugun-reformer.jpg"),
-                imageAlt: "Feet pressing the footbar of a timber Reformer",
+                image: tbm("home-studio-tugun.jpg"),
+                imageAlt: "A row of Reformers mid-class at Tugun Beach",
                 imageFocus: "center 45%",
                 ctaLabel: "SEE TUGUN BEACH PILATES",
                 ctaHref: "/studios",
@@ -220,8 +222,8 @@ export const homePageFallbackData: HomePageProps = {
                 italicLine:
                     "Light filled yoga, mat pilates and movement with variety, genuine energy and a great community.",
                 body: "Pilates, yoga, barre, yin, meditation and movement in our beautiful Cornerstone studio - where natural light pours in and the trees feel like part of the room - with more ways to move and more people to move alongside.",
-                image: ph("studio-cornerstone-meditation.jpg"),
-                imageAlt: "Seated meditation facing windows full of trees",
+                image: tbm("home-studio-cornerstone.jpg"),
+                imageAlt: "A full mat class at Cornerstone with trees through the windows",
                 imageFocus: "center 45%",
                 ctaLabel: "SEE CORNERSTONE",
                 ctaHref: "/studios",
@@ -260,29 +262,29 @@ export const homePageFallbackData: HomePageProps = {
                 {
                     id: "story-1",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Anna",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-1-downdog.jpg"),
-                    imageAlt: "Downward facing dog on a sage mat",
+                    image: tbm("home-story-anna.jpg"),
+                    imageAlt: "Anna talking with two other members in the studio",
                 },
                 {
                     id: "story-2",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Christine",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-2-reformer-arms.jpg"),
-                    imageAlt: "Kneeling arm work with straps on a Reformer",
+                    image: tbm("home-story-christine.jpg"),
+                    imageAlt: "Christine smiling in the studio",
                 },
                 {
                     id: "story-3",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Devina",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-3-childs-pose.jpg"),
-                    imageAlt: "Child's pose in soft window light",
+                    image: tbm("home-story-devina.jpg"),
+                    imageAlt: "Devina hugging another member after class",
                 },
             ],
         },
@@ -304,9 +306,9 @@ export const homePageFallbackData: HomePageProps = {
                 "Private Pilates gives you the space to work one-to-one with an experienced teacher and build movement around your body, your history and what you want to achieve.",
                 "Private Pilates for people who want individual attention - whether you're returning from injury, building confidence, navigating pregnancy/postpartum, improving technique or simply want movement built around your body.",
             ],
-            image: ph("private-pilates.jpg"),
-            imageAlt: "A teacher guiding a client's leg in Reformer straps",
-            imageFocus: "50% 0%",
+            image: tbm("home-private-pilates.jpg"),
+            imageAlt: "A client's hands resting on the Reformer during a private session",
+            imageFocus: "center",
             cta: { label: "EXPLORE PRIVATE PILATES", href: "/private-pilates" },
         },
         lifeAtTbm: {

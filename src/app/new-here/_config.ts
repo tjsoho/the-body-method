@@ -83,6 +83,8 @@ export type NewHerePageProps = {
 export const NEW_HERE_SLUG = "new-here";
 
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const newHereFallbackData: NewHerePageProps = {
     slug: NEW_HERE_SLUG,
@@ -110,8 +112,8 @@ export const newHereFallbackData: NewHerePageProps = {
             closerPlain: "Because the goal isn’t to move every day for 21 days.",
             closerItalic:
                 "It’s to find a way of moving you’ll want to keep coming back to long after they’re over.",
-            image: ph("portrait-new-here-springs.jpg"),
-            imageAlt: "A hand adjusting the springs on a timber Pilates tower",
+            image: tbm("new-here-21-days.jpg"),
+            imageAlt: "A member smiling between exercises on the Pilates tower",
         },
         ready: {
             heading: "You don’t need to be “ready”.",
@@ -133,16 +135,16 @@ export const newHereFallbackData: NewHerePageProps = {
                     id: "tugun-beach",
                     name: "Tugun Beach",
                     body: "Six-person Reformer Pilates with personalised teaching and close attention.",
-                    image: ph("studio-tugun-reformer.jpg"),
-                    imageAlt: "Feet pressing the footbar of a timber Reformer",
+                    image: tbm("new-here-tugun.jpg"),
+                    imageAlt: "A small group class working on the towers at Tugun Beach",
                     imageFocus: "center 45%",
                 },
                 {
                     id: "cornerstone",
                     name: "Cornerstone",
                     body: "Pilates, yoga, barre and more in our larger, light-filled community studio.",
-                    image: ph("studio-cornerstone-meditation.jpg"),
-                    imageAlt: "Seated meditation facing windows full of trees",
+                    image: tbm("new-here-cornerstone.jpg"),
+                    imageAlt: "The Cornerstone studio, timber floors and greenery through the glass",
                     imageFocus: "center",
                 },
             ],
@@ -188,8 +190,8 @@ export const newHereFallbackData: NewHerePageProps = {
                 "Book and then arrive a little early. Tell us anything we should know about your body or experience.",
             ],
             italicLine: "Then let us take care of the rest.",
-            image: ph("landscape-first-class-door.jpg"),
-            imageAlt: "Shoes lined up on a timber bench at the studio door",
+            image: tbm("new-here-first-class.jpg"),
+            imageAlt: "Two members greeting each other with a hug at the studio door",
             cta: { label: "START MY 21 DAYS", href: BOOKING_URL },
         },
         faq: {
