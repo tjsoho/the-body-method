@@ -338,6 +338,16 @@ export const siteImages: SiteImage[] = [
         "group": "Tbm placeholders"
     },
     {
+        "url": "/images/tbm/about-care.jpg",
+        "label": "About care",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/about-strength.jpg",
+        "label": "About strength",
+        "group": "Tbm"
+    },
+    {
         "url": "/images/tbm/classes-barre.jpg",
         "label": "Classes barre",
         "group": "Tbm"
@@ -378,8 +388,68 @@ export const siteImages: SiteImage[] = [
         "group": "Tbm"
     },
     {
+        "url": "/images/tbm/contact-hero.jpg",
+        "label": "Contact hero",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/cornerstone-community.jpg",
+        "label": "Cornerstone community",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/cornerstone-intro.jpg",
+        "label": "Cornerstone intro",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/cornerstone-timetable.jpg",
+        "label": "Cornerstone timetable",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-about.jpg",
+        "label": "Hero about",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-classes.jpg",
+        "label": "Hero classes",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-cornerstone.jpg",
+        "label": "Hero cornerstone",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-home.jpg",
+        "label": "Hero home",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-new-here.jpg",
+        "label": "Hero new here",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-studios.jpg",
+        "label": "Hero studios",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/hero-tugun.jpg",
+        "label": "Hero tugun",
+        "group": "Tbm"
+    },
+    {
         "url": "/images/tbm/home-belong.jpg",
         "label": "Home belong",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/home-final-cta.jpg",
+        "label": "Home final cta",
         "group": "Tbm"
     },
     {
@@ -428,6 +498,21 @@ export const siteImages: SiteImage[] = [
         "group": "Tbm"
     },
     {
+        "url": "/images/tbm/life-tile-beach.jpg",
+        "label": "Life tile beach",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/life-tile-group.jpg",
+        "label": "Life tile group",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/life-tile-meditation.jpg",
+        "label": "Life tile meditation",
+        "group": "Tbm"
+    },
+    {
         "url": "/images/tbm/life-workshop-ballet.jpg",
         "label": "Life workshop ballet",
         "group": "Tbm"
@@ -448,6 +533,11 @@ export const siteImages: SiteImage[] = [
         "group": "Tbm"
     },
     {
+        "url": "/images/tbm/new-here-band.jpg",
+        "label": "New here band",
+        "group": "Tbm"
+    },
+    {
         "url": "/images/tbm/new-here-cornerstone.jpg",
         "label": "New here cornerstone",
         "group": "Tbm"
@@ -455,6 +545,11 @@ export const siteImages: SiteImage[] = [
     {
         "url": "/images/tbm/new-here-first-class.jpg",
         "label": "New here first class",
+        "group": "Tbm"
+    },
+    {
+        "url": "/images/tbm/new-here-ready.jpg",
+        "label": "New here ready",
         "group": "Tbm"
     },
     {

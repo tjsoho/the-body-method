@@ -42,7 +42,6 @@ export type ClassesPageProps = {
 
 export const CLASSES_SLUG = "classes";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -58,8 +57,8 @@ export const classesFallbackData: ClassesPageProps = {
                 "Strength, control, mobility, stretching, energy and stillness - different days ask different things of us.",
                 "Explore the ways you can move across The Body Method.",
             ],
-            image: ph("hero-classes.jpg"),
-            imageAlt: "A mat Pilates class with legs raised in tabletop",
+            image: tbm("hero-classes.jpg"),
+            imageAlt: "Two members hugging at the end of a class",
             imageFocus: "center 50%",
         },
         cards: {

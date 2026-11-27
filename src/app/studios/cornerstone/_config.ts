@@ -78,7 +78,8 @@ export type CornerstonePageProps = {
 
 export const CORNERSTONE_SLUG = "studios-cornerstone";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const cornerstoneFallbackData: CornerstonePageProps = {
     slug: CORNERSTONE_SLUG,
@@ -91,9 +92,9 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
             lines: [
                 "Light pouring through the windows, trees outside through the windows, and people you know inside.",
             ],
-            image: ph("hero-corner.jpg"),
+            image: tbm("hero-cornerstone.jpg"),
             imageAlt:
-                "An upstairs studio with windows full of tree canopy and people folded forward on mats",
+                "The entrance to the Cornerstone building through the gardens",
             imageFocus: "center 50%",
         },
         intro: {
@@ -107,8 +108,8 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 "Movement.",
             ],
             closer: "Different practices, with one place to make them part of your life.",
-            image: ph("portrait-cs-intro.jpg"),
-            imageAlt: "A teacher's hand on a student's back in a seated pose",
+            image: tbm("cornerstone-intro.jpg"),
+            imageAlt: "A mat and massage ball waiting by the window at Cornerstone",
         },
         moveDifferently: {
             heading: "Move differently through your week.",
@@ -121,19 +122,19 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
             cards: [
                 {
                     id: "mat",
-                    image: ph("portrait-cs-mat.jpg"),
-                    imageAlt: "Side-lying leg lift on a sage mat",
+                    image: tbm("classes-mat.jpg"),
+                    imageAlt: "A mat class stretching in low light beside the studio windows",
                 },
                 {
                     id: "yoga",
-                    image: ph("portrait-cs-yoga.jpg"),
+                    image: tbm("classes-yoga.jpg"),
                     imageAlt:
-                        "A low lunge with arms raised in front of tall windows",
+                        "A yoga class reaching both arms overhead",
                 },
                 {
                     id: "barre",
-                    image: ph("portrait-cs-barre.jpg"),
-                    imageAlt: "A hand on a timber barre and legs in a plie",
+                    image: tbm("classes-barre.jpg"),
+                    imageAlt: "A barre class holding a lunge at the timber barre",
                 },
             ],
             cta: { label: "EXPLORE CLASSES", href: "/classes" },
@@ -145,8 +146,8 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 "Come for your class - don’t be surprised if you stay for a chat.",
             ],
             link: { label: "LIFE AT TBM", href: "/life-at-tbm" },
-            image: ph("landscape-cs-community.jpg"),
-            imageAlt: "People chatting while rolling up mats after class",
+            image: tbm("cornerstone-community.jpg"),
+            imageAlt: "The street outside the studio, with people at the cafe tables",
             imageFocus: "center",
         },
         grid: {
@@ -155,15 +156,15 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                 href: "/our-people",
                 role: "Vinyasa / flow yoga.",
                 time: "Cornerstone, Wednesday 4.15pm",
-                image: ph("portrait-t9.jpg"),
-                imageAlt: "Hands holding a singing bowl in a lap",
+                image: tbm("teacher-susie-tagarro.jpg"),
+                imageAlt: "Portrait of Susie Tagarro",
             },
             story: {
                 label: "“Why I stay.”",
                 quote: "Short quote",
-                caption: "Member name · Member since XXXX",
-                image: ph("member-1-downdog.jpg"),
-                imageAlt: "Downward facing dog on a sage mat",
+                caption: "Anna · Member since XXXX",
+                image: tbm("home-story-anna.jpg"),
+                imageAlt: "Anna talking with two other members in the studio",
             },
             timetable: {
                 body: "Classes run throughout the week. Check the live timetable and book your spot before you arrive.",
@@ -171,9 +172,8 @@ export const cornerstoneFallbackData: CornerstonePageProps = {
                     label: "VIEW CORNERSTONE TIMETABLE",
                     href: BOOKING_URL,
                 },
-                image: ph("landscape-yoga.jpg"),
-                imageAlt:
-                    "People in warrior two facing tall windows full of trees",
+                image: tbm("cornerstone-timetable.jpg"),
+                imageAlt: "Members resting on their mats at the end of a class",
             },
             location: {
                 address:

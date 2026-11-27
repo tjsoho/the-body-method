@@ -60,7 +60,8 @@ export type TugunBeachPageProps = {
 
 export const TUGUN_BEACH_SLUG = "studios-tugun-beach";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const tugunBeachFallbackData: TugunBeachPageProps = {
     slug: TUGUN_BEACH_SLUG,
@@ -73,9 +74,9 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             lines: [
                 "With just six Reformers, Tugun Beach gives our teachers something valuable: the space to really teach.",
             ],
-            image: ph("hero-tugun.jpg"),
+            image: tbm("hero-tugun.jpg"),
             imageAlt:
-                "Hands gripping the footbar of a timber Reformer while a teacher guides the knee",
+                "The Body Method shopfront at Tugun Beach",
             imageFocus: "center 40%",
         },
         intro: {
@@ -90,9 +91,9 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             ],
             closer:
                 "With a maximum of six, there is room for individual teaching within every class.",
-            image: ph("portrait-tugun-six.jpg"),
+            image: tbm("home-studio-tugun.jpg"),
             imageAlt:
-                "A small Reformer studio with one person lying on the carriage",
+                "A row of Reformers mid-class at Tugun Beach",
         },
         reformer: {
             heading: "Reformer Pilates at The Body Method",
@@ -101,9 +102,9 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             bestFor:
                 "All ages and fitness levels, including pregnancy and postpartum, those returning from injury, or anyone looking for a strong, effective workout that builds core strength and stability.",
             cta: { label: "VIEW REFORMER TIMES", href: BOOKING_URL },
-            image: ph("portrait-tugun-socks.jpg"),
+            image: tbm("classes-reformer.jpg"),
             imageAlt:
-                "Feet in grip socks on the carriage of a timber Reformer",
+                "A teacher watching a client work through footwork on the Reformer",
         },
         privateBand: {
             heading: "Movement that is all about you.",
@@ -112,9 +113,9 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
                 label: "EXPLORE PRIVATE PILATES",
                 href: "/private-pilates",
             },
-            image: ph("landscape-tugun-private.jpg"),
+            image: tbm("private-semi.jpg"),
             imageAlt:
-                "A teacher's hands supporting a client's ankle on a Reformer",
+                "A teacher adjusting a client's arms in the straps",
             imageFocus: "center",
         },
         teachers: {
@@ -122,18 +123,18 @@ export const tugunBeachFallbackData: TugunBeachPageProps = {
             tiles: [
                 {
                     id: "teacher-1",
-                    image: ph("teacher-1.jpg"),
-                    imageAlt: "A teacher's hands guiding a student's hips",
+                    image: tbm("teacher-mel-kitchen.jpg"),
+                    imageAlt: "Portrait of Mel Kitchen",
                 },
                 {
                     id: "teacher-2",
-                    image: ph("teacher-2.jpg"),
-                    imageAlt: "Plank on the Reformer carriage",
+                    image: tbm("teacher-miki-takumiya.jpg"),
+                    imageAlt: "Portrait of Miki Takumiya",
                 },
                 {
                     id: "teacher-4",
-                    image: ph("teacher-4.jpg"),
-                    imageAlt: "Legs in Reformer straps",
+                    image: tbm("teacher-kassie-redmond.jpg"),
+                    imageAlt: "Portrait of Kassie Redmond",
                 },
             ],
         },

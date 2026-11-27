@@ -72,7 +72,6 @@ export type LifeAtTbmPageProps = {
 
 export const LIFE_AT_TBM_SLUG = "life-at-tbm";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
 /** The Nov 2026 shoot. Real photography, beside the placeholders. */
 const tbm = (file: string) => `/images/tbm/${file}`;
 
@@ -132,29 +131,29 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                 {
                     id: "story-1",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Anna",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-1-downdog.jpg"),
-                    imageAlt: "Downward facing dog on a sage mat",
+                    image: tbm("home-story-anna.jpg"),
+                    imageAlt: "Anna talking with two other members in the studio",
                 },
                 {
                     id: "story-2",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Christine",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-2-reformer-arms.jpg"),
-                    imageAlt: "Kneeling arm work with straps on a Reformer",
+                    image: tbm("home-story-christine.jpg"),
+                    imageAlt: "Christine smiling in the studio",
                 },
                 {
                     id: "story-3",
                     quote: "Short quote",
-                    name: "Member name",
+                    name: "Devina",
                     memberSince: "XXXX",
                     favouriteClassTeacher: "Favourite class / teacher",
-                    image: ph("member-3-childs-pose.jpg"),
-                    imageAlt: "Child’s pose in soft window light",
+                    image: tbm("home-story-devina.jpg"),
+                    imageAlt: "Devina hugging another member after class",
                 },
             ],
         },

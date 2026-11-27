@@ -44,7 +44,8 @@ export type AboutPageProps = {
 
 export const ABOUT_SLUG = "about";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const aboutFallbackData: AboutPageProps = {
     slug: ABOUT_SLUG,
@@ -57,9 +58,9 @@ export const aboutFallbackData: AboutPageProps = {
             lines: [
                 "Strength isn't only what happens when something gets heavier.",
             ],
-            image: ph("hero-about.jpg"),
+            image: tbm("hero-about.jpg"),
             imageAlt:
-                "A woman holding a side plank in front of tall windows",
+                "A member standing at the barre looking out to the greenery",
             imageFocus: "center 45%",
         },
         strength: {
@@ -67,9 +68,9 @@ export const aboutFallbackData: AboutPageProps = {
             body: [
                 "Knowing when to push and when to listen. Showing up for yourself and having people around you who notice when you do. That's the kind of strength we're interested in.",
             ],
-            image: ph("portrait-about.jpg"),
+            image: tbm("about-strength.jpg"),
             imageAlt:
-                "A linen bolster, blanket and blocks on a mat by a sunny window",
+                "A mat and massage ball laid out by the studio window",
         },
         care: {
             heading: "We actually genuinely care.",
@@ -77,8 +78,8 @@ export const aboutFallbackData: AboutPageProps = {
                 "About the quality of the teaching, about the people who walk through our doors. About remembering your name and understanding your body and about creating somewhere people feel better for having spent time.",
                 "That philosophy has shaped The Body Method from the beginning.",
             ],
-            image: ph("belong-tree-pose.jpg"),
-            imageAlt: "Hands at heart in tree pose on a sage mat",
+            image: tbm("about-care.jpg"),
+            imageAlt: "A teacher's hands supporting a client's head and shoulder",
         },
         beliefs: {
             heading: "What We Believe:",
