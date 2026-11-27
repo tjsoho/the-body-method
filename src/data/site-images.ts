@@ -428,6 +428,11 @@ export const siteImages: SiteImage[] = [
         "group": "Tbm"
     },
     {
+        "url": "/images/tbm/hero-memberships.jpg",
+        "label": "Hero memberships",
+        "group": "Tbm"
+    },
+    {
         "url": "/images/tbm/hero-new-here.jpg",
         "label": "Hero new here",
         "group": "Tbm"

@@ -8,6 +8,10 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type Cta = { label: string; href: string };
 
@@ -63,6 +67,8 @@ export const studiosFallbackData: StudiosPageProps = {
             heading: "Two studios - One Body Method.",
             lines: [],
             image: tbm("hero-studios.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt: "The studio barre and mirrors with trees through the glass",
             imageFocus: "center 45%",
         },

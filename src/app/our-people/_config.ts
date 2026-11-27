@@ -7,6 +7,10 @@
 ************************************************************ */
 
 import type { PhotoHeroContent } from "@/components/core/PageHero";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 export type OurPeopleContent = {
     hero: PhotoHeroContent;
@@ -47,6 +51,8 @@ export const ourPeopleFallbackData: OurPeoplePageProps = {
                 "That's what we look for in our people.",
             ],
             image: tbm("people-hero.jpg"),
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             imageAlt:
                 "The Body Method teaching team together in the studio",
             imageFocus: "center 55%",

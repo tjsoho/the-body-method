@@ -1,6 +1,10 @@
 import type { MemberStory } from "@/components/Home/WhyPeopleStay";
 import type { LifeTile } from "@/components/Home/LifeAtTbm";
 import { BOOKING_URL } from "@/config/booking";
+import {
+    HERO_VIDEO_DESKTOP,
+    HERO_VIDEO_MOBILE,
+} from "@/config/hero-video";
 
 /**
  * The Body Method — Home page content shape and fallback copy.
@@ -165,8 +169,8 @@ export const homePageFallbackData: HomePageProps = {
                 href: BOOKING_URL,
             },
             secondaryCta: { label: "EXPLORE BOTH STUDIOS", href: "/studios" },
-            videoDesktopUrl: "",
-            videoMobileUrl: "",
+            videoDesktopUrl: HERO_VIDEO_DESKTOP,
+            videoMobileUrl: HERO_VIDEO_MOBILE,
             fallbackImage: tbm("hero-home.jpg"),
             fallbackImageAlt:
                 "A full class resting on their mats while the teacher stands at the window",
