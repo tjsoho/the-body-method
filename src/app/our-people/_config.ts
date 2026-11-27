@@ -31,7 +31,8 @@ export type OurPeoplePageProps = {
 
 export const OUR_PEOPLE_SLUG = "our-people";
 
-const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const ourPeopleFallbackData: OurPeoplePageProps = {
     slug: OUR_PEOPLE_SLUG,
@@ -45,9 +46,9 @@ export const ourPeopleFallbackData: OurPeoplePageProps = {
                 "Technique and experience matters, but great teaching also requires something harder to put on a certificate: **the ability to see the person in front of you.**",
                 "That's what we look for in our people.",
             ],
-            image: ph("hero-people.jpg"),
+            image: tbm("people-hero.jpg"),
             imageAlt:
-                "A small group walking along a beach path carrying yoga mats",
+                "The Body Method teaching team together in the studio",
             imageFocus: "center 55%",
         },
         owner: {
@@ -62,9 +63,9 @@ export const ourPeopleFallbackData: OurPeoplePageProps = {
                 "That ripple effect is what drives Sarah's vision for The Body Method. A place where exceptional teaching meets genuine care, where movement makes everyday life better, and where the benefits extend far beyond the studio walls.",
                 "For Sarah, leading The Body Method is about much more than running two movement studios. It's about making a meaningful contribution to the community, one person at a time.",
             ],
-            image: ph("portrait-sarah.jpg"),
+            image: tbm("people-sarah.jpg"),
             imageAlt:
-                "Sarah standing beside a timber Reformer, hand on the footbar",
+                "Sarah standing beside the barre in the studio",
         },
         roster: {
             heading: "MEET OUR TEACHERS",

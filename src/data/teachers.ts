@@ -60,8 +60,8 @@ export const teachers: Teacher[] = [
         role: "Lorem ipsum dolor sit amet",
         teaser:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-        image: "/images/tbm-placeholders/teacher-1.jpg",
-        imageAlt: "A teacher's hands guiding a student's hips",
+        image: "/images/tbm/teacher-mel-kitchen.jpg",
+        imageAlt: "Portrait of Mel Kitchen",
         cta: { href: BOOKING_URL, label: "FIND A CLASS WITH MEL" },
         fields: [
             {
@@ -125,8 +125,8 @@ export const teachers: Teacher[] = [
         role: "Vinyasa / flow yoga",
         teaser:
             "Students describe her classes as “healing sessions for the soul”.",
-        image: "/images/tbm-placeholders/portrait-t9.jpg",
-        imageAlt: "Hands holding a singing bowl in a lap",
+        image: "/images/tbm/teacher-susie-tagarro.jpg",
+        imageAlt: "Portrait of Susie Tagarro",
         fields: [
             {
                 label: "Discipline:",
@@ -165,8 +165,8 @@ export const teachers: Teacher[] = [
         role: "Yin, Meditation + Yoga",
         teaser:
             "I want students to leave my classes feeling grounded, relaxed and more connected to themselves.",
-        image: "/images/tbm-placeholders/portrait-t5.jpg",
-        imageAlt: "A teacher seated cross-legged with hands in her lap",
+        image: "/images/tbm/teacher-valeria-naimey.jpg",
+        imageAlt: "Portrait of Valeria Naimey",
         fields: [
             {
                 label: "Discipline / qualifications",
@@ -238,8 +238,8 @@ export const teachers: Teacher[] = [
         role: "Mat Pilates, Barre + Reformer",
         teaser:
             "Creative flows, functional strength and plenty of variety, finding the balance between challenge and ease.",
-        image: "/images/tbm-placeholders/portrait-t10.jpg",
-        imageAlt: "A woman carrying a surfboard down a beach at sunrise",
+        image: "/images/tbm/teacher-tallis-jarrah.jpg",
+        imageAlt: "Portrait of Tallis Jarrah",
         fields: [
             {
                 label: "Qualifications:",
@@ -349,8 +349,8 @@ export const teachers: Teacher[] = [
         role: "Reformer Pilates",
         teaser:
             "I want clients to leave each session feeling stronger, lighter, and more connected to themselves.",
-        image: "/images/tbm-placeholders/teacher-2.jpg",
-        imageAlt: "Plank on the Reformer carriage",
+        image: "/images/tbm/teacher-miki-takumiya.jpg",
+        imageAlt: "Portrait of Miki Takumiya",
         fields: [
             {
                 label: "Discipline / Qualifications",
@@ -417,8 +417,8 @@ export const teachers: Teacher[] = [
         role: "Mat + Reformer Pilates, Yoga, Breathwork",
         teaser:
             "I want people to leave class feeling stronger, more present and a little more at home in their bodies.",
-        image: "/images/tbm-placeholders/portrait-t6.jpg",
-        imageAlt: "A teacher's hands holding a Reformer strap",
+        image: "/images/tbm/teacher-chanel-korhonen.jpg",
+        imageAlt: "Portrait of Chanel Korhonen",
         fields: [
             {
                 label: "Discipline / qualifications",
@@ -472,8 +472,8 @@ export const teachers: Teacher[] = [
         role: "Pilates, Barre, Stretch + Breathwork",
         teaser:
             "I want people to leave my classes feeling more connected to themselves, stronger in their bodies and calmer in their minds.",
-        image: "/images/tbm-placeholders/portrait-t8.jpg",
-        imageAlt: "Legs in a releve beside a timber barre",
+        image: "/images/tbm/teacher-victoria-richter.jpg",
+        imageAlt: "Portrait of Victoria Richter",
         fields: [
             {
                 label: "Discipline / Qualifications",
@@ -595,8 +595,8 @@ export const teachers: Teacher[] = [
         role: "STOTT Pilates: Mat, Barre + Reformer",
         teaser:
             "My philosophy is centered around moving with intention, precision and control.",
-        image: "/images/tbm-placeholders/teacher-4.jpg",
-        imageAlt: "Legs in Reformer straps",
+        image: "/images/tbm/teacher-kassie-redmond.jpg",
+        imageAlt: "Portrait of Kassie Redmond",
         fields: [
             {
                 label: "Discipline / qualifications",

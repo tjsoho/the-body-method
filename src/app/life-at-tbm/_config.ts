@@ -73,6 +73,8 @@ export type LifeAtTbmPageProps = {
 export const LIFE_AT_TBM_SLUG = "life-at-tbm";
 
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
     slug: LIFE_AT_TBM_SLUG,
@@ -85,9 +87,9 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
             lines: [
                 "Movement brings us together, but some of the best things happen around it.",
             ],
-            image: ph("hero-life.jpg"),
+            image: tbm("life-hero.jpg"),
             imageAlt:
-                "Hands holding coffee cups around a timber table near a sunny window",
+                "Two members lying on their mats, talking before class",
             imageFocus: "center 50%",
         },
         lede: {
@@ -105,8 +107,8 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                     body: "[One or two lines about the event]",
                     linkLabel: "",
                     linkHref: "",
-                    image: ph("landscape-life-walk.jpg"),
-                    imageAlt: "Women walking along the water at sunrise",
+                    image: tbm("life-event-1.jpg"),
+                    imageAlt: "Four members walking out of the studio together",
                 },
                 {
                     id: "event-2",
@@ -115,8 +117,8 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                     body: "[One or two lines about the event]",
                     linkLabel: "",
                     linkHref: "",
-                    image: ph("landscape-life-retreat.jpg"),
-                    imageAlt: "Mats laid out on a timber deck among trees",
+                    image: tbm("life-event-2.jpg"),
+                    imageAlt: "The headland and the beach looking north to the skyline",
                 },
             ],
         },
@@ -168,9 +170,9 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                     body: "Creating a welcoming space for adults to reconnect with dance, explore ballet fundamentals and experience the joy of movement, regardless of their previous dance experience.",
                     linkLabel: "",
                     linkHref: "",
-                    image: ph("landscape-life-workshop.jpg"),
+                    image: tbm("life-workshop-ballet.jpg"),
                     imageAlt:
-                        "A small group on mats watching a teacher demonstrate with a spine model",
+                        "A dancer stretching at the barre in silhouette",
                 },
                 {
                     id: "barre-body",
@@ -179,8 +181,19 @@ export const lifeAtTbmFallbackData: LifeAtTbmPageProps = {
                     body: "[One or two lines about the training]",
                     linkLabel: "https://barrebody.com.au",
                     linkHref: "https://barrebody.com.au",
-                    image: ph("landscape-life-training.jpg"),
-                    imageAlt: "Legs at a timber barre during a training session",
+                    image: tbm("life-workshop-barre-body.jpg"),
+                    imageAlt: "A group sitting on mats during a training session",
+                },
+                {
+                    id: "refill-the-well",
+                    meta: "[Date \u00b7 time] \u00b7 [Studio]",
+                    title: "Refill the Well",
+                    body: "[One or two lines about the session]",
+                    linkLabel: "",
+                    linkHref: "",
+                    image: tbm("life-workshop-refill.jpg"),
+                    imageAlt:
+                        "A teacher sitting cross-legged while the class rests on their mats",
                 },
             ],
             cta: { label: "SEE WHAT'S COMING UP", href: "#whats-on" },

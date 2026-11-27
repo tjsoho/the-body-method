@@ -59,6 +59,8 @@ export type PrivatePilatesPageProps = {
 export const PRIVATE_PILATES_SLUG = "private-pilates";
 
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const privatePilatesFallbackData: PrivatePilatesPageProps = {
     slug: PRIVATE_PILATES_SLUG,
@@ -99,9 +101,9 @@ export const privatePilatesFallbackData: PrivatePilatesPageProps = {
                 "Not a predetermined workout. We begin with where you are, what you're experiencing and what you'd like movement to help you do.",
                 "From there, your teacher builds the session around you.",
             ],
-            image: ph("portrait-priv-first.jpg"),
+            image: tbm("private-first-session.jpg"),
             imageAlt:
-                "A teacher and client talking on a Reformer before a session",
+                "A teacher guiding a client through an exercise on the Reformer",
         },
         progression: {
             heading: "Private doesn’t have to mean forever.",
@@ -114,8 +116,8 @@ export const privatePilatesFallbackData: PrivatePilatesPageProps = {
                 "When you're ready, we can help you find the next environment that works for you.",
                 "Perfect if you’re new to Pilates, working with an injury, pregnant or postnatal, or simply prefer a more personalised approach.",
             ],
-            image: ph("landscape-priv-semi.jpg"),
-            imageAlt: "Three Reformers side by side in a small group session",
+            image: tbm("private-semi.jpg"),
+            imageAlt: "A teacher adjusting a client's arms in the straps",
             imageFocus: "center",
         },
         pricing: {

@@ -51,6 +51,8 @@ export type StudiosPageProps = {
 export const STUDIOS_SLUG = "studios";
 
 const ph = (file: string) => `/images/tbm-placeholders/${file}`;
+/** The Nov 2026 shoot. Real photography, beside the placeholders. */
+const tbm = (file: string) => `/images/tbm/${file}`;
 
 export const studiosFallbackData: StudiosPageProps = {
     slug: STUDIOS_SLUG,
@@ -72,18 +74,18 @@ export const studiosFallbackData: StudiosPageProps = {
                     id: "tugun-beach",
                     name: "Tugun Beach",
                     href: "/studios/tugun-beach",
-                    image: ph("studio-tugun-reformer.jpg"),
+                    image: tbm("studios-tugun.jpg"),
                     imageAlt:
-                        "Feet pressing the footbar of a timber Reformer",
+                        "The Body Method shopfront at Tugun Beach",
                     imageFocus: "center 45%",
                 },
                 {
                     id: "cornerstone",
                     name: "Cornerstone",
                     href: "/studios/cornerstone",
-                    image: ph("studio-cornerstone-meditation.jpg"),
+                    image: tbm("studios-cornerstone.jpg"),
                     imageAlt:
-                        "Seated meditation facing windows full of trees",
+                        "The entrance to the Cornerstone building through the gardens",
                     imageFocus: "center",
                 },
             ],
