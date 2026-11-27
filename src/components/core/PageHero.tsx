@@ -39,9 +39,6 @@ export type BandHeroContent = {
     emphasisLine: string;
 };
 
-const OVERLAY =
-    "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,0) 78%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)";
-
 /* ************************************************************
                         PHOTO HERO
 ************************************************************ */
@@ -83,7 +80,8 @@ export function PhotoHero({
             />
             <div
                 aria-hidden="true"
-                style={{ position: "absolute", inset: 0, background: OVERLAY }}
+                className="tbm-hero-scrim"
+                style={{ position: "absolute", inset: 0 }}
             />
             <div
                 className="tbm-wrap tbm-g12"

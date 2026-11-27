@@ -42,7 +42,7 @@ export default function FinalCta({ content }: { content: FinalCtaContent }) {
                 style={{
                     position: "absolute",
                     inset: 0,
-                    background: "rgba(0,0,0,.66)",
+                    background: "rgba(0,0,0,.48)",
                 }}
             />
             <div

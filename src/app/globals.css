@@ -289,6 +289,50 @@ a:hover {
     padding-top: 64px;
     padding-bottom: 64px;
 }
+
+/* Hero scrim. Measured, not eyeballed: the copy band has to clear
+   4.5:1 against cream on every hero photo we ship, and the rest of
+   the frame should stay as bright as that allows.
+
+   Desktop leans the darkness left, because the copy sits in the
+   first seven columns and the right of the photo carries nothing.
+   Below 900px .tbm-c-l7 goes full width, so the lean is wrong there
+   and the scrim has to cover the whole frame instead. That case used
+   to fall to 2.2:1 on the brighter photos.                          */
+.tbm-hero-scrim {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.38) 45%,
+            rgba(0, 0, 0, 0) 78%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.06) 30%,
+            rgba(0, 0, 0, 0.28) 62%,
+            rgba(0, 0, 0, 0.58) 100%
+        );
+}
+@media (max-width: 900px) {
+    .tbm-hero-scrim {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0.54) 0%,
+                rgba(0, 0, 0, 0.44) 60%,
+                rgba(0, 0, 0, 0.38) 100%
+            ),
+            linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0.1) 30%,
+                rgba(0, 0, 0, 0.3) 62%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+    }
+}
 @media (max-width: 900px) {
     .tbm-hero-copy {
         margin-top: 0;
