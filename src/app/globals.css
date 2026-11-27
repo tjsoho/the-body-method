@@ -301,6 +301,35 @@ a:hover {
         0 2px 22px rgba(0, 0, 0, 0.5);
 }
 
+/* Home hero pool. The full-width wash was dimming footage nobody was
+ * reading over, so this is a soft pool of shade behind the copy block
+ * and nothing anywhere else. Measured over eight frames across the
+ * loop: the copy band holds 4.7:1 while the frame keeps about 75% of
+ * its bare brightness, where the old wash gave 3.1:1 at 66%.
+ *
+ * The ellipse sits left-of-centre because that is where the copy sits.
+ * Below 900px the copy goes full width, so it spreads and drops.      */
+.tbm-hero-pool {
+    background: radial-gradient(
+        ellipse 62% 58% at 28% 50%,
+        rgba(0, 0, 0, 0.64) 0%,
+        rgba(0, 0, 0, 0.48) 45%,
+        rgba(0, 0, 0, 0.16) 75%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+@media (max-width: 900px) {
+    .tbm-hero-pool {
+        background: radial-gradient(
+            ellipse 100% 66% at 50% 56%,
+            rgba(0, 0, 0, 0.74) 0%,
+            rgba(0, 0, 0, 0.6) 45%,
+            rgba(0, 0, 0, 0.24) 75%,
+            rgba(0, 0, 0, 0) 100%
+        );
+    }
+}
+
 /* Hero scrim. Measured, not eyeballed: the copy band has to clear
    4.5:1 against cream on every hero photo we ship, and the rest of
    the frame should stay as bright as that allows.

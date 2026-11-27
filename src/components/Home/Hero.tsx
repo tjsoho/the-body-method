@@ -85,12 +85,13 @@ export default function Hero({ content }: { content: HeroContent }) {
                 />
             )}
 
-            {/* Scrim for WCAG AA on hero text. Shape and strength live
-                in .tbm-hero-scrim, because the copy goes full width on a
-                phone and the scrim has to follow it. */}
+            {/* A pool of shade behind the copy, and nothing over the
+                rest of the frame. The film swings from very dark to
+                near-white across the loop, so bare was not survivable:
+                at 20s the copy measured 1.2:1. See .tbm-hero-pool. */}
             <div
                 aria-hidden="true"
-                className="tbm-hero-scrim"
+                className="tbm-hero-pool"
                 style={{ position: "absolute", inset: 0 }}
             />
 
