@@ -111,15 +111,13 @@ export default function Hero({ content }: { content: HeroContent }) {
                     style={{ ...backdropStyle, transformOrigin: "center center" }}
                 />
             )}
-            {/* Double-gradient overlay for WCAG AA on hero text. */}
+            {/* Scrim for WCAG AA on hero text. Shape and strength live
+                in .tbm-hero-scrim, because the copy goes full width on a
+                phone and the scrim has to follow it. */}
             <div
                 aria-hidden="true"
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                        "linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 45%, rgba(0,0,0,0) 75%), linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.85) 100%)",
-                }}
+                className="tbm-hero-scrim"
+                style={{ position: "absolute", inset: 0 }}
             />
 
             <div
